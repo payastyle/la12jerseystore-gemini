@@ -1,0 +1,94 @@
+LA-12-JERSEY-STORE/
+│
+├── index.html
+├── carrito.html
+├── producto.html
+│
+├── style.css
+├── app.js
+├── producto.js
+├── productos.js
+├── promos.js
+├── resenas.js
+│
+├── admin/
+│   ├── admin.html
+│   ├── admin.css
+│   ├── admin.js
+│
+├── img/
+│   ├── logo.png
+│   ├── promo.jpg
+│   ├── whatsapp.jpg
+│
+│   ├── productos/
+│   │   ├── real-madrid-1/
+│   │   │   ├── 1.jpg
+│   │   │   ├── 2.jpg
+│   │   │
+│   │   ├── barcelona-1/
+│   │   │   ├── 1.jpg
+│   │   │   ├── 2.jpg
+│
+│   ├── resenas/
+│   │   ├── resena1.jpg
+│   │   ├── resena2.jpg
+│
+│   ├── ligas/
+│   │   ├── liga-mx.jpg
+│   │   ├── premier.jpg
+│   │   ├── laliga.jpg
+│   │   ├── bundesliga.jpg
+│
+│   ├── tallas/
+│   │   ├── adulto.png
+│   │   ├── niño.png
+│
+├── README.txt
+
+
+
+
+
+
+
+
+
+
+
+🧠 💡 EXPLICACIÓN RÁPIDA
+🏠 index.html
+
+👉 Home + catálogo + PLP
+
+🛒 carrito.html
+
+👉 Checkout (3 pasos estilo Nike)
+
+👕 producto.html
+
+👉 Página individual del jersey
+
+⚙️ JS
+app.js → lógica general (carrito, filtros, WhatsApp)
+producto.js → lógica del producto
+productos.js → base de productos
+promos.js → cupones y promociones
+resenas.js → reseñas
+🎨 CSS
+style.css → todo el diseño de la tienda
+🧑‍💻 ADMIN
+
+👉 Panel separado (muy pro)
+
+admin/
+🖼️ IMÁGENES
+
+👉 Separadas por tipo:
+
+productos
+reseñas
+ligas
+tallas
+
+💣 Esto es MUY profesional

@@ -1,0 +1,116 @@
+Perfecto 🔥 ahora sí te dejo la estructura del HOME (index.html) clara y ordenada 💸
+👉 Para que la pegues en un .txt y entiendas cómo está armado tu sitio
+
+🧱 🏠 ESTRUCTURA DEL HOME (FRONT)
+HOME - index.html
+│
+├── HEADER / NAVBAR
+│   ├── Menú hamburguesa ☰
+│   ├── Logo centrado
+│   ├── Buscador
+│   ├── Botón tema (🌙 / ☀️)
+│   ├── Icono carrito + contador
+│
+├── MENÚ LATERAL (SIDEBAR)
+│   ├── Copa Mundial 2026
+│   ├── Temporada 25/26
+│   ├── Retro
+│   ├── Niño
+│   ├── Anime
+│   ├── Reseñas
+│   ├── Rastrear pedido
+│
+├── HERO / BANNER PRINCIPAL
+│   └── Imagen grande promocional
+│
+├── PLP (PRODUCT LISTING PAGE)
+│   ├── Título de categoría
+│   ├── Buscador / filtros
+│   ├── Grid de productos
+│   │   ├── Imagen
+│   │   ├── Nombre
+│   │   ├── Precio
+│   │   ├── Badge (retro / niño)
+│   │   ├── Hover → “Ver producto”
+│
+├── CARRUSEL DE LIGAS
+│   ├── Liga MX
+│   ├── Premier League
+│   ├── La Liga
+│   ├── Bundesliga
+│   └── Scroll horizontal clickeable
+│
+├── CINTA PROMOCIONAL (SCROLL)
+│   └── Texto dinámico (promo / reseñas)
+│
+├── SLIDER DE RESEÑAS
+│   ├── Imagen cliente
+│   ├── Nombre
+│   ├── Estrellas ⭐
+│   ├── Comentario
+│   └── Cambio automático
+│
+├── SECCIÓN WHATSAPP (CTA)
+│   ├── Imagen (lado izquierdo)
+│   ├── Texto motivador
+│   ├── Botón WhatsApp
+│
+├── RASTREO DE PEDIDO
+│   ├── Input número de guía
+│   ├── Botón rastrear (17track)
+│
+├── FOOTER
+│   ├── Copyright
+│   ├── Link rastreo
+│
+└── SCRIPTS
+    ├── productos.js
+    ├── resenas.js
+    ├── promos.js
+    ├── app.js
+
+
+
+🧠 💡 CÓMO FUNCIONA (RÁPIDO)
+👉 Todo está pensado como tienda real:
+
+🔝 Arriba → navegación
+
+🧠 Medio → productos (lo importante)
+
+💬 Abajo → confianza (reseñas + WhatsApp)
+
+🔧 Final → utilidades (tracking + footer)
+
+💣 ORDEN DE IMPORTANCIA
+1. Productos (ventas)
+2. Promos (convencer)
+3. Reseñas (confianza)
+4. WhatsApp (cierre)
+🧠 TIP PRO (MUY IMPORTANTE)
+👉 El HOME no es solo diseño:
+
+💣 Es tu vendedor principal
+
+🚀 SIGUIENTE NIVEL
+Si quieres lo llevamos brutal:
+
+👉 recomendaciones automáticas
+👉 productos aleatorios por sección
+👉 badges (OFERTA / NUEVO / HOT)
+👉 animaciones tipo Apple
+
+⚽ CONCLUSIÓN
+👉 Ya tienes estructura de home profesional
+👉 Bien organizada
+👉 Lista para convertir visitas en ventas
+
+Si quieres el siguiente paso 🔥
+👉 “optimizar home para vender más”
+👉 “orden exacto tipo Nike (UX real)”
+
+Te lo dejo nivel empresa 😎💸
+
+
+
+

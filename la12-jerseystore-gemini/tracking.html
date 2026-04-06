@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rastrear pedido - La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="window.location.href='index.html'">
+    <img src="img/logo.png" alt="La 12 Jersey Store">
+  </div>
+  <div class="nav-actions">
+    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
+    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+      🛒 <span id="contador-carrito">0</span>
+    </div>
+  </div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#">Temporada 25/26</a>
+  <a href="index.html#">Retro</a>
+  <a href="index.html#">Niño</a>
+  <a href="index.html#">Anime</a>
+  <a href="index.html#resenas">Reseñas</a>
+  <a href="tracking.html">Rastrear pedido</a>
+</div>
+
+<section class="tracking-page">
+  <h1>📦 Rastrea tu pedido</h1>
+  <p>Consulta el estado de tu envío en tiempo real con nuestro sistema global</p>
+
+  <div class="tracking-box">
+    <input type="text" id="guia" placeholder="Ingresa tu número de guía (Ej: 123456789)">
+    <button onclick="rastrearPro()">Rastrear</button>
+  </div>
+
+  <div id="contenedor-resultados-17track"></div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+</footer>
+
+<script src="app.js"></script>
+<script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
+
+<script>
+function rastrearPro(){
+  const guia = document.getElementById("guia").value.trim();
+
+  if(!guia){
+    alert("Por favor, ingresa tu número de guía");
+    return;
+  }
+
+  // Uso de la API Oficial de 17track para evitar el error de conexión
+  YQV5.trackSingle({
+      YQ_ContainerId: "contenedor-resultados-17track",
+      YQ_Height: 560,
+      YQ_Fc: "0",
+      YQ_Lang: "es",
+      YQ_Num: guia
+  });
+}
+</script>
+</body>
+</html>

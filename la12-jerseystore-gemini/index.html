@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="irHome()">
+    <img src="img/logo.png" alt="La 12 Jersey Store">
+  </div>
+  <div class="nav-actions">
+    <input type="text" id="busqueda" placeholder="Buscar equipo o liga..." oninput="filtrarProductos()">
+    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
+    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+      🛒 <span id="contador-carrito">0</span>
+    </div>
+  </div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <a href="#" onclick="seleccionarCategoria(event,'mundial')">Copa Mundial 2026</a>
+  <a href="#" onclick="seleccionarCategoria(event,'reciente')">Temporada 25/26</a>
+  <a href="#" onclick="seleccionarCategoria(event,'retro')">Retro</a>
+  <a href="#" onclick="seleccionarCategoria(event,'niño')">Niño</a>
+  <a href="#" onclick="seleccionarCategoria(event,'anime')">Anime</a>
+  <a href="#" onclick="verResenas(event)">Reseñas</a>
+  <a href="tracking.html">Rastrear pedido</a>
+</div>
+
+<section id="hero" class="hero-premium">
+  <img src="img/promo.jpg" alt="Gran Inauguración 3x2 en todas las jerseys">
+</section>
+
+<section id="categorias" class="categorias-premium">
+  <div onclick="mostrarCategoria('reciente')">
+    <img src="img/categorias/actual.jpg" alt="Temporada Actual">
+    <p>Temporada</p>
+  </div>
+  <div onclick="mostrarCategoria('retro')">
+    <img src="img/categorias/retro.jpg" alt="Jerseys Retro">
+    <p>Retro</p>
+  </div>
+  <div onclick="mostrarCategoria('niño')">
+    <img src="img/categorias/nino.jpg" alt="Jerseys para Niños">
+    <p>Niños</p>
+  </div>
+</section>
+
+<section id="seccion-productos" class="plp-container">
+  <h2 id="titulo-categoria">Nuevos Lanzamientos</h2>
+  <div id="productos-categoria" class="plp-grid"></div>
+</section>
+
+<section id="seccion-resenas" class="slider-resenas" style="display:none;">
+  <h2>⭐ Opiniones reales de clientes</h2>
+  <div id="slider-resenas"></div>
+</section>
+
+<section id="recomendados-resenas" class="plp-container" style="display:none;">
+  <h2>Te puede interesar</h2>
+  <div id="productos-recomendados" class="plp-grid"></div>
+</section>
+
+<footer class="footer">
+  <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+</footer>
+
+<script src="productos.js"></script>
+<script src="resenas.js"></script>
+<script src="promos.js"></script>
+<script src="app.js"></script>
+
+<script>
+function limpiarVista(){
+  document.getElementById("hero").style.display = "none";
+  document.getElementById("seccion-productos").style.display = "none";
+  document.getElementById("categorias").style.display = "none";
+  document.getElementById("seccion-resenas").style.display = "none";
+  document.getElementById("recomendados-resenas").style.display = "none";
+}
+
+function irHome(){
+  limpiarVista();
+  document.getElementById("hero").style.display = "block";
+  document.getElementById("categorias").style.display = "flex";
+  document.getElementById("seccion-productos").style.display = "block";
+  document.getElementById("titulo-categoria").innerText = "Nuevos Lanzamientos";
+  renderPLP(productos);
+}
+
+function verResenas(e){
+  e.preventDefault();
+  limpiarVista();
+  document.getElementById("seccion-resenas").style.display = "block";
+  document.getElementById("recomendados-resenas").style.display = "block";
+  generarRecomendados();
+  document.getElementById("menu-lateral").classList.remove("open");
+}
+
+function seleccionarCategoria(e, tipo){
+  e.preventDefault();
+  limpiarVista();
+  document.getElementById("seccion-productos").style.display = "block";
+  mostrarCategoria(tipo);
+  document.getElementById("menu-lateral").classList.remove("open");
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  irHome();
+});
+</script>
+</body>
+</html>

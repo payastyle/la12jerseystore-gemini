@@ -1,0 +1,171 @@
+/* ================= RESET ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', Arial, sans-serif;
+}
+
+/* ================= BODY ================= */
+body{
+  background:#0b0b0b;
+  color:white;
+  height:100vh;
+}
+
+/* ================= INICIO ================= */
+.inicio-admin{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+}
+
+.inicio-admin h1{
+  font-size:32px;
+  margin-bottom:20px;
+  letter-spacing:1px;
+}
+
+/* BOTONES PRINCIPALES */
+.botones-admin{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.botones-admin button{
+  padding:20px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  background:gold;
+  color:black;
+  cursor:pointer;
+  font-weight:bold;
+  letter-spacing:0.5px;
+  transition: all 0.3s ease;
+}
+
+.botones-admin button:hover{
+  transform:scale(1.08);
+  box-shadow:0 10px 25px rgba(255,215,0,0.3);
+}
+
+/* ================= SECCIONES ================= */
+.seccion{
+  display:none;
+  padding:30px;
+  max-width:700px;
+  margin:auto;
+  animation:fadeIn 0.4s ease;
+}
+
+/* ================= TITULOS ================= */
+.seccion h2{
+  margin-bottom:10px;
+}
+
+.referencia{
+  color:gold;
+  font-size:14px;
+  margin-bottom:15px;
+}
+
+/* ================= INPUTS ================= */
+input, textarea, select{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:8px;
+  border:none;
+  background:#1a1a1a;
+  color:white;
+  font-size:14px;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline:none;
+  border:1px solid gold;
+}
+
+/* ================= BOTONES ================= */
+button{
+  padding:12px;
+  background:black;
+  color:white;
+  border:none;
+  cursor:pointer;
+  margin-top:10px;
+  border-radius:8px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* BOTÓN VOLVER */
+.volver{
+  background:#222;
+  margin-bottom:20px;
+}
+
+/* ================= RESULTADO ================= */
+pre{
+  background:#000;
+  padding:15px;
+  margin-top:15px;
+  border-radius:8px;
+  overflow:auto;
+  font-size:13px;
+  color:#00ff88;
+}
+
+/* ================= ANIMACIONES ================= */
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ================= SCROLL ================= */
+::-webkit-scrollbar{
+  width:6px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:gold;
+  border-radius:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+
+  .inicio-admin h1{
+    font-size:26px;
+  }
+
+  .botones-admin{
+    flex-direction:column;
+    width:100%;
+  }
+
+  .botones-admin button{
+    width:100%;
+  }
+
+  .seccion{
+    padding:20px;
+  }
+
+}

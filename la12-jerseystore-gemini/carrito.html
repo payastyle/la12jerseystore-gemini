@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carrito - La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="window.location.href='index.html'">
+    <img src="img/logo.png" alt="La 12 Jersey Store">
+  </div>
+  <div class="nav-actions">
+    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
+    <div class="carrito-icon">
+      🛒 <span id="contador-carrito">0</span>
+    </div>
+  </div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#">Temporada 25/26</a>
+  <a href="index.html#">Retro</a>
+  <a href="index.html#">Niño</a>
+  <a href="index.html#">Anime</a>
+  <a href="index.html#resenas">Reseñas</a>
+  <a href="tracking.html">Rastrear pedido</a>
+</div>
+
+<div class="checkout-container">
+
+  <div id="paso1" class="checkout-step">
+    <h2>Tu carrito</h2>
+    <div id="carrito-productos"></div>
+    <div class="resumen" style="margin-top: 20px; font-size: 18px; text-align: right;">
+      <p style="color:#888;">Subtotal: $<span id="subtotal">0</span></p>
+      <p style="color:#888;">Envío: $<span id="envio">0</span></p>
+      <h3 style="margin-top:10px; color:#d4af37;">Total: $<span id="total">0</span></h3>
+    </div>
+    <button class="btn-principal" onclick="irPaso2()">Proceder al pago</button>
+  </div>
+
+  <div id="paso2" class="checkout-step" style="display:none;">
+    <h2>Datos de envío</h2>
+    <div class="formulario">
+      <input type="text" id="nombre" placeholder="Nombre completo">
+      <input type="text" id="direccion" placeholder="Dirección">
+      <input type="text" id="cp" placeholder="Código Postal">
+      <input type="text" id="ciudad" placeholder="Ciudad">
+      <input type="text" id="pais" placeholder="País">
+      <input type="text" id="telefono" placeholder="Teléfono (WhatsApp)">
+    </div>
+    <button class="btn-principal" onclick="irPaso3()">Continuar</button>
+  </div>
+
+  <div id="paso3" class="checkout-step" style="display:none;">
+    <h2>Método de pago</h2>
+    <div class="metodos" style="display:flex; flex-direction:column; gap:15px; margin-bottom:20px;">
+      <label><input type="radio" name="pago" value="Transferencia"> Transferencia Bancaria</label>
+      <label><input type="radio" name="pago" value="OXXO"> Depósito en OXXO</label>
+      <label><input type="radio" name="pago" value="PayPal"> PayPal</label>
+      <label><input type="radio" name="pago" value="Mercado Pago"> Mercado Pago</label>
+    </div>
+    <p id="info-pago" style="color:#d4af37; font-weight:bold; margin-bottom:20px;"></p>
+    <button class="btn-principal" onclick="finalizarCompra()">Finalizar compra 📲</button>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+</footer>
+
+<script src="productos.js"></script>
+<script src="app.js"></script>
+
+<script>
+function irPaso2(){
+  if(carrito.length === 0){
+    alert("Tu carrito está vacío");
+    return;
+  }
+  document.getElementById("paso1").style.display = "none";
+  document.getElementById("paso2").style.display = "block";
+}
+
+function irPaso3(){
+  const nombre = document.getElementById("nombre").value;
+  if(!nombre){
+    alert("Completa tus datos para el envío");
+    return;
+  }
+  document.getElementById("paso2").style.display = "none";
+  document.getElementById("paso3").style.display = "block";
+}
+
+document.addEventListener("change", function(e){
+  if(e.target.name === "pago"){
+    let texto = "";
+    if(e.target.value === "Transferencia") texto = "Al finalizar serás redirigido a WhatsApp para enviar tu comprobante de transferencia.";
+    if(e.target.value === "OXXO") texto = "Al finalizar serás redirigido a WhatsApp para enviar la foto de tu ticket de OXXO.";
+    if(e.target.value === "PayPal") texto = "Procesaremos tu pedido vía WhatsApp para mandarte el link de PayPal.";
+    if(e.target.value === "Mercado Pago") texto = "Procesaremos tu pedido vía WhatsApp para mandarte el link de Mercado Pago.";
+    document.getElementById("info-pago").innerText = texto;
+  }
+});
+
+function finalizarCompra(){
+  const datos = {
+    nombre: document.getElementById("nombre").value,
+    direccion: document.getElementById("direccion").value,
+    cp: document.getElementById("cp").value,
+    ciudad: document.getElementById("ciudad").value,
+    pais: document.getElementById("pais").value,
+    telefono: document.getElementById("telefono").value
+  };
+
+  let mensaje = "🧾 DATOS DEL CLIENTE\n\n";
+  mensaje += `Nombre: ${datos.nombre}\n`;
+  mensaje += `Dirección: ${datos.direccion}\n`;
+  mensaje += `CP: ${datos.cp}\n`;
+  mensaje += `Ciudad: ${datos.ciudad}\n`;
+  mensaje += `País: ${datos.pais}\n`;
+  mensaje += `Teléfono: ${datos.telefono}\n\n`;
+
+  let subtotal = 0;
+  carrito.forEach((p,i)=>{
+    mensaje += `Producto ${i+1}: ${p.nombre}\n`;
+    mensaje += `Talla: ${p.talla || "-"}\n`;
+    mensaje += `Precio: $${p.precio}\n\n`;
+    subtotal += p.precio;
+  });
+  
+  let envio = carrito.length >= 4 ? 0 : 50;
+  let total = subtotal + envio;
+  
+  mensaje += `Total a pagar: $${total}\n`;
+
+  window.open(`https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(mensaje)}`, "_blank");
+}
+</script>
+</body>
+</html>
