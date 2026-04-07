@@ -1,7 +1,5 @@
-
 // ================= NAVEGACIÓN =================
 function abrirSeccion(id){
-
   // Ocultar inicio
   document.getElementById("inicio-admin").style.display = "none";
 
@@ -12,11 +10,9 @@ function abrirSeccion(id){
 
   // Mostrar sección seleccionada
   document.getElementById(id).style.display = "block";
-
 }
 
 function volverInicio(){
-
   // Ocultar todas las secciones
   document.querySelectorAll(".seccion").forEach(sec=>{
     sec.style.display = "none";
@@ -24,12 +20,10 @@ function volverInicio(){
 
   // Mostrar inicio
   document.getElementById("inicio-admin").style.display = "flex";
-
 }
 
 // ================= GENERAR ID =================
 function generarID(nombre){
-
   const base = nombre
     .toLowerCase()
     .trim()
@@ -39,12 +33,10 @@ function generarID(nombre){
   const numero = Math.floor(Math.random() * 1000);
 
   return `${base}-${numero}`;
-
 }
 
 // ================= PRODUCTOS =================
 function generarProducto(){
-
   const nombre = document.getElementById("nombre").value.trim();
   const precio = document.getElementById("precio").value;
   const tipo = document.getElementById("tipoProducto").value;
@@ -68,25 +60,22 @@ function generarProducto(){
   }
 
   const producto = `
-{
-  id: "${id}",
-  nombre: "${nombre}",
-  precio: ${precio},
-  tipoProducto: "${tipo}",
-  liga: "${liga}",
-  equipo: "${equipo}",
-  imagenes: [${imagenes.join(", ")}],
-  descripcion: "${descripcion}"
-},
-`;
+  {
+    id: "${id}",
+    nombre: "${nombre}",
+    precio: ${precio},
+    tipoProducto: "${tipo}",
+    liga: "${liga}",
+    equipo: "${equipo}",
+    descripcion: "${descripcion}",
+    imagenes: [${imagenes.join(", ")}]
+  },`;
 
   document.getElementById("resultado-producto").innerText = producto;
-
 }
 
 // ================= RESEÑAS =================
 function generarResena(){
-
   const nombre = document.getElementById("resena-nombre").value.trim();
   const estrellas = document.getElementById("resena-estrellas").value;
   const comentario = document.getElementById("resena-comentario").value;
@@ -98,23 +87,18 @@ function generarResena(){
   }
 
   const resena = `
-{
-  nombre: "${nombre}",
-  estrellas: ${estrellas},
-  comentario: "${comentario}",
-  imagen: "${imagen}"
-},
-`;
+  {
+    nombre: "${nombre}",
+    estrellas: ${estrellas},
+    comentario: "${comentario}",
+    imagen: "${imagen}"
+  },`;
 
   document.getElementById("resultado-resena").innerText = resena;
-
 }
 
 // ================= PROMOS =================
 function generarPromo(){
-
-  const texto = document.getElementById("promo-texto").value;
-
   const codigo = document.getElementById("cupon-codigo").value;
   const descuento = document.getElementById("cupon-descuento").value;
   const expiracion = document.getElementById("cupon-expira").value;
@@ -124,31 +108,28 @@ function generarPromo(){
     return;
   }
 
+  // Genera solo el objeto del cupón para agregarlo al array 'cupones'
   const resultado = `
-const PROMOS = {
-
-  envioGratis: {
-    activo: true,
-    cantidadMinima: 4
-  },
-
-  promoTexto: {
-    activo: true,
-    mensaje: "${texto}"
-  },
-
-  cupones: [
     {
       codigo: "${codigo}",
       descuento: ${descuento},
       activo: true,
       expiracion: "${expiracion}"
-    }
-  ]
-
-};
-`;
+    },`;
 
   document.getElementById("resultado-promo").innerText = resultado;
+}
 
+// ================= COPIAR AL PORTAPAPELES =================
+function copiarTexto(idElemento) {
+  const texto = document.getElementById(idElemento).innerText;
+  if (!texto) {
+    alert("No hay nada que copiar. Genera el código primero.");
+    return;
+  }
+  navigator.clipboard.writeText(texto).then(() => {
+    alert("¡Código copiado al portapapeles! 📋");
+  }).catch(err => {
+    console.error('Error al copiar: ', err);
+  });
 }

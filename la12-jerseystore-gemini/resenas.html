@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Opiniones - La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="window.location.href='index.html'">
+    <img src="img/logo.png" alt="La 12 Jersey Store">
+  </div>
+  <div class="nav-actions">
+    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
+    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+      🛒 <span id="contador-carrito">0</span>
+    </div>
+  </div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <div class="menu-header">
+    <h3>MENÚ</h3>
+    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
+  </div>
+  <a href="index.html">Inicio</a>
+  <a href="index.html#">Temporada 25/26</a>
+  <a href="index.html#">Retro</a>
+  <a href="index.html#">Kids</a>
+  <a href="index.html#">Ediciones Anime</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="resenas.html">⭐ Opiniones</a>
+  <a href="tracking.html">📦 Rastrear pedido</a>
+</div>
+
+<section class="reviews-page-section">
+  <h1 class="seccion-titulo" style="margin-top: 40px;">LA VOZ DE NUESTRA AFICIÓN</h1>
+  <p style="text-align:center; color:#888; margin-bottom: 20px;">Desliza para ver lo que dicen nuestros clientes</p>
+
+  <div class="tarjeta-carrusel-wrapper">
+    <button class="btn-carrusel" onclick="cambiarResena('anterior')">❮</button>
+
+    <div id="tarjeta-carrusel-contenido"></div>
+
+    <button class="btn-carrusel" onclick="cambiarResena('siguiente')">❯</button>
+  </div>
+</section>
+
+<section id="recomendados-resenas" class="plp-container">
+  <h2 class="seccion-titulo">TE PUEDE INTERESAR</h2>
+  <div id="productos-recomendados" class="plp-grid"></div>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-col">
+      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
+      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
+    </div>
+    <div class="footer-col">
+      <h4>AYUDA</h4>
+      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
+      <p><a href="#" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="productos.js"></script>
+<script src="resenas.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

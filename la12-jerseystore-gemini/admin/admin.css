@@ -10,7 +10,7 @@
 body{
   background:#0b0b0b;
   color:white;
-  height:100vh;
+  min-height:100vh;
 }
 
 /* ================= INICIO ================= */
@@ -109,10 +109,22 @@ button:hover{
   transform:scale(1.05);
 }
 
-/* BOTÓN VOLVER */
+/* BOTÓN VOLVER Y COPIAR */
 .volver{
   background:#222;
   margin-bottom:20px;
+}
+
+.btn-copiar{
+  background:#333;
+  width:100%;
+  margin-top:10px;
+  border: 1px dashed #555;
+}
+
+.btn-copiar:hover{
+  background:#444;
+  border-color: gold;
 }
 
 /* ================= RESULTADO ================= */
@@ -150,22 +162,17 @@ pre{
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:768px){
-
   .inicio-admin h1{
     font-size:26px;
   }
-
   .botones-admin{
     flex-direction:column;
     width:100%;
   }
-
   .botones-admin button{
     width:100%;
   }
-
   .seccion{
     padding:20px;
   }
-
 }

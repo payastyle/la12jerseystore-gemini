@@ -1,4 +1,4 @@
-/* ================= RESET Y TIPOGRAFÍA DEPORTIVA ================= */
+/* ================= RESET Y TIPOGRAFÍA ================= */
 *{
   margin:0;
   padding:0;
@@ -7,34 +7,46 @@
 }
 
 body{
-  background:#111111; /* Negro profundo premium */
+  background:#111111;
   color:#f5f5f5;
   scroll-behavior:smooth;
 }
 
-/* ================= NAVBAR (STICKY CON EFECTO BLUR) ================= */
+/* ================= CINTILLO ANUNCIOS ================= */
+.announcement-bar {
+  background-color: #d4af37;
+  color: #000;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ================= NAVBAR (Efecto Cristal) ================= */
 .navbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:15px 40px;
-  background:rgba(0,0,0,0.85); /* Fondo semi-transparente */
-  backdrop-filter:blur(10px); /* Efecto cristal */
-  border-bottom: 1px solid #333;
+  background:rgba(17, 17, 17, 0.95);
+  backdrop-filter:blur(10px);
+  border-bottom: 1px solid #222;
   position:sticky;
   top:0;
   z-index:1000;
 }
 
 .logo img{
-  height:50px;
+  height:40px;
   cursor:pointer;
 }
 
 .menu-icon{
   font-size:24px;
   cursor:pointer;
-  display: block; /* Visible siempre */
+  display: block;
 }
 
 .nav-actions{
@@ -65,7 +77,7 @@ body{
   position:absolute;
   top:-5px;
   right:-10px;
-  background:#d4af37; /* Dorado premium */
+  background:#d4af37;
   color:black;
   font-size:12px;
   font-weight: bold;
@@ -79,7 +91,7 @@ body{
   top:0;
   left:0;
   transform:translateX(-100%);
-  width:280px;
+  width:320px;
   height:100%;
   background:#111;
   padding:30px;
@@ -92,39 +104,196 @@ body{
   transform:translateX(0);
 }
 
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .menu-lateral a{
   display:block;
-  margin:20px 0;
+  margin:18px 0;
   text-decoration:none;
   color:white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .menu-lateral a:hover{
   color: #d4af37;
 }
 
-/* ================= HERO ================= */
-.hero-premium img{
-  width:100%;
-  height:auto;
-  display: block;
-  object-fit:cover;
+/* ================= HERO SECCIÓN ================= */
+.hero-premium{
+  position: relative;
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* ================= PLP (GRILLA DE PRODUCTOS) ================= */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+}
+
+.hero-content h2 {
+  font-size: 56px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.btn-hero {
+  background: white;
+  color: black;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.3s ease;
+}
+
+.btn-hero:hover {
+  transform: scale(1.05);
+  background: #d4af37;
+}
+
+/* ================= TRUST BADGES ================= */
+.trust-badges {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  background: #0a0a0a;
+  border-bottom: 1px solid #222;
+}
+
+.badge-item {
+  text-align: center;
+  flex: 1;
+}
+
+.badge-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.badge-item h4 {
+  font-size: 14px;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.badge-item p {
+  color: #888;
+  font-size: 12px;
+}
+
+/* ================= CATEGORIAS CIRCULARES ================= */
+.shop-by-category {
+  padding: 60px 40px;
+}
+
+.seccion-titulo {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.category-scroll {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.category-circle {
+  text-align: center;
+  cursor: pointer;
+  width: 140px;
+}
+
+.category-circle img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.category-circle:hover img {
+  border-color: #d4af37;
+  transform: translateY(-5px);
+}
+
+.category-circle p {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ================= BANNER PROMOCIONAL INTERMEDIO ================= */
+.promo-mid {
+  background: #d4af37;
+  color: black;
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promo-mid-content h3 {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.promo-mid-content p {
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ================= PLP (GRILLA PRODUCTOS) ================= */
 .plp-container{
   padding:60px 40px;
-}
-
-.plp-container h2{
-  margin-bottom:40px;
-  font-size:28px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-align: center;
 }
 
 .plp-grid{
@@ -133,7 +302,6 @@ body{
   gap:30px;
 }
 
-/* CARD MAGIA PREMIUM */
 .plp-card{
   background:transparent;
   cursor:pointer;
@@ -143,14 +311,14 @@ body{
 .imagen-contenedor {
   position: relative;
   background-color: #222;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   margin-bottom: 15px;
 }
 
 .img-front, .img-back {
   width: 100%;
-  height: 320px;
+  height: 340px;
   object-fit: cover;
   transition: opacity 0.4s ease, transform 0.4s ease;
   display: block;
@@ -163,28 +331,20 @@ body{
   opacity: 0;
 }
 
-.plp-card:hover .img-front {
-  opacity: 0;
-}
+.plp-card:hover .img-front { opacity: 0; }
+.plp-card:hover .img-back { opacity: 1; transform: scale(1.05); }
 
-.plp-card:hover .img-back {
-  opacity: 1;
-  transform: scale(1.05); /* Efecto zoom ligero */
-}
-
-.plp-info{
-  padding:0 5px;
-}
+.plp-info{ padding:0 5px; }
 
 .plp-info h3{
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .plp-info .categoria{
   color: #888;
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 8px;
   text-transform: capitalize;
 }
@@ -194,182 +354,271 @@ body{
   font-size: 16px;
 }
 
-/* BADGE */
 .badge{
   position:absolute;
   top:10px;
   left:10px;
-  background:#d4af37;
+  background: white;
   color:black;
-  padding:4px 12px;
-  font-size: 12px;
+  padding:4px 10px;
+  font-size: 11px;
   font-weight: bold;
-  border-radius:20px;
   text-transform: uppercase;
   z-index: 10;
 }
 
-/* ================= CATEGORIAS ================= */
-.categorias-premium{
-  display:flex;
-  gap:20px;
-  padding:20px 40px 60px 40px;
+/* ================= SECCIÓN BÚSQUEDA PERSONALIZADA (Estilo Jorge Campos) ================= */
+.missing-jersey-section {
+  display: flex;
+  background-color: #e2e2e6; 
+  color: #111;
+  align-items: center;
+  margin: 0;
 }
 
-.categorias-premium div{
-  flex:1;
-  cursor:pointer;
-  position: relative;
-  overflow: hidden;
-  border-radius:12px;
+.missing-img-box {
+  flex: 1;
+  max-width: 50%;
 }
 
-.categorias-premium img{
-  width:100%;
-  height: 400px;
+.missing-img-box img {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
   object-fit: cover;
-  transition:0.5s ease;
-  filter: brightness(0.7);
+  display: block;
 }
 
-.categorias-premium div:hover img{
-  transform:scale(1.05);
-  filter: brightness(0.9);
+.missing-text-box {
+  flex: 1;
+  padding: 40px 80px;
 }
 
-.categorias-premium p{
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* ================= RESEÑAS ================= */
-.slider-resenas{
-  text-align:center;
-  padding:60px 20px;
-  background: #0a0a0a;
-}
-
-.slider-resenas h2{
-  margin-bottom: 40px;
-  text-transform: uppercase;
-}
-
-.resena-slide img{
-  width:80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius:50%;
-  margin-bottom: 15px;
-}
-
-/* ================= FOOTER ================= */
-.footer{
-  text-align:center;
-  padding:30px;
-  background:#000;
-  font-size:14px;
-  color: #777;
-  border-top: 1px solid #222;
-  margin-top: 40px;
-}
-
-/* ================= TRACKING ================= */
-.tracking-page{
-  text-align:center;
-  padding:80px 20px;
-  min-height: 70vh;
-}
-
-.tracking-page h1 {
+.missing-text-box h3 {
   font-size: 32px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: -0.5px;
 }
 
-.tracking-page p {
-  color: #888;
-  margin-bottom: 30px;
-}
-
-.tracking-box input{
-  padding:15px;
-  width:300px;
-  border-radius:8px;
-  border:1px solid #333;
-  background: #222;
-  color: white;
+.missing-text-box p {
   font-size: 16px;
-  outline: none;
+  color: #444;
+  margin-bottom: 35px;
+  line-height: 1.5;
+  max-width: 450px;
 }
 
-.tracking-box button{
-  padding:15px 30px;
-  background:#d4af37;
-  color:black;
-  border:none;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 8px;
+.btn-black {
+  background: #000;
+  color: #fff;
+  padding: 15px 35px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  margin-left: 10px;
   transition: background 0.3s;
 }
 
-.tracking-box button:hover {
-  background: #b5952f;
+.btn-black:hover {
+  background: #333;
 }
 
-#contenedor-resultados-17track {
+/* ================= CARRUSEL TARJETA DE PRESENTACIÓN (RESEÑAS) ================= */
+.reviews-page-section {
+  padding: 20px;
+}
+
+.tarjeta-carrusel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 10px;
+  min-height: 40vh;
+}
+
+.btn-carrusel {
+  background: #d4af37;
+  color: black;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-carrusel:hover {
+  background: #b5952f;
+  transform: scale(1.1);
+}
+
+.tarjeta-presentacion {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: fadeInCard 0.5s ease-in-out;
+  position: relative;
+}
+
+.tarjeta-presentacion::before { 
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 5px;
+  background: #d4af37;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.tarjeta-presentacion img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d4af37;
+  margin-bottom: 20px;
+}
+
+.tarjeta-presentacion h4 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.estrellas-tarjeta {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.comentario-tarjeta {
+  font-size: 18px;
+  color: #ccc;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ================= CHECKOUT Y CARRITO ================= */
+.checkout-container {
   max-width: 800px;
   margin: 40px auto;
-  background: white; /* 17track se lee mejor en fondo blanco */
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* ================= CHECKOUT ================= */
-.checkout-container{
-  max-width:800px;
-  margin:40px auto;
-  padding:30px;
+  padding: 30px;
   background: #1a1a1a;
   border-radius: 12px;
 }
 
-.checkout-step h2{
+.checkout-step h2 {
   margin-bottom: 20px;
   text-transform: uppercase;
   border-bottom: 1px solid #333;
   padding-bottom: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .formulario input {
   width: 100%;
-  padding: 12px;
+  padding: 15px;
   margin-bottom: 15px;
   background: #222;
   border: 1px solid #333;
   color: white;
   border-radius: 6px;
+  font-size: 16px;
+  outline: none;
 }
 
-.btn-principal{
-  width:100%;
-  padding:15px;
-  background:#d4af37;
-  color:black;
-  border:none;
+.formulario input:focus {
+  border-color: #d4af37;
+}
+
+.btn-principal {
+  width: 100%;
+  padding: 16px;
+  background: #d4af37;
+  color: black;
+  border: none;
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 6px;
-  margin-top:20px;
+  margin-top: 20px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
+
+.btn-principal:hover {
+  background: #b5952f;
+  transform: translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+.footer{
+  background:#000;
+  padding: 60px 40px 20px 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-col h4 {
+  margin-bottom: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.footer-col p {
+  color: #888;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #222;
+  color: #555;
+  font-size: 12px;
+}
+
+/* ================= ANIMACIONES GLOBALES ================= */
+.animar { opacity: 0; transform: translateY(20px); transition: 0.6s ease; }
+.animar.visible { opacity: 1; transform: translateY(0); }
 
 /* ================= LIGHT MODE ================= */
 body.light{
@@ -378,49 +627,68 @@ body.light{
 }
 
 body.light .navbar{
-  background:rgba(255,255,255,0.9);
-  backdrop-filter:blur(10px);
-  border-bottom: 1px solid #e5e5e5;
+  background:rgba(255,255,255,0.95);
+  border-bottom: 1px solid #eee;
 }
 
 body.light .menu-lateral{
   background:#ffffff;
-  border-right: 1px solid #e5e5e5;
+  border-right: 1px solid #eee;
 }
 
-body.light .menu-lateral a{
-  color: #111;
-}
+body.light .menu-lateral a, body.light .menu-header h3 { color: #111; }
 
-body.light #busqueda, body.light .formulario input, body.light .tracking-box input {
+body.light #busqueda {
   background: #f5f5f5;
   border: 1px solid #ddd;
   color: #111;
 }
 
-body.light .imagen-contenedor {
-  background: #f5f5f5;
-}
+body.light .trust-badges { background: #f9f9f9; border-bottom: 1px solid #eee; }
+body.light .imagen-contenedor { background: #f5f5f5; }
+body.light .footer { background: #f9f9f9; border-top: 1px solid #eee; }
 
-body.light .footer {
-  background: #f5f5f5;
-  border-top: 1px solid #ddd;
-  color: #333;
+/* Light mode Tarjeta de Reseñas */
+body.light .tarjeta-presentacion {
+  background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+  border-color: #ddd;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.05);
 }
+body.light .tarjeta-presentacion h4 { color: #111; }
+body.light .comentario-tarjeta { color: #555; }
 
-body.light .checkout-container {
-  background: #f9f9f9;
-  border: 1px solid #eee;
-}
+/* Light mode Checkout */
+body.light .checkout-container { background: #f9f9f9; border: 1px solid #eee; }
+body.light .checkout-step h2 { border-bottom: 1px solid #ddd; }
+body.light .formulario input { background: #fff; border: 1px solid #ddd; color: #111; }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width:768px){
+  .announcement-bar { font-size: 11px; }
   .navbar { padding: 15px 20px; }
-  .nav-actions input { display: none; } /* Ocultamos buscador en móvil para ahorrar espacio */
-  .categorias-premium{ flex-direction:column; padding: 20px; }
+  .nav-actions input { display: none; }
+  
+  .hero-premium { min-height: 60vh; }
+  .hero-content h2 { font-size: 40px; }
+  
+  .trust-badges { flex-direction: column; gap: 30px; }
+  
+  .missing-jersey-section { flex-direction: column; }
+  .missing-img-box { max-width: 100%; }
+  .missing-text-box { padding: 40px 20px; text-align: center; }
+  .missing-text-box p { margin: 0 auto 30px auto; }
+  
+  .category-scroll { gap: 20px; }
+  .category-circle { width: 100px; }
+  .category-circle img { width: 100px; height: 100px; }
+  
+  .plp-container, .shop-by-category { padding: 40px 20px; }
   .plp-grid{ grid-template-columns:repeat(2,1fr); gap: 15px; }
-  .plp-container { padding: 40px 20px; }
   .img-front, .img-back { height: 200px; }
-  .tracking-box input { width: 100%; margin-bottom: 10px; }
-  .tracking-box button { width: 100%; margin-left: 0; }
+}
+
+@media(max-width: 480px) {
+  .tarjeta-carrusel-wrapper { gap: 10px; }
+  .btn-carrusel { width: 35px; height: 35px; font-size: 16px; }
+  .tarjeta-presentacion { padding: 30px 15px; }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacto - La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="window.location.href='index.html'"><img src="img/logo.png"></div>
+  <div class="nav-actions"><div class="tema-toggle" onclick="cambiarTema()">🌙</div><div class="carrito-icon" onclick="window.location.href='carrito.html'">🛒 <span id="contador-carrito">0</span></div></div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <div class="menu-header"><h3>MENÚ</h3><span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span></div>
+  <a href="index.html">Inicio</a><a href="resenas.html">⭐ Opiniones</a><a href="tracking.html">📦 Rastrear pedido</a><hr style="border-color:#333; margin: 20px 0;"><a href="cuidados.html">👕 Cuidados del jersey</a><a href="tallas.html">📏 Guía de tallas</a><a href="contacto.html">📞 Contáctanos</a><a href="faq.html">❓ Preguntas Frecuentes</a><a href="politicas.html">🚚 Políticas de envío</a>
+</div>
+
+<div class="checkout-container" style="margin-top: 60px; margin-bottom: 60px; text-align: center;">
+  <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; text-align: left;">📞 Contáctanos</h2>
+  <p style="color: #ccc; margin-bottom: 30px; line-height: 1.6; text-align: left;">¿Tienes dudas con tu pedido, tallas o quieres cotizar un jersey que no ves en el catálogo? Estamos para ayudarte.</p>
+  
+  <div style="background: #222; padding: 30px; border-radius: 8px; border: 1px solid #333; margin-bottom: 20px;">
+    <h3 style="color: white; margin-bottom: 15px;">Atención rápida por WhatsApp</h3>
+    <p style="color: #888; margin-bottom: 20px;">De Lunes a Sábado de 10:00 AM a 8:00 PM</p>
+    <button class="btn-principal" style="background: #25D366; color: white; width: auto; padding: 15px 40px;" onclick="comprarWhatsApp()">Escríbenos en WhatsApp 📲</button>
+  </div>
+</div>
+
+<footer class="footer"><div class="footer-bottom"><p>© 2026 La 12 Jersey Store.</p></div></footer>
+<script src="app.js"></script>
+</body>
+</html>

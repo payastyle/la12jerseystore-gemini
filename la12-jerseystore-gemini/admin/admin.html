@@ -8,7 +8,6 @@
 
 <body>
 
-<!-- ================= INICIO ================= -->
 <div id="inicio-admin" class="inicio-admin">
 
   <h1>⚙️ Panel Admin</h1>
@@ -21,7 +20,6 @@
 
 </div>
 
-<!-- ================= PRODUCTOS ================= -->
 <div id="productos" class="seccion">
 
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
@@ -51,10 +49,10 @@
   <button onclick="generarProducto()">Generar producto</button>
 
   <pre id="resultado-producto"></pre>
+  <button class="btn-copiar" onclick="copiarTexto('resultado-producto')">📋 Copiar Código</button>
 
 </div>
 
-<!-- ================= RESEÑAS ================= -->
 <div id="resenas" class="seccion">
 
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
@@ -77,16 +75,16 @@
   <button onclick="generarResena()">Generar reseña</button>
 
   <pre id="resultado-resena"></pre>
+  <button class="btn-copiar" onclick="copiarTexto('resultado-resena')">📋 Copiar Código</button>
 
 </div>
 
-<!-- ================= PROMOS ================= -->
 <div id="promos" class="seccion">
 
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
 
   <h2>Promociones</h2>
-  <p class="referencia">📁 Copiar en: promos.js</p>
+  <p class="referencia">📁 Copiar en: promos.js (Dentro del arreglo cupones)</p>
 
   <input type="text" id="promo-texto" placeholder="Texto promo (ej: 20% OFF)">
 
@@ -98,10 +96,10 @@
   <button onclick="generarPromo()">Generar promo</button>
 
   <pre id="resultado-promo"></pre>
+  <button class="btn-copiar" onclick="copiarTexto('resultado-promo')">📋 Copiar Código</button>
 
 </div>
 
-<!-- ================= JS ================= -->
 <script src="admin.js"></script>
 
 </body>

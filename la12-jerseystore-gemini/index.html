@@ -2,11 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>La 12 Jersey Store</title>
+  <title>La 12 Jersey Store | Tienda Oficial</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="announcement-bar">
+  🔥 ENVÍO GRATIS EN COMPRAS DE 4 JERSEYS O MÁS 🔥
+</div>
 
 <header class="navbar">
   <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
@@ -23,83 +27,144 @@
 </header>
 
 <div id="menu-lateral" class="menu-lateral">
-  <a href="#" onclick="seleccionarCategoria(event,'mundial')">Copa Mundial 2026</a>
+  <div class="menu-header">
+    <h3>MENÚ</h3>
+    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
+  </div>
   <a href="#" onclick="seleccionarCategoria(event,'reciente')">Temporada 25/26</a>
-  <a href="#" onclick="seleccionarCategoria(event,'retro')">Retro</a>
-  <a href="#" onclick="seleccionarCategoria(event,'niño')">Niño</a>
-  <a href="#" onclick="seleccionarCategoria(event,'anime')">Anime</a>
-  <a href="#" onclick="verResenas(event)">Reseñas</a>
-  <a href="tracking.html">Rastrear pedido</a>
+  <a href="#" onclick="seleccionarCategoria(event,'mundial')">Rumbo al Mundial 2026</a>
+  <a href="#" onclick="seleccionarCategoria(event,'retro')">Colección Retro</a>
+  <a href="#" onclick="seleccionarCategoria(event,'niño')">Kids</a>
+  <a href="#" onclick="seleccionarCategoria(event,'anime')">Ediciones Anime</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="resenas.html">⭐ Opiniones</a>
+  <a href="tracking.html">📦 Rastrear pedido</a>
 </div>
 
 <section id="hero" class="hero-premium">
-  <img src="img/promo.jpg" alt="Gran Inauguración 3x2 en todas las jerseys">
+  <img src="img/promo.jpg" alt="Gran Inauguración" class="hero-bg">
+  <div class="hero-content">
+    <h2>NUEVA TEMPORADA</h2>
+    <p>Las indumentarias más esperadas de la temporada 25/26 ya están aquí.</p>
+    <button class="btn-hero" onclick="document.getElementById('seccion-productos').scrollIntoView({behavior: 'smooth'})">COMPRAR AHORA</button>
+  </div>
 </section>
 
-<section id="categorias" class="categorias-premium">
-  <div onclick="mostrarCategoria('reciente')">
-    <img src="img/categorias/actual.jpg" alt="Temporada Actual">
-    <p>Temporada</p>
+<section id="trust-badges" class="trust-badges">
+  <div class="badge-item">
+    <span class="badge-icon">🚚</span>
+    <h4>ENVÍO SEGURO</h4>
+    <p>A todo México</p>
   </div>
-  <div onclick="mostrarCategoria('retro')">
-    <img src="img/categorias/retro.jpg" alt="Jerseys Retro">
-    <p>Retro</p>
+  <div class="badge-item">
+    <span class="badge-icon">⭐</span>
+    <h4>CALIDAD PREMIUM</h4>
+    <p>Versión Jugador y Fan</p>
   </div>
-  <div onclick="mostrarCategoria('niño')">
-    <img src="img/categorias/nino.jpg" alt="Jerseys para Niños">
-    <p>Niños</p>
+  <div class="badge-item">
+    <span class="badge-icon">🛡️</span>
+    <h4>COMPRA SEGURA</h4>
+    <p>Pagos protegidos</p>
+  </div>
+</section>
+
+<section id="categorias" class="shop-by-category">
+  <h2 class="seccion-titulo">COMPRA POR CATEGORÍA</h2>
+  <div class="category-scroll">
+    <div class="category-circle" onclick="mostrarCategoria('reciente')">
+      <img src="img/categorias/actual.jpg" alt="Nuevas">
+      <p>Nuevas</p>
+    </div>
+    <div class="category-circle" onclick="mostrarCategoria('retro')">
+      <img src="img/categorias/retro.jpg" alt="Retro">
+      <p>Retro</p>
+    </div>
+    <div class="category-circle" onclick="mostrarCategoria('mundial')">
+      <img src="img/categorias/selecciones.jpg" alt="Selecciones">
+      <p>Selecciones</p>
+    </div>
+    <div class="category-circle" onclick="mostrarCategoria('niño')">
+      <img src="img/categorias/nino.jpg" alt="Niños">
+      <p>Niños</p>
+    </div>
+    <div class="category-circle" onclick="mostrarCategoria('anime')">
+      <img src="img/categorias/anime.jpg" alt="Especiales">
+      <p>Especiales</p>
+    </div>
+  </div>
+</section>
+
+<section id="promo-mid" class="promo-mid">
+  <div class="promo-mid-content">
+    <h3>APROVECHA NUESTRA PROMO 3X2</h3>
+    <p>Lleva 3 jerseys de cualquier equipo y paga solo 2. Descuento aplicado al contactarnos.</p>
   </div>
 </section>
 
 <section id="seccion-productos" class="plp-container">
-  <h2 id="titulo-categoria">Nuevos Lanzamientos</h2>
+  <h2 id="titulo-categoria" class="seccion-titulo">LOS MÁS BUSCADOS</h2>
   <div id="productos-categoria" class="plp-grid"></div>
 </section>
 
-<section id="seccion-resenas" class="slider-resenas" style="display:none;">
-  <h2>⭐ Opiniones reales de clientes</h2>
-  <div id="slider-resenas"></div>
-</section>
-
-<section id="recomendados-resenas" class="plp-container" style="display:none;">
-  <h2>Te puede interesar</h2>
-  <div id="productos-recomendados" class="plp-grid"></div>
+<section id="whatsapp-promo" class="missing-jersey-section animar">
+  <div class="missing-img-box">
+    <img src="img/seccion-whatsapp.png" alt="Henry Arsenal Jersey">
+  </div>
+  <div class="missing-text-box">
+    <h3>¿No viste la camiseta que estabas buscando?</h3>
+    <p>No te preocupes, mándanos un mensaje por WhatsApp y te ayudamos a encontrar la camiseta que estás buscando.</p>
+    <button class="btn-black" onclick="comprarWhatsApp()">Enviar Mensaje</button>
+  </div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  <div class="footer-content">
+    <div class="footer-col">
+      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
+      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
+    </div>
+    <div class="footer-col">
+      <h4>AYUDA</h4>
+      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
+      <p><a href="#" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  </div>
 </footer>
 
 <script src="productos.js"></script>
-<script src="resenas.js"></script>
 <script src="promos.js"></script>
 <script src="app.js"></script>
 
 <script>
+// Funciones simplificadas solo para el comportamiento del Home (SPA local)
 function limpiarVista(){
-  document.getElementById("hero").style.display = "none";
-  document.getElementById("seccion-productos").style.display = "none";
-  document.getElementById("categorias").style.display = "none";
-  document.getElementById("seccion-resenas").style.display = "none";
-  document.getElementById("recomendados-resenas").style.display = "none";
+  const secciones = ["hero", "trust-badges", "categorias", "promo-mid", "seccion-productos", "whatsapp-promo"];
+  secciones.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.style.display = "none";
+  });
 }
 
 function irHome(){
+  // Si se llama desde otra página, redirige al index
+  if (!document.getElementById("hero")) {
+    window.location.href = "index.html";
+    return;
+  }
+  
   limpiarVista();
-  document.getElementById("hero").style.display = "block";
-  document.getElementById("categorias").style.display = "flex";
+  document.getElementById("hero").style.display = "flex";
+  document.getElementById("trust-badges").style.display = "flex";
+  document.getElementById("categorias").style.display = "block";
+  document.getElementById("promo-mid").style.display = "flex";
   document.getElementById("seccion-productos").style.display = "block";
-  document.getElementById("titulo-categoria").innerText = "Nuevos Lanzamientos";
+  document.getElementById("whatsapp-promo").style.display = "flex"; 
+  document.getElementById("titulo-categoria").innerText = "LOS MÁS BUSCADOS";
+  
   renderPLP(productos);
-}
-
-function verResenas(e){
-  e.preventDefault();
-  limpiarVista();
-  document.getElementById("seccion-resenas").style.display = "block";
-  document.getElementById("recomendados-resenas").style.display = "block";
-  generarRecomendados();
-  document.getElementById("menu-lateral").classList.remove("open");
 }
 
 function seleccionarCategoria(e, tipo){
@@ -109,10 +174,6 @@ function seleccionarCategoria(e, tipo){
   mostrarCategoria(tipo);
   document.getElementById("menu-lateral").classList.remove("open");
 }
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  irHome();
-});
 </script>
 </body>
 </html>

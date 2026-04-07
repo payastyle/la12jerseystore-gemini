@@ -10,9 +10,7 @@ function guardarCarrito(){
 // ================== CONTADOR ==================
 function actualizarContador(){
   const contador = document.getElementById("contador-carrito");
-  if(contador){
-    contador.innerText = carrito.length;
-  }
+  if(contador) contador.innerText = carrito.length;
 }
 
 // ================== AGREGAR ==================
@@ -74,9 +72,8 @@ function renderPLP(lista){
     if(p.tipoProducto === "retro") badge = `<div class="badge">Retro</div>`;
     if(p.tipoProducto === "niño") badge = `<div class="badge">Niño</div>`;
 
-    // Lógica para tomar las dos imágenes (frente y vuelta)
     let imgFront = p.imagenes[0];
-    let imgBack = p.imagenes[1] ? p.imagenes[1] : p.imagenes[0]; // Si no hay segunda, repite la primera
+    let imgBack = p.imagenes[1] ? p.imagenes[1] : p.imagenes[0];
 
     contenedor.innerHTML += `
       <div class="plp-card animar" onclick="verProducto('${p.id}')">
@@ -93,7 +90,6 @@ function renderPLP(lista){
       </div>
     `;
   });
-
   animarScroll();
 }
 
@@ -129,37 +125,10 @@ function verProducto(id){
   window.location.href = `producto.html?id=${id}`;
 }
 
-// ================== RESEÑAS ==================
-function iniciarSliderResenas(){
-  const contenedor = document.getElementById("slider-resenas");
-  if(!contenedor) return;
-
-  let lista = [...resenas].sort(()=>0.5 - Math.random());
-  let index = 0;
-
-  function mostrar(){
-    const r = lista[index];
-    const estrellas = "⭐".repeat(r.estrellas);
-
-    contenedor.innerHTML = `
-      <div class="resena-slide">
-        <img src="${r.imagen}">
-        <h4>${r.nombre}</h4>
-        <p style="margin: 8px 0;">${estrellas}</p>
-        <p style="color:#aaa;">"${r.comentario}"</p>
-      </div>
-    `;
-    index = (index + 1) % lista.length;
-  }
-
-  mostrar();
-  setInterval(mostrar, 4000);
-}
-
 // ================== RECOMENDADOS ==================
 function generarRecomendados(){
   const contenedor = document.getElementById("productos-recomendados");
-  if(!contenedor) return;
+  if(!contenedor || typeof productos === "undefined") return;
 
   contenedor.innerHTML = "";
   const aleatorios = [...productos].sort(()=>0.5 - Math.random()).slice(0,4);
@@ -183,30 +152,59 @@ function generarRecomendados(){
   });
 }
 
+// ================== RESEÑAS TIPO TARJETA (PÁGINA DEDICADA) ==================
+let indexResena = 0;
+let intervaloResenas;
+
+function renderResenaActual() {
+  const contenedor = document.getElementById("tarjeta-carrusel-contenido");
+  if(!contenedor || typeof resenas === "undefined" || resenas.length === 0) return;
+
+  const r = resenas[indexResena];
+  const estrellas = "⭐".repeat(r.estrellas);
+
+  contenedor.innerHTML = `
+    <div class="tarjeta-presentacion">
+      <img src="${r.imagen}" alt="${r.nombre}" onerror="this.src='img/logo.png'">
+      <h4>${r.nombre}</h4>
+      <p class="estrellas-tarjeta">${estrellas}</p>
+      <p class="comentario-tarjeta">"${r.comentario}"</p>
+    </div>
+  `;
+}
+
+function cambiarResena(direccion) {
+  if(typeof resenas === "undefined" || resenas.length === 0) return;
+
+  if (direccion === 'siguiente') {
+    indexResena = (indexResena + 1) % resenas.length;
+  } else if (direccion === 'anterior') {
+    indexResena = (indexResena - 1 + resenas.length) % resenas.length;
+  }
+  
+  renderResenaActual();
+  reiniciarIntervaloResenas(); 
+}
+
+function reiniciarIntervaloResenas() {
+  clearInterval(intervaloResenas);
+  intervaloResenas = setInterval(() => {
+    cambiarResena('siguiente');
+  }, 10000); // 10 segundos
+}
+
+function iniciarCarruselTarjeta(){
+  const contenedor = document.getElementById("tarjeta-carrusel-contenido");
+  if(!contenedor) return;
+
+  renderResenaActual();
+  reiniciarIntervaloResenas();
+}
+
 // ================== WHATSAPP ==================
 function comprarWhatsApp(){
   let numero = "521XXXXXXXXXX";
-  let mensaje = "🔥 Pedido - La 12 Jersey Store 🔥\n\n";
-  let subtotal = 0;
-
-  carrito.forEach((p,i)=>{
-    mensaje += `🛒 Producto ${i+1}\n`;
-    mensaje += `${p.nombre}\n`;
-    mensaje += `ID: ${p.id}\n`;
-    mensaje += `Talla: ${p.talla}\n`;
-    if(p.tipo) mensaje += `Versión: ${p.tipo}\n`;
-    if(p.personalizar === "Si"){
-      mensaje += `Nombre: ${p.nombrePersonalizado}\n`;
-      mensaje += `Número: ${p.numero}\n`;
-    }
-    if(p.parches === "Si") mensaje += `Con parches\n`;
-    mensaje += `Precio: $${p.precio}\n\n`;
-    subtotal += p.precio;
-  });
-
-  let envio = carrito.length >= 4 ? 0 : 50;
-  let total = subtotal + envio;
-  mensaje += `Total: $${total}`;
+  let mensaje = "🔥 Pedido / Ayuda - La 12 Jersey Store 🔥\n\nHola, me gustaría recibir más información o ayuda con mi pedido.";
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
 }
 
@@ -249,16 +247,26 @@ document.addEventListener("click", function(e){
   }
 });
 
-// ================== INIT ==================
+// ================== INIT GLOBAL ==================
 document.addEventListener("DOMContentLoaded", ()=>{
   actualizarContador();
   actualizarCarrito();
-  iniciarSliderResenas();
   cargarTema();
   animarScroll();
 
-  if(typeof productos !== "undefined" && document.getElementById("productos-categoria")){
-    renderPLP(productos);
+  // 1. Si estamos en index.html
+  if(document.getElementById("hero") && typeof irHome === "function"){
+    irHome();
+  }
+
+  // 2. Si estamos en la página de Reseñas
+  if(document.getElementById("tarjeta-carrusel-contenido")){
+    iniciarCarruselTarjeta();
+  }
+
+  // 3. Si la página tiene recomendados (como resenas.html)
+  if(document.getElementById("productos-recomendados")){
+    generarRecomendados();
   }
 });
 
