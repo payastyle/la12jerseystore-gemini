@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo - La 12 Jersey Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+  <div class="logo" onclick="window.location.href='index.html'">
+    <img src="img/logo.png" alt="La 12 Jersey Store">
+  </div>
+  <div class="nav-actions">
+    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
+    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+      🛒 <span id="contador-carrito">0</span>
+    </div>
+  </div>
+</header>
+
+<div id="menu-lateral" class="menu-lateral">
+  <div class="menu-header">
+    <h3>MENÚ</h3>
+    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
+  </div>
+  <a href="index.html">Inicio</a>
+  <a href="catalogo.html?cat=reciente">Temporada 25/26</a>
+  <a href="catalogo.html?cat=retro">Colección Retro</a>
+  <a href="catalogo.html?cat=niño">Kids</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="resenas.html">⭐ Opiniones</a>
+  <a href="tracking.html">📦 Rastrear pedido</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="cuidados.html">👕 Cuidados del jersey</a>
+  <a href="tallas.html">📏 Guía de tallas</a>
+  <a href="contacto.html">📞 Contáctanos</a>
+  <a href="faq.html">❓ Preguntas Frecuentes</a>
+  <a href="politicas.html">🚚 Políticas de envío</a>
+</div>
+
+<div class="catalog-layout">
+  
+  <aside class="filters-sidebar">
+    <h3>Filtros</h3>
+    
+    <div class="filter-group">
+      <h4>Disponibilidad</h4>
+      <label style="cursor: pointer; display: flex; align-items: center; color: #ccc;">
+        <input type="checkbox" id="filtro-stock" onchange="aplicarFiltrosYOrden()"> Solo En Stock
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <h4>Liga / Competición</h4>
+      <select id="filtro-liga" onchange="aplicarFiltrosYOrden()">
+        <option value="todas">Todas las Ligas</option>
+        <option value="la liga">La Liga</option>
+        <option value="premier league">Premier League</option>
+        <option value="serie a">Serie A</option>
+        <option value="liga mx">Liga MX</option>
+        <option value="selecciones">Selecciones Nacionales</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <h4>Precio Máximo</h4>
+      <input type="range" id="filtro-precio" min="500" max="3000" step="100" value="3000" oninput="actualizarLabelPrecio(); aplicarFiltrosYOrden()">
+      <p style="color: #ccc; margin-top: 5px;">Hasta: $<span id="precio-label">3000</span></p>
+    </div>
+  </aside>
+
+  <main class="catalog-main">
+    
+    <div class="catalog-toolbar">
+      <div class="toolbar-info">
+        <h2 id="catalogo-titulo" style="color:#d4af37; margin-bottom:5px;">Catálogo</h2>
+        <p style="color:#888; font-size:14px;"><span id="contador-productos">0</span> artículos encontrados</p>
+      </div>
+      
+      <div class="toolbar-actions">
+        <select id="ordenar-select" onchange="aplicarFiltrosYOrden()">
+          <option value="recientes">Más Recientes (Nuevos)</option>
+          <option value="precio-menor">Precio: Menor a Mayor</option>
+          <option value="precio-mayor">Precio: Mayor a Menor</option>
+          <option value="a-z">Alfabético: A - Z</option>
+          <option value="z-a">Alfabético: Z - A</option>
+        </select>
+
+        <div class="view-toggles">
+          <button onclick="cambiarVista('grid')" id="btn-grid" class="active">𓃑</button>
+          <button onclick="cambiarVista('list')" id="btn-list">𝌆</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="productos-catalogo" class="plp-grid"></div>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="footer-content" style="align-items: flex-start; text-align: left;">
+    <div class="footer-col">
+      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
+      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
+      <div class="social-links">
+        <a href="#" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="#" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+        <a href="#" target="_blank"><img src="img/tiktok.png" alt="TikTok"></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 style="color: #d4af37;">INFORMACIÓN</h4>
+      <p><a href="cuidados.html" style="color:#888; text-decoration:none;">Cuidados del jersey</a></p>
+      <p><a href="tallas.html" style="color:#888; text-decoration:none;">Guía de tallas</a></p>
+      <p><a href="politicas.html" style="color:#888; text-decoration:none;">Políticas de envío</a></p>
+    </div>
+    <div class="footer-col">
+      <h4 style="color: #d4af37;">AYUDA Y SOPORTE</h4>
+      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
+      <p><a href="faq.html" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
+      <p><a href="contacto.html" style="color:#888; text-decoration:none;">Contáctanos</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script src="productos.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>

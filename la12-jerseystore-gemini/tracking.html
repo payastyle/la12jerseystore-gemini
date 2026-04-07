@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Rastrear pedido - La 12 Jersey Store</title>
+  <title>Rastrea tu pedido - La 12 Jersey Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,52 +22,84 @@
 </header>
 
 <div id="menu-lateral" class="menu-lateral">
+  <div class="menu-header">
+    <h3>MENÚ</h3>
+    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
+  </div>
   <a href="index.html">Inicio</a>
-  <a href="index.html#">Temporada 25/26</a>
-  <a href="index.html#">Retro</a>
-  <a href="index.html#">Niño</a>
-  <a href="index.html#">Anime</a>
-  <a href="index.html#resenas">Reseñas</a>
-  <a href="tracking.html">Rastrear pedido</a>
+  <a href="index.html">Temporada 25/26</a>
+  <a href="index.html">Colección Retro</a>
+  <a href="index.html">Kids</a>
+  <a href="index.html">Ediciones Anime</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="resenas.html">⭐ Opiniones</a>
+  <a href="tracking.html">📦 Rastrear pedido</a>
+  <hr style="border-color:#333; margin: 20px 0;">
+  <a href="cuidados.html">👕 Cuidados del jersey</a>
+  <a href="tallas.html">📏 Guía de tallas</a>
+  <a href="contacto.html">📞 Contáctanos</a>
+  <a href="faq.html">❓ Preguntas Frecuentes</a>
+  <a href="politicas.html">🚚 Políticas de envío</a>
 </div>
 
-<section class="tracking-page">
-  <h1>📦 Rastrea tu pedido</h1>
-  <p>Consulta el estado de tu envío en tiempo real con nuestro sistema global</p>
-
-  <div class="tracking-box">
-    <input type="text" id="guia" placeholder="Ingresa tu número de guía (Ej: 123456789)">
-    <button onclick="rastrearPro()">Rastrear</button>
+<section class="tracking-premium-section">
+  <div class="tracking-card animar">
+    <div class="tracking-icon">📦</div>
+    <h2>RASTREA TU PEDIDO</h2>
+    <p>Ingresa tu número de guía para conocer el estado exacto y la ubicación de tu envío en tiempo real.</p>
+    
+    <div class="tracking-form">
+      <input type="text" id="guia-input" placeholder="Ej: AS123456789CN">
+      <button class="btn-principal btn-rastrear" onclick="rastrearPedido()">RASTREAR</button>
+    </div>
+    
+    <p class="tracking-note">Se abrirá una nueva ventana segura de nuestro socio logístico global (17Track) con los detalles de tu paquete.</p>
   </div>
-
-  <div id="contenedor-resultados-17track"></div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  <div class="footer-content" style="align-items: flex-start; text-align: left;">
+    <div class="footer-col">
+      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
+      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
+      <div class="social-links">
+        <a href="#" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="#" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
+        <a href="#" target="_blank"><img src="img/tiktok.png" alt="TikTok"></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 style="color: #d4af37;">INFORMACIÓN</h4>
+      <p><a href="cuidados.html" style="color:#888; text-decoration:none;">Cuidados del jersey</a></p>
+      <p><a href="tallas.html" style="color:#888; text-decoration:none;">Guía de tallas</a></p>
+      <p><a href="politicas.html" style="color:#888; text-decoration:none;">Políticas de envío</a></p>
+    </div>
+    <div class="footer-col">
+      <h4 style="color: #d4af37;">AYUDA Y SOPORTE</h4>
+      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
+      <p><a href="faq.html" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
+      <p><a href="contacto.html" style="color:#888; text-decoration:none;">Contáctanos</a></p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
+  </div>
 </footer>
 
 <script src="app.js"></script>
-<script type="text/javascript" src="//www.17track.net/externalcall.js"></script>
-
 <script>
-function rastrearPro(){
-  const guia = document.getElementById("guia").value.trim();
-
-  if(!guia){
-    alert("Por favor, ingresa tu número de guía");
-    return;
+  // Lógica directa para abrir 17Track en una nueva pestaña
+  function rastrearPedido() {
+    const guia = document.getElementById('guia-input').value.trim();
+    
+    if (!guia) {
+      alert('Por favor, ingresa un número de guía válido para continuar.');
+      return;
+    }
+    
+    // Abre la pestaña de 17track y le pasa el número de guía en la URL
+    window.open(`https://t.17track.net/es#nums=${guia}`, '_blank');
   }
-
-  // Uso de la API Oficial de 17track para evitar el error de conexión
-  YQV5.trackSingle({
-      YQ_ContainerId: "contenedor-resultados-17track",
-      YQ_Height: 560,
-      YQ_Fc: "0",
-      YQ_Lang: "es",
-      YQ_Num: guia
-  });
-}
 </script>
 </body>
 </html>

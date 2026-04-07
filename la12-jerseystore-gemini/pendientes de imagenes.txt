@@ -1,0 +1,2 @@
+imagenes para el carrusel
+"Necesito 5 imágenes verticales para el menú, todas de 600x760 píxeles, en formato JPG optimizado o WebP, y con el motivo principal (el logo o el jugador) centrado".

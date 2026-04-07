@@ -1,116 +1,17 @@
-Perfecto 🔥 ahora sí te dejo la estructura del HOME (index.html) clara y ordenada 💸
-👉 Para que la pegues en un .txt y entiendas cómo está armado tu sitio
+Basándome en el archivo que subiste, la estructura actual de tu página principal (Home / index.html) está organizada de la siguiente manera, de arriba hacia abajo:
 
-🧱 🏠 ESTRUCTURA DEL HOME (FRONT)
-HOME - index.html
-│
-├── HEADER / NAVBAR
-│   ├── Menú hamburguesa ☰
-│   ├── Logo centrado
-│   ├── Buscador
-│   ├── Botón tema (🌙 / ☀️)
-│   ├── Icono carrito + contador
-│
-├── MENÚ LATERAL (SIDEBAR)
-│   ├── Copa Mundial 2026
-│   ├── Temporada 25/26
-│   ├── Retro
-│   ├── Niño
-│   ├── Anime
-│   ├── Reseñas
-│   ├── Rastrear pedido
-│
-├── HERO / BANNER PRINCIPAL
-│   └── Imagen grande promocional
-│
-├── PLP (PRODUCT LISTING PAGE)
-│   ├── Título de categoría
-│   ├── Buscador / filtros
-│   ├── Grid de productos
-│   │   ├── Imagen
-│   │   ├── Nombre
-│   │   ├── Precio
-│   │   ├── Badge (retro / niño)
-│   │   ├── Hover → “Ver producto”
-│
-├── CARRUSEL DE LIGAS
-│   ├── Liga MX
-│   ├── Premier League
-│   ├── La Liga
-│   ├── Bundesliga
-│   └── Scroll horizontal clickeable
-│
-├── CINTA PROMOCIONAL (SCROLL)
-│   └── Texto dinámico (promo / reseñas)
-│
-├── SLIDER DE RESEÑAS
-│   ├── Imagen cliente
-│   ├── Nombre
-│   ├── Estrellas ⭐
-│   ├── Comentario
-│   └── Cambio automático
-│
-├── SECCIÓN WHATSAPP (CTA)
-│   ├── Imagen (lado izquierdo)
-│   ├── Texto motivador
-│   ├── Botón WhatsApp
-│
-├── RASTREO DE PEDIDO
-│   ├── Input número de guía
-│   ├── Botón rastrear (17track)
-│
-├── FOOTER
-│   ├── Copyright
-│   ├── Link rastreo
-│
-└── SCRIPTS
-    ├── productos.js
-    ├── resenas.js
-    ├── promos.js
-    ├── app.js
+Barra de Navegación (Navbar): Es el encabezado fijo que contiene el botón del menú (hamburguesa), el logo de "La 12 Jersey Store", el buscador de productos, el interruptor de modo oscuro/claro y el icono del carrito de compras con su contador.
 
+Menú Lateral: Un panel oculto que se despliega al hacer clic en el icono de hamburguesa, el cual contiene los enlaces a las diferentes categorías (Mundial, Temporada, Retro, etc.), la sección de reseñas y la página de rastreo de pedidos.
 
+Sección Hero: El banner principal a pantalla completa (<section id="hero">) que muestra la imagen promocional destacada para captar la atención del usuario apenas entra a la tienda.
 
-🧠 💡 CÓMO FUNCIONA (RÁPIDO)
-👉 Todo está pensado como tienda real:
+Productos Destacados: Una cuadrícula (<section id="seccion-productos">) donde se renderizan de forma dinámica las tarjetas de los jerseys disponibles en tu catálogo.
 
-🔝 Arriba → navegación
+Categorías Premium: Un bloque visual con imágenes grandes (<section id="categorias">) que permite al usuario filtrar rápidamente entre "Temporada", "Retro" y "Niños".
 
-🧠 Medio → productos (lo importante)
+Sección de Reseñas (Oculta por defecto): Un contenedor (<section id="seccion-resenas">) reservado para mostrar las opiniones de los clientes. Está programado para mostrarse únicamente cuando el usuario hace clic en "Reseñas" desde el menú.
 
-💬 Abajo → confianza (reseñas + WhatsApp)
+Productos Recomendados (Oculto por defecto): Una sección adicional (<section id="recomendados-resenas">) que aparece junto con las reseñas para ofrecer productos de forma aleatoria y mantener al cliente navegando.
 
-🔧 Final → utilidades (tracking + footer)
-
-💣 ORDEN DE IMPORTANCIA
-1. Productos (ventas)
-2. Promos (convencer)
-3. Reseñas (confianza)
-4. WhatsApp (cierre)
-🧠 TIP PRO (MUY IMPORTANTE)
-👉 El HOME no es solo diseño:
-
-💣 Es tu vendedor principal
-
-🚀 SIGUIENTE NIVEL
-Si quieres lo llevamos brutal:
-
-👉 recomendaciones automáticas
-👉 productos aleatorios por sección
-👉 badges (OFERTA / NUEVO / HOT)
-👉 animaciones tipo Apple
-
-⚽ CONCLUSIÓN
-👉 Ya tienes estructura de home profesional
-👉 Bien organizada
-👉 Lista para convertir visitas en ventas
-
-Si quieres el siguiente paso 🔥
-👉 “optimizar home para vender más”
-👉 “orden exacto tipo Nike (UX real)”
-
-Te lo dejo nivel empresa 😎💸
-
-
-
-
+Footer: El pie de página con los derechos de autor de la tienda.

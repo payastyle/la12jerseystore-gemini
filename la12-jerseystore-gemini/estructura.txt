@@ -1,94 +1,41 @@
-LA-12-JERSEY-STORE/
+📁 tu-tienda-la-12/
 │
-├── index.html
-├── carrito.html
-├── producto.html
+├── 🌐 VISTAS PRINCIPALES DE VENTA (El núcleo del negocio)
+│   ├── 📄 index.html         (Home: Banners promocionales, categorías principales y productos destacados)
+│   ├── 📄 catalogo.html      (Catálogo Avanzado: Filtros por liga, precio, disponibilidad y ordenamiento)
+│   ├── 📄 producto.html      (Detalle del Jersey: Galería de fotos, selección de talla y botón "Agregar al Carrito")
+│   └── 📄 carrito.html       (Checkout en 3 pasos con integración de PayPal, OXXO, Transferencia y envío a WhatsApp)
 │
-├── style.css
-├── app.js
-├── producto.js
-├── productos.js
-├── promos.js
-├── resenas.js
+├── ℹ️ PÁGINAS DE INFORMACIÓN (Atención al cliente y Confianza)
+│   ├── 📄 resenas.html       (Tarjeta de presentación interactiva con opiniones de clientes)
+│   ├── 📄 tracking.html      (Sistema de rastreo premium con redirección directa a 17Track)
+│   ├── 📄 cuidados.html      (Guía de lavado para cuidar los estampados)
+│   ├── 📄 tallas.html        (Explicación de tallas Fan vs. Player)
+│   ├── 📄 contacto.html      (Datos de contacto y botón directo a tu WhatsApp)
+│   ├── 📄 faq.html           (Preguntas frecuentes)
+│   └── 📄 politicas.html     (Reglas de envío y devoluciones)
 │
-├── admin/
-│   ├── admin.html
-│   ├── admin.css
-│   ├── admin.js
+├── 🎨 DISEÑO
+│   └── 📄 style.css          (Todo el diseño visual, modo oscuro/claro, animaciones y responsivo)
 │
-├── img/
-│   ├── logo.png
-│   ├── promo.jpg
-│   ├── whatsapp.jpg
+├── 🧠 LÓGICA Y DATOS (Tus "Bases de Datos" en JavaScript)
+│   ├── 📄 app.js             (El motor: controla el carrito, PayPal, las vistas, los filtros y los cálculos)
+│   ├── 📄 productos.js       (Aquí guardas todo tu inventario de jerseys)
+│   ├── 📄 resenas.js         (Aquí guardas las opiniones)
+│   └── 📄 promos.js          (Aquí configuras los cupones de descuento)
 │
-│   ├── productos/
-│   │   ├── real-madrid-1/
-│   │   │   ├── 1.jpg
-│   │   │   ├── 2.jpg
-│   │   │
-│   │   ├── barcelona-1/
-│   │   │   ├── 1.jpg
-│   │   │   ├── 2.jpg
+├── ⚙️ PANEL DE ADMINISTRACIÓN (Tu herramienta privada)
+│   ├── 📄 admin.html         (Tu pantalla para crear nuevos productos, cupones o reseñas sin tocar código complejo)
+│   ├── 📄 admin.css          (El estilo visual del panel)
+│   └── 📄 admin.js           (El código que genera el fragmento exacto que vas a pegar en tus bases de datos)
 │
-│   ├── resenas/
-│   │   ├── resena1.jpg
-│   │   ├── resena2.jpg
-│
-│   ├── ligas/
-│   │   ├── liga-mx.jpg
-│   │   ├── premier.jpg
-│   │   ├── laliga.jpg
-│   │   ├── bundesliga.jpg
-│
-│   ├── tallas/
-│   │   ├── adulto.png
-│   │   ├── niño.png
-│
-├── README.txt
-
-
-
-
-
-
-
-
-
-
-
-🧠 💡 EXPLICACIÓN RÁPIDA
-🏠 index.html
-
-👉 Home + catálogo + PLP
-
-🛒 carrito.html
-
-👉 Checkout (3 pasos estilo Nike)
-
-👕 producto.html
-
-👉 Página individual del jersey
-
-⚙️ JS
-app.js → lógica general (carrito, filtros, WhatsApp)
-producto.js → lógica del producto
-productos.js → base de productos
-promos.js → cupones y promociones
-resenas.js → reseñas
-🎨 CSS
-style.css → todo el diseño de la tienda
-🧑‍💻 ADMIN
-
-👉 Panel separado (muy pro)
-
-admin/
-🖼️ IMÁGENES
-
-👉 Separadas por tipo:
-
-productos
-reseñas
-ligas
-tallas
-
-💣 Esto es MUY profesional
+└── 📂 img/                   (Tu directorio de imágenes)
+    ├── 🖼️ logo.png
+    ├── 🖼️ promo.jpg          (Banner principal del Home)
+    ├── 🖼️ seccion-whatsapp.png (La imagen del jersey de Henry/Arsenal)
+    ├── 🖼️ facebook.png       (Logo red social)
+    ├── 🖼️ instagram.png      (Logo red social)
+    ├── 🖼️ tiktok.png         (Logo red social)
+    ├── 📁 categorias/        (Las fotos circulares: retro.jpg, actual.jpg, etc.)
+    ├── 📁 productos/         (Fotos de los jerseys)
+    └── 📁 resenas/           (Fotos de perfil de tus clientes)
