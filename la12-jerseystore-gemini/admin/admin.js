@@ -1,135 +1,94 @@
-// ================= NAVEGACIÓN =================
-function abrirSeccion(id){
-  // Ocultar inicio
-  document.getElementById("inicio-admin").style.display = "none";
+/* ==========================================================================
+   LÓGICA DEL PANEL ADMIN - LA 12
+   ========================================================================== */
 
-  // Ocultar todas las secciones
-  document.querySelectorAll(".seccion").forEach(sec=>{
-    sec.style.display = "none";
-  });
-
-  // Mostrar sección seleccionada
-  document.getElementById(id).style.display = "block";
+// Navegación
+function abrirSeccion(id) {
+    document.querySelectorAll('.seccion-admin').forEach(s => s.classList.remove('activo'));
+    document.getElementById(id).classList.add('activo');
 }
 
-function volverInicio(){
-  // Ocultar todas las secciones
-  document.querySelectorAll(".seccion").forEach(sec=>{
-    sec.style.display = "none";
-  });
-
-  // Mostrar inicio
-  document.getElementById("inicio-admin").style.display = "flex";
+function volverInicio() {
+    document.querySelectorAll('.seccion-admin').forEach(s => s.classList.remove('activo'));
+    document.getElementById('inicio-admin').classList.add('activo');
 }
 
-// ================= GENERAR ID =================
-function generarID(nombre){
-  const base = nombre
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w\-]+/g, "");
+// Generar Producto
+function generarProducto() {
+    const id = document.getElementById('nombre').value.toUpperCase().replace(/\s+/g, '-');
+    const nombre = document.getElementById('nombre').value;
+    const precio = document.getElementById('precio').value;
+    const tipo = document.getElementById('tipoProducto').value;
+    const liga = document.getElementById('liga').value;
+    const equipo = document.getElementById('equipo').value;
+    const img1 = document.getElementById('imagen').value;
+    const img2 = document.getElementById('imagen2').value;
+    const desc = document.getElementById('descripcion').value;
 
-  const numero = Math.floor(Math.random() * 1000);
+    const imagenes = img2 ? `["${img1}", "${img2}"]` : `["${img1}"]`;
 
-  return `${base}-${numero}`;
-}
-
-// ================= PRODUCTOS =================
-function generarProducto(){
-  const nombre = document.getElementById("nombre").value.trim();
-  const precio = document.getElementById("precio").value;
-  const tipo = document.getElementById("tipoProducto").value;
-  const liga = document.getElementById("liga").value.toLowerCase().trim();
-  const equipo = document.getElementById("equipo").value.toLowerCase().trim();
-  const imagen1 = document.getElementById("imagen").value;
-  const imagen2 = document.getElementById("imagen2").value;
-  const descripcion = document.getElementById("descripcion").value;
-
-  if(!nombre || !precio || !imagen1){
-    alert("Completa los campos obligatorios");
-    return;
-  }
-
-  const id = generarID(nombre);
-
-  let imagenes = [`"${imagen1}"`];
-
-  if(imagen2){
-    imagenes.push(`"${imagen2}"`);
-  }
-
-  const producto = `
-  {
+    const resultado = `{
     id: "${id}",
     nombre: "${nombre}",
-    precio: ${precio},
+    precioNormal: ${parseInt(precio) + 500},
+    precio: ${parseInt(precio)},
     tipoProducto: "${tipo}",
     liga: "${liga}",
+    marca: "Genérica",
     equipo: "${equipo}",
-    descripcion: "${descripcion}",
-    imagenes: [${imagenes.join(", ")}]
+    descripcion: "${desc}",
+    imagenes: ${imagenes},
+    stock: true
   },`;
 
-  document.getElementById("resultado-producto").innerText = producto;
+    document.getElementById('resultado-producto').innerText = resultado;
 }
 
-// ================= RESEÑAS =================
-function generarResena(){
-  const nombre = document.getElementById("resena-nombre").value.trim();
-  const estrellas = document.getElementById("resena-estrellas").value;
-  const comentario = document.getElementById("resena-comentario").value;
-  const imagen = document.getElementById("resena-imagen").value;
+// Generar Reseña (Para que la pegues en el HTML de reseñas)
+function generarResena() {
+    const nombre = document.getElementById('resena-nombre').value;
+    const estrellas = document.getElementById('resena-estrellas').value;
+    const comentario = document.getElementById('resena-comentario').value;
+    const producto = document.getElementById('resena-producto').value;
+    const letra = nombre.charAt(0).toUpperCase();
 
-  if(!nombre || !comentario || !imagen){
-    alert("Completa todos los campos");
-    return;
-  }
+    const resultado = `<div class="resena-card">
+    <div class="resena-header">
+        <div class="resena-cliente">
+            <div class="resena-avatar">${letra}</div>
+            <div>
+                <h4 style="color: #fff; margin: 0 0 5px;">${nombre}</h4>
+                <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
+            </div>
+        </div>
+        <div class="resena-estrellas">${estrellas}</div>
+    </div>
+    <p class="resena-texto">"${comentario}"</p>
+    <div class="resena-producto">Producto comprado: <span>${producto}</span></div>
+</div>`;
 
-  const resena = `
-  {
-    nombre: "${nombre}",
-    estrellas: ${estrellas},
-    comentario: "${comentario}",
-    imagen: "${imagen}"
+    document.getElementById('resultado-resena').innerText = resultado;
+}
+
+// Generar Promo
+function generarPromo() {
+    const codigo = document.getElementById('cupon-codigo').value.toUpperCase();
+    const descuento = document.getElementById('cupon-descuento').value;
+
+    const resultado = `{
+    codigo: "${codigo}",
+    descuento: ${descuento},
+    activo: true
   },`;
 
-  document.getElementById("resultado-resena").innerText = resena;
+    document.getElementById('resultado-promo').innerText = resultado;
 }
 
-// ================= PROMOS =================
-function generarPromo(){
-  const codigo = document.getElementById("cupon-codigo").value;
-  const descuento = document.getElementById("cupon-descuento").value;
-  const expiracion = document.getElementById("cupon-expira").value;
-
-  if(!codigo || !descuento || !expiracion){
-    alert("Completa todos los datos del cupón");
-    return;
-  }
-
-  // Genera solo el objeto del cupón para agregarlo al array 'cupones'
-  const resultado = `
-    {
-      codigo: "${codigo}",
-      descuento: ${descuento},
-      activo: true,
-      expiracion: "${expiracion}"
-    },`;
-
-  document.getElementById("resultado-promo").innerText = resultado;
-}
-
-// ================= COPIAR AL PORTAPAPELES =================
-function copiarTexto(idElemento) {
-  const texto = document.getElementById(idElemento).innerText;
-  if (!texto) {
-    alert("No hay nada que copiar. Genera el código primero.");
-    return;
-  }
-  navigator.clipboard.writeText(texto).then(() => {
-    alert("¡Código copiado al portapapeles! 📋");
-  }).catch(err => {
-    console.error('Error al copiar: ', err);
-  });
+// Copiar al portapapeles
+function copiarTexto(id) {
+    const texto = document.getElementById(id).innerText;
+    if(!texto) return alert("Primero genera el código.");
+    
+    navigator.clipboard.writeText(texto);
+    alert("¡Código copiado! Pégalo en tu archivo .js correspondiente.");
 }

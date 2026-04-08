@@ -1,79 +1,342 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Opiniones - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reseñas de Clientes - La 12 Jersey Store</title>
+    
+    <meta property="og:title" content="Reseñas de La 12 Jersey Store">
+    <meta property="og:description" content="Lee lo que opinan nuestros clientes sobre nuestra calidad Premium 1:1 y anímate a dejar tu propia reseña por un cupón de descuento.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .resenas-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('img/ui/promo.jpg') center/cover;
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .resenas-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        /* Lado Izquierdo: Formulario */
+        .resenas-form-box {
+            flex: 1;
+            min-width: 300px;
+            background: #111;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .resenas-form-box h3 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .form-grupo {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-grupo input, .form-grupo select, .form-grupo textarea {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        .form-grupo input:focus, .form-grupo select:focus, .form-grupo textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        /* Lado Derecho: Comentarios Destacados */
+        .resenas-lista {
+            flex: 1.5;
+            min-width: 300px;
+        }
+
+        .resena-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .resena-card:hover {
+            transform: translateX(10px);
+            border-color: #444;
+        }
+
+        .resena-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 15px;
+        }
+
+        .resena-cliente {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .resena-avatar {
+            width: 50px;
+            height: 50px;
+            background: #222;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+
+        .resena-estrellas {
+            color: #d4af37;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .resena-texto {
+            color: #ccc;
+            font-size: 15px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .resena-producto {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .resena-producto span {
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .resenas-form-box { position: static; }
+            .resena-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #0a0a0a; color: #fff;">
 
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'">
-    <img src="img/logo.png" alt="La 12 Jersey Store">
-  </div>
-  <div class="nav-actions">
-    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
-    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-      🛒 <span id="contador-carrito">0</span>
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
     </div>
-  </div>
-</header>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header">
-    <h3>MENÚ</h3>
-    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
-  </div>
-  <a href="index.html">Inicio</a>
-  <a href="index.html#">Temporada 25/26</a>
-  <a href="index.html#">Retro</a>
-  <a href="index.html#">Kids</a>
-  <a href="index.html#">Ediciones Anime</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="resenas.html">⭐ Opiniones</a>
-  <a href="tracking.html">📦 Rastrear pedido</a>
-</div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-<section class="reviews-page-section">
-  <h1 class="seccion-titulo" style="margin-top: 40px;">LA VOZ DE NUESTRA AFICIÓN</h1>
-  <p style="text-align:center; color:#888; margin-bottom: 20px;">Desliza para ver lo que dicen nuestros clientes</p>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
 
-  <div class="tarjeta-carrusel-wrapper">
-    <button class="btn-carrusel" onclick="cambiarResena('anterior')">❮</button>
-
-    <div id="tarjeta-carrusel-contenido"></div>
-
-    <button class="btn-carrusel" onclick="cambiarResena('siguiente')">❯</button>
-  </div>
-</section>
-
-<section id="recomendados-resenas" class="plp-container">
-  <h2 class="seccion-titulo">TE PUEDE INTERESAR</h2>
-  <div id="productos-recomendados" class="plp-grid"></div>
-</section>
-
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-col">
-      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
-      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
     </div>
-    <div class="footer-col">
-      <h4>AYUDA</h4>
-      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
-      <p><a href="#" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
-  </div>
-</footer>
 
-<script src="productos.js"></script>
-<script src="resenas.js"></script>
-<script src="app.js"></script>
+    <section class="resenas-hero">
+        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">PRUEBA SOCIAL</h4>
+        <h1 style="color: #fff; font-size: 40px; margin-bottom: 15px; text-transform: uppercase;">La voz de la afición 🏟️</h1>
+        <p style="color: #ccc; font-size: 16px; max-width: 600px; margin: 0 auto;">No confíes solo en lo que decimos, confía en lo que nuestros clientes reciben. La calidad 1:1 habla por sí sola.</p>
+    </section>
 
+    <section class="resenas-container">
+        
+        <div class="resenas-form-box">
+            <h3>Gana un 20% de Descuento 🎁</h3>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 25px; line-height: 1.5;">¿Ya recibiste tu jersey? Déjanos tu opinión honesta y recibe automáticamente un código de <strong>20% OFF</strong> para tu próxima compra por WhatsApp.</p>
+            
+            <div class="form-grupo">
+                <label for="resena-nombre">Tu Nombre o Apodo:</label>
+                <input type="text" id="resena-nombre" placeholder="Ej: Carlos M." required>
+            </div>
+
+            <div class="form-grupo">
+                <label for="resena-estrellas">Calificación:</label>
+                <select id="resena-estrellas">
+                    <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐ (¡Increíble, calidad Top!)</option>
+                    <option value="⭐⭐⭐⭐">⭐⭐⭐⭐ (Muy bueno, lo recomiendo)</option>
+                    <option value="⭐⭐⭐">⭐⭐⭐ (Bueno, pero puede mejorar)</option>
+                    <option value="⭐⭐">⭐⭐ (Regular)</option>
+                    <option value="⭐">⭐ (Malo)</option>
+                </select>
+            </div>
+
+            <div class="form-grupo">
+                <label for="resena-comentario">Tu Opinión:</label>
+                <textarea id="resena-comentario" rows="4" placeholder="¿Qué te pareció la tela? ¿El estampado llegó bien? ¿El envío fue rápido?" required></textarea>
+            </div>
+
+            <button class="btn-principal" onclick="enviarResenaWhatsApp()" style="width: 100%; padding: 15px; background: #25D366; color: white; border: none; font-weight: bold; border-radius: 30px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s;">
+                Enviar y Solicitar Cupón 📲
+            </button>
+            <p style="text-align: center; color: #666; font-size: 12px; margin-top: 15px;">Serás redirigido a nuestro WhatsApp oficial.</p>
+        </div>
+
+        <div class="resenas-lista">
+            <h2 style="color: #fff; margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px;">Últimas Valoraciones</h2>
+
+            <div class="resena-card">
+                <div class="resena-header">
+                    <div class="resena-cliente">
+                        <div class="resena-avatar">A</div>
+                        <div>
+                            <h4 style="color: #fff; margin: 0 0 5px;">Alejandro Gómez</h4>
+                            <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="resena-estrellas">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="resena-texto">"Hermano, me acaba de llegar el jersey del Madrid. Sinceramente no esperaba tanta calidad por el precio. Los logos vienen termosellados perfectos y la tela se siente súper fresca. Ya les pedí dos más."</p>
+                <div class="resena-producto">Producto comprado: <span>Real Madrid Local 25/26 (Versión Jugador)</span></div>
+            </div>
+
+            <div class="resena-card">
+                <div class="resena-header">
+                    <div class="resena-cliente">
+                        <div class="resena-avatar">M</div>
+                        <div>
+                            <h4 style="color: #fff; margin: 0 0 5px;">Miguel Sánchez</h4>
+                            <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="resena-estrellas">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="resena-texto">"Tenía mis dudas por ser mi primera compra con ustedes, pero la atención por WhatsApp de 10. Me resolvieron la duda de las tallas y el estampado que le pusieron atrás (Messi 10) viene de excelente calidad. Tardó 4 días en llegar por Estafeta."</p>
+                <div class="resena-producto">Producto comprado: <span>Argentina Retro 1994</span></div>
+            </div>
+
+            <div class="resena-card">
+                <div class="resena-header">
+                    <div class="resena-cliente">
+                        <div class="resena-avatar">D</div>
+                        <div>
+                            <h4 style="color: #fff; margin: 0 0 5px;">Daniela R.</h4>
+                            <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="resena-estrellas">⭐⭐⭐⭐</div>
+                </div>
+                <p class="resena-texto">"Compré los jerseys de Tigres para mis hijos y están hermosos. Le pongo 4 estrellas solo porque la paquetería se retrasó un día por culpa de la lluvia en mi ciudad, pero los productos intactos y la calidad de la tela de niños está muy bien cuidada."</p>
+                <div class="resena-producto">Producto comprado: <span>Tigres UANL (Kids)</span></div>
+            </div>
+
+            <div class="resena-card">
+                <div class="resena-header">
+                    <div class="resena-cliente">
+                        <div class="resena-avatar">J</div>
+                        <div>
+                            <h4 style="color: #fff; margin: 0 0 5px;">Juan Pablo V.</h4>
+                            <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="resena-estrellas">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p class="resena-texto">"La versión de jugador viene idéntica a la de la tienda departamental, con sus etiquetas y la bolsa ziploc de la marca. Vale totalmente la pena. Aproveché el envío gratis llevando 4 piezas."</p>
+                <div class="resena-producto">Producto comprado: <span>AC Milan Local 2007</span></div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20general" class="whatsapp-flotante" target="_blank">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="promo.js"></script>
+    <script src="app.js"></script>
+    
+    <script>
+        function enviarResenaWhatsApp() {
+            const nombre = document.getElementById("resena-nombre").value.trim();
+            const mensajeResena = document.getElementById("resena-comentario").value.trim();
+            const calificacion = document.getElementById("resena-estrellas").value;
+          
+            if (nombre === "" || mensajeResena === "") {
+                alert("Por favor, llena tu nombre y tu comentario antes de enviar.");
+                return;
+            }
+
+            let mensajeWS = `*NUEVA RESEÑA DE CLIENTE - LA 12* ⭐️\n\n`;
+            mensajeWS += `👤 *Cliente:* ${nombre}\n`;
+            mensajeWS += `🏅 *Calificación:* ${calificacion}\n`;
+            mensajeWS += `💬 *Comentario:* "${mensajeResena}"\n\n`;
+            mensajeWS += `🎁 *Vengo a solicitar mi cupón del 20% OFF por haber dejado mi reseña.*`;
+          
+            const numeroTuWhatsApp = "521XXXXXXXXXX"; // REEMPLAZA CON TU NÚMERO
+            const url = `https://wa.me/${numeroTuWhatsApp}?text=${encodeURIComponent(mensajeWS)}`;
+            
+            // Abre WhatsApp y limpia el formulario
+            window.open(url, '_blank');
+            
+            document.getElementById("resena-nombre").value = "";
+            document.getElementById("resena-comentario").value = "";
+        }
+    </script>
 </body>
 </html>

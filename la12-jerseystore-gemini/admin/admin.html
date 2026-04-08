@@ -5,25 +5,19 @@
   <title>Admin - La 12 Jersey Store</title>
   <link rel="stylesheet" href="admin.css">
 </head>
-
 <body>
 
-<div id="inicio-admin" class="inicio-admin">
-
+<div id="inicio-admin" class="seccion-admin activo">
   <h1>⚙️ Panel Admin</h1>
-
   <div class="botones-admin">
     <button onclick="abrirSeccion('productos')">📦 Productos</button>
     <button onclick="abrirSeccion('resenas')">⭐ Reseñas</button>
     <button onclick="abrirSeccion('promos')">🎁 Promos</button>
   </div>
-
 </div>
 
-<div id="productos" class="seccion">
-
+<div id="productos" class="seccion-admin">
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-
   <h2>Agregar Producto</h2>
   <p class="referencia">📁 Copiar en: productos.js</p>
 
@@ -32,75 +26,59 @@
 
   <select id="tipoProducto">
     <option value="mundial">Copa Mundial 2026</option>
-    <option value="reciente">Temporada 25/26</option>
-    <option value="retro">Retro</option>
-    <option value="niño">Niño</option>
+    <option value="temporada">Temporada 25/26</option>
+    <option value="retro-clubes">Retro Clubes</option>
+    <option value="retro-selecciones">Retro Selecciones</option>
+    <option value="kids">Niño</option>
     <option value="anime">Anime</option>
   </select>
 
-  <input type="text" id="liga" placeholder="Liga (ej: la liga)">
-  <input type="text" id="equipo" placeholder="Equipo (ej: real madrid)">
-
+  <input type="text" id="liga" placeholder="Liga (ej: La Liga)">
+  <input type="text" id="equipo" placeholder="Equipo (ej: Real Madrid)">
   <input type="text" id="imagen" placeholder="Imagen principal (img/productos/ejemplo.jpg)">
   <input type="text" id="imagen2" placeholder="Imagen secundaria (opcional)">
-
   <textarea id="descripcion" placeholder="Descripción del producto"></textarea>
 
-  <button onclick="generarProducto()">Generar producto</button>
+  <button onclick="generarProducto()" class="btn-generar">Generar producto</button>
 
-  <pre id="resultado-producto"></pre>
+  <pre id="resultado-producto" class="resultado"></pre>
   <button class="btn-copiar" onclick="copiarTexto('resultado-producto')">📋 Copiar Código</button>
-
 </div>
 
-<div id="resenas" class="seccion">
-
+<div id="resenas" class="seccion-admin">
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-
   <h2>Agregar Reseña</h2>
-  <p class="referencia">📁 Copiar en: resenas.js</p>
+  <p class="referencia">📁 Copiar en: resenas.html (Muro de valoraciones)</p>
 
   <input type="text" id="resena-nombre" placeholder="Nombre del cliente">
-
   <select id="resena-estrellas">
-    <option value="5">⭐⭐⭐⭐⭐</option>
-    <option value="4">⭐⭐⭐⭐</option>
-    <option value="3">⭐⭐⭐</option>
+    <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+    <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+    <option value="⭐⭐⭐">⭐⭐⭐</option>
   </select>
-
   <textarea id="resena-comentario" placeholder="Comentario"></textarea>
+  <input type="text" id="resena-producto" placeholder="Producto comprado (ej: Real Madrid Local)">
 
-  <input type="text" id="resena-imagen" placeholder="Imagen (img/resenas/ejemplo.jpg)">
+  <button onclick="generarResena()" class="btn-generar">Generar reseña</button>
 
-  <button onclick="generarResena()">Generar reseña</button>
-
-  <pre id="resultado-resena"></pre>
+  <pre id="resultado-resena" class="resultado"></pre>
   <button class="btn-copiar" onclick="copiarTexto('resultado-resena')">📋 Copiar Código</button>
-
 </div>
 
-<div id="promos" class="seccion">
-
+<div id="promos" class="seccion-admin">
   <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-
   <h2>Promociones</h2>
-  <p class="referencia">📁 Copiar en: promos.js (Dentro del arreglo cupones)</p>
-
-  <input type="text" id="promo-texto" placeholder="Texto promo (ej: 20% OFF)">
+  <p class="referencia">📁 Copiar en: promo.js (Dentro del arreglo cupones)</p>
 
   <input type="text" id="cupon-codigo" placeholder="Código (ej: LA12-20)">
   <input type="number" step="0.01" id="cupon-descuento" placeholder="Descuento (0.20 = 20%)">
 
-  <input type="date" id="cupon-expira">
+  <button onclick="generarPromo()" class="btn-generar">Generar promo</button>
 
-  <button onclick="generarPromo()">Generar promo</button>
-
-  <pre id="resultado-promo"></pre>
+  <pre id="resultado-promo" class="resultado"></pre>
   <button class="btn-copiar" onclick="copiarTexto('resultado-promo')">📋 Copiar Código</button>
-
 </div>
 
 <script src="admin.js"></script>
-
 </body>
 </html>

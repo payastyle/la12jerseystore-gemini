@@ -1,105 +1,221 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Rastrea tu pedido - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastrea tu Pedido - La 12 Jersey Store</title>
+    
+    <meta property="og:title" content="Rastrea tu pedido en La 12">
+    <meta property="og:description" content="Sigue el trayecto de tu jersey premium hasta la puerta de tu casa usando nuestro rastreador universal.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .tracking-hero {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('img/ui/promo.jpg') center/cover;
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .tracking-container {
+            max-width: 900px;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Caja de Rastreo */
+        .tracking-box {
+            flex: 1;
+            min-width: 300px;
+            background: #111;
+            border: 1px solid #d4af37;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .tracking-box h3 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-grupo {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-grupo input {
+            width: 100%;
+            padding: 15px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: inherit;
+            text-transform: uppercase;
+        }
+
+        .form-grupo input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        /* Caja de Información */
+        .tracking-info {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px 0;
+        }
+
+        .tracking-info h4 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 10px;
+        }
+
+        .tracking-info p {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tracking-info ul {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .tracking-info li {
+            margin-bottom: 10px;
+        }
+
+    </style>
 </head>
-<body>
+<body style="background-color: #0a0a0a; color: #fff;">
 
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'">
-    <img src="img/logo.png" alt="La 12 Jersey Store">
-  </div>
-  <div class="nav-actions">
-    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
-    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-      🛒 <span id="contador-carrito">0</span>
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
     </div>
-  </div>
-</header>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header">
-    <h3>MENÚ</h3>
-    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
-  </div>
-  <a href="index.html">Inicio</a>
-  <a href="index.html">Temporada 25/26</a>
-  <a href="index.html">Colección Retro</a>
-  <a href="index.html">Kids</a>
-  <a href="index.html">Ediciones Anime</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="resenas.html">⭐ Opiniones</a>
-  <a href="tracking.html">📦 Rastrear pedido</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="cuidados.html">👕 Cuidados del jersey</a>
-  <a href="tallas.html">📏 Guía de tallas</a>
-  <a href="contacto.html">📞 Contáctanos</a>
-  <a href="faq.html">❓ Preguntas Frecuentes</a>
-  <a href="politicas.html">🚚 Políticas de envío</a>
-</div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-<section class="tracking-premium-section">
-  <div class="tracking-card animar">
-    <div class="tracking-icon">📦</div>
-    <h2>RASTREA TU PEDIDO</h2>
-    <p>Ingresa tu número de guía para conocer el estado exacto y la ubicación de tu envío en tiempo real.</p>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
+
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html" style="color: #d4af37;">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
+    </div>
+
+    <section class="tracking-hero">
+        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ESTADO DE TU ENVÍO</h4>
+        <h1 style="color: #fff; font-size: 40px; margin-bottom: 15px; text-transform: uppercase;">Sigue tu Jersey 📦</h1>
+        <p style="color: #ccc; font-size: 16px; max-width: 600px; margin: 0 auto;">Ingresa el número de guía que te proporcionamos por WhatsApp. Nuestro sistema universal detectará automáticamente tu paquete.</p>
+    </section>
+
+    <section class="tracking-container">
+        
+        <div class="tracking-box">
+            <h3>Rastreo Universal 🌍</h3>
+            <p style="color: #888; font-size: 13px; margin-bottom: 20px;">Desarrollado por 17TRACK</p>
+            
+            <div class="form-grupo">
+                <label for="guia-input">Número de Guía (Tracking):</label>
+                <input type="text" id="guia-input" placeholder="Ej: 7894561230" required>
+            </div>
+
+            <button class="btn-principal" onclick="rastrearPaquete()" style="width: 100%; padding: 15px; background: #d4af37; color: #000; border: none; font-weight: bold; border-radius: 30px; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: 0.3s;">
+                BUSCAR PAQUETE 🔍
+            </button>
+        </div>
+
+        <div class="tracking-info">
+            <h4>¿Dónde encuentro mi guía?</h4>
+            <p>Una vez que tu pedido ha sido procesado y empacado, te enviamos un mensaje a tu <strong>WhatsApp</strong> con la foto de tu guía o el código de rastreo.</p>
+            
+            <h4>Tiempos Estimados</h4>
+            <ul>
+                <li><strong>Stock Nacional:</strong> El código se activa en las primeras 24 horas y llega en 3-5 días hábiles.</li>
+                <li><strong>Bajo Pedido o Personalizado:</strong> Te daremos una guía internacional que puede tardar hasta 7-10 días en reflejar movimientos al llegar a aduana mexicana.</li>
+            </ul>
+
+            <div style="background: rgba(37, 211, 102, 0.1); border-left: 4px solid #25D366; padding: 15px; border-radius: 0 4px 4px 0; margin-top: 20px;">
+                <p style="margin: 0; color: #25D366; font-size: 14px; font-weight: bold;">¿Tienes problemas con tu guía o marca como entregado y no lo tienes?</p>
+                <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20un%20problema%20con%20el%20rastreo%20de%20mi%20pedido" target="_blank" style="color: #fff; text-decoration: underline; font-size: 13px; display: inline-block; margin-top: 5px;">Escríbenos a Soporte</a>
+            </div>
+        </div>
+
+    </section>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20con%20mi%20envío" class="whatsapp-flotante" target="_blank">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="promo.js"></script>
+    <script src="app.js"></script>
     
-    <div class="tracking-form">
-      <input type="text" id="guia-input" placeholder="Ej: AS123456789CN">
-      <button class="btn-principal btn-rastrear" onclick="rastrearPedido()">RASTREAR</button>
-    </div>
-    
-    <p class="tracking-note">Se abrirá una nueva ventana segura de nuestro socio logístico global (17Track) con los detalles de tu paquete.</p>
-  </div>
-</section>
+    <script>
+        function rastrearPaquete() {
+            const guia = document.getElementById("guia-input").value.trim();
 
-<footer class="footer">
-  <div class="footer-content" style="align-items: flex-start; text-align: left;">
-    <div class="footer-col">
-      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
-      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
-      <div class="social-links">
-        <a href="#" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-        <a href="#" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
-        <a href="#" target="_blank"><img src="img/tiktok.png" alt="TikTok"></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4 style="color: #d4af37;">INFORMACIÓN</h4>
-      <p><a href="cuidados.html" style="color:#888; text-decoration:none;">Cuidados del jersey</a></p>
-      <p><a href="tallas.html" style="color:#888; text-decoration:none;">Guía de tallas</a></p>
-      <p><a href="politicas.html" style="color:#888; text-decoration:none;">Políticas de envío</a></p>
-    </div>
-    <div class="footer-col">
-      <h4 style="color: #d4af37;">AYUDA Y SOPORTE</h4>
-      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
-      <p><a href="faq.html" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
-      <p><a href="contacto.html" style="color:#888; text-decoration:none;">Contáctanos</a></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
-  </div>
-</footer>
+            if (guia === "") {
+                alert("⚠️ Por favor, ingresa tu número de guía.");
+                return;
+            }
 
-<script src="app.js"></script>
-<script>
-  // Lógica directa para abrir 17Track en una nueva pestaña
-  function rastrearPedido() {
-    const guia = document.getElementById('guia-input').value.trim();
-    
-    if (!guia) {
-      alert('Por favor, ingresa un número de guía válido para continuar.');
-      return;
-    }
-    
-    // Abre la pestaña de 17track y le pasa el número de guía en la URL
-    window.open(`https://t.17track.net/es#nums=${guia}`, '_blank');
-  }
-</script>
+            // Construye la URL oficial de 17TRACK con el número de guía
+            const url = `https://t.17track.net/es#nums=${guia}`;
+
+            // Abre 17TRACK en una pestaña nueva (target="_blank")
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>

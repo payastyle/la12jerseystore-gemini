@@ -1,0 +1,57 @@
+1. Carrusel 3D Principal (Colecciones en el Home)
+Estas son las imágenes de "Temporada 25/26", "Retro Clubes", "Retro Selecciones", etc.
+
+Tamaño recomendado (Alta Definición): 600px de ancho x 760px de alto
+
+Formato: Vertical (Proporción 3:3.8).
+
+Tip de diseño: Mantén el motivo principal (el jugador o el jersey) bien centrado para que no se corte con el efecto 3D.
+
+2. Carruseles Dinámicos (Ligas y Marcas)
+Estas son las tarjetas que se mueven infinitamente donde están los logos de las ligas o de Nike, Adidas, etc.
+
+Tamaño recomendado (Alta Definición): 560px de ancho x 700px de alto
+
+Formato: Vertical (Proporción 4:5 - Igual a las fotos verticales de Instagram).
+
+Tip de diseño: Para las ligas y marcas, fondos oscuros con el logo grande y brillante al centro, o fotos de estadios en blanco y negro con el logo encima, se ven espectaculares.
+
+3. Las Estrellas: Los Jerseys (Productos para el Catálogo)
+Como le agregamos el código aspect-ratio: 1 / 1 al CSS para que se vean uniformes, estas fotos deben ser estrictamente cuadradas.
+
+Tamaño recomendado (Alta Definición): 1000px de ancho x 1000px de alto (Mínimo 800x800).
+
+Formato: Cuadrado (Proporción 1:1).
+
+Tip de diseño: Deja siempre un margen igual alrededor del jersey para que "respire". Recuerda:
+
+Imagen 1: Jersey solo (frente).
+
+Imagen 2: Jugador usándolo o detalle de la espalda (para que se active el efecto hover al pasar el mouse).
+
+4. Guías de Tallas (Imágenes emergentes)
+Las tablas con las medidas de pecho y largo que configuramos en la página de producto.
+
+Tamaño recomendado: 800px de ancho x 1000px de alto (o cualquier formato vertical que sea fácil de leer en un celular).
+
+5. Video "Calidad Premium 1:1"
+El video que pondrás en el Home para comparar la calidad.
+
+Tamaño recomendado: 1080px de ancho x 1920px de alto (Formato 9:16, exactamente igual que un Reel de Instagram o un TikTok).
+
+
+El Hero Banner Principal (promo.jpg)
+Tamaño recomendado (Full HD): 1920px de ancho x 1080px de alto (o 1920x800 si lo quieres un poco más panorámico).
+
+Formato: Horizontal (Paisaje / 16:9).
+
+Peso Máximo: ¡Súper importante! Intenta que no pase de 250 KB - 300 KB. Al ser la imagen más grande de tu página, si pesa 3 Megas, tu cliente verá una pantalla en negro por varios segundos antes de cargar. Usa JPG o WebP comprimido. que sea oscuro
+
+Tamaños para la Imagen del Jugador (Split WhatsApp)
+Como la sección estará dividida en dos columnas (50% imagen, 50% texto), la foto debe tener una proporción vertical o cuadrada para que luzca el jersey y el jugador sin ocupar toda la pantalla hacia abajo.
+
+Tamaño recomendado (Alta Definición): 1000px de ancho x 1200px de alto.
+
+Formato: Vertical (Proporción 4:5 - Igual a las fotos de producto y Ligas).
+
+Tip de Diseño: Una foto de un jugador celebrando o posando de medio cuerpo hacia arriba funciona mejor. Intenta que el fondo de la foto sea oscuro o borroso para que el jersey y el jugador sean los protagonistas.

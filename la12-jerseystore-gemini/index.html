@@ -1,179 +1,368 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>La 12 Jersey Store | Tienda Oficial</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La 12 Jersey Store - La Pasión en tu Piel</title>
+    
+    <meta property="og:title" content="La 12 Jersey Store - Calidad Premium 1:1">
+    <meta property="og:description" content="No pagues por la tienda, paga por la pasión. Los mejores jerseys, al mejor precio.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <meta property="og:url" content="https://tu-tienda-la12.com">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* ================= HERO SECTION ================= */
+        .hero-section {
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%), url('img/ui/promo.jpg') center/cover no-repeat;
+            height: 80vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            margin-top: 35px; /* Compensa la cintilla */
+        }
+        .hero-content {
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: #d4af37;
+            color: #000;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .hero-titulo {
+            font-size: 55px;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .hero-desc {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .btn-hero {
+            display: inline-block;
+            background: #fff;
+            color: #000;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+        .btn-hero:hover {
+            background: #d4af37;
+            color: #fff;
+        }
+
+        /* ================= SECCIÓN COLECCIONES ================= */
+        .colecciones-section {
+            padding: 80px 20px;
+            background: #0a0a0a;
+            text-align: center;
+        }
+        .colecciones-grid {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 40px auto 0;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            scroll-snap-type: x mandatory;
+        }
+        .coleccion-card {
+            flex: 0 0 300px;
+            height: 400px;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            cursor: pointer;
+            border: 1px solid #222;
+        }
+        .coleccion-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .coleccion-card:hover img {
+            transform: scale(1.1);
+        }
+        .coleccion-info {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 30px 20px 20px;
+            text-align: left;
+        }
+        .coleccion-info h3 {
+            color: #fff;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+        .coleccion-info p {
+            color: #d4af37;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+        .footer {
+            background: #050505;
+            border-top: 1px solid #222;
+            padding: 60px 20px 20px;
+            color: #aaa;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .footer-links h4 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #d4af37;
+        }
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #111;
+            padding-top: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-titulo { font-size: 40px; }
+            .coleccion-card { flex: 0 0 260px; height: 350px; }
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #0a0a0a; color: #fff;">
 
-<div class="announcement-bar">
-  🔥 ENVÍO GRATIS EN COMPRAS DE 4 JERSEYS O MÁS 🔥
-</div>
-
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="irHome()">
-    <img src="img/logo.png" alt="La 12 Jersey Store">
-  </div>
-  <div class="nav-actions">
-    <input type="text" id="busqueda" placeholder="Buscar equipo o liga..." oninput="filtrarProductos()">
-    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
-    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-      🛒 <span id="contador-carrito">0</span>
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
     </div>
-  </div>
-</header>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header">
-    <h3>MENÚ</h3>
-    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
-  </div>
-  <a href="#" onclick="seleccionarCategoria(event,'reciente')">Temporada 25/26</a>
-  <a href="#" onclick="seleccionarCategoria(event,'mundial')">Rumbo al Mundial 2026</a>
-  <a href="#" onclick="seleccionarCategoria(event,'retro')">Colección Retro</a>
-  <a href="#" onclick="seleccionarCategoria(event,'niño')">Kids</a>
-  <a href="#" onclick="seleccionarCategoria(event,'anime')">Ediciones Anime</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="resenas.html">⭐ Opiniones</a>
-  <a href="tracking.html">📦 Rastrear pedido</a>
-</div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-<section id="hero" class="hero-premium">
-  <img src="img/promo.jpg" alt="Gran Inauguración" class="hero-bg">
-  <div class="hero-content">
-    <h2>NUEVA TEMPORADA</h2>
-    <p>Las indumentarias más esperadas de la temporada 25/26 ya están aquí.</p>
-    <button class="btn-hero" onclick="document.getElementById('seccion-productos').scrollIntoView({behavior: 'smooth'})">COMPRAR AHORA</button>
-  </div>
-</section>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html" style="color: #d4af37;">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
 
-<section id="trust-badges" class="trust-badges">
-  <div class="badge-item">
-    <span class="badge-icon">🚚</span>
-    <h4>ENVÍO SEGURO</h4>
-    <p>A todo México</p>
-  </div>
-  <div class="badge-item">
-    <span class="badge-icon">⭐</span>
-    <h4>CALIDAD PREMIUM</h4>
-    <p>Versión Jugador y Fan</p>
-  </div>
-  <div class="badge-item">
-    <span class="badge-icon">🛡️</span>
-    <h4>COMPRA SEGURA</h4>
-    <p>Pagos protegidos</p>
-  </div>
-</section>
-
-<section id="categorias" class="shop-by-category">
-  <h2 class="seccion-titulo">COMPRA POR CATEGORÍA</h2>
-  <div class="category-scroll">
-    <div class="category-circle" onclick="mostrarCategoria('reciente')">
-      <img src="img/categorias/actual.jpg" alt="Nuevas">
-      <p>Nuevas</p>
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
+        <a href="faq.html">❓ Preguntas Frecuentes</a>
+        <a href="contacto.html">📞 Contacto</a>
     </div>
-    <div class="category-circle" onclick="mostrarCategoria('retro')">
-      <img src="img/categorias/retro.jpg" alt="Retro">
-      <p>Retro</p>
-    </div>
-    <div class="category-circle" onclick="mostrarCategoria('mundial')">
-      <img src="img/categorias/selecciones.jpg" alt="Selecciones">
-      <p>Selecciones</p>
-    </div>
-    <div class="category-circle" onclick="mostrarCategoria('niño')">
-      <img src="img/categorias/nino.jpg" alt="Niños">
-      <p>Niños</p>
-    </div>
-    <div class="category-circle" onclick="mostrarCategoria('anime')">
-      <img src="img/categorias/anime.jpg" alt="Especiales">
-      <p>Especiales</p>
-    </div>
-  </div>
-</section>
 
-<section id="promo-mid" class="promo-mid">
-  <div class="promo-mid-content">
-    <h3>APROVECHA NUESTRA PROMO 3X2</h3>
-    <p>Lleva 3 jerseys de cualquier equipo y paga solo 2. Descuento aplicado al contactarnos.</p>
-  </div>
-</section>
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-badge">TEMPORADA 25/26 YA DISPONIBLE</span>
+            <h1 class="hero-titulo">La pasión se lleva en la piel.</h1>
+            <p class="hero-desc">Descubre la nueva colección de jerseys. Calidad premium, versiones de jugador y personalización oficial para que apoyes a tu equipo como un profesional.</p>
+            <a href="catalogo.html" class="btn-hero">EXPLORAR CATÁLOGO</a>
+        </div>
+    </section>
 
-<section id="seccion-productos" class="plp-container">
-  <h2 id="titulo-categoria" class="seccion-titulo">LOS MÁS BUSCADOS</h2>
-  <div id="productos-categoria" class="plp-grid"></div>
-</section>
+    <section class="calidad-premium-section" style="background: #111; padding: 80px 20px; border-bottom: 1px solid #222;">
+        <div class="calidad-container" style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 50px; flex-wrap: wrap;">
+            
+            <div class="calidad-info" style="flex: 1; min-width: 300px;">
+                <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">TRANSPARENCIA TOTAL</h4>
+                <h2 style="color: #fff; font-size: 36px; margin-bottom: 20px;">No pagues la tienda,<br><span style="color: #d4af37;">paga la pasión.</span></h2>
+                <p style="color: #aaa; font-size: 16px; margin-bottom: 25px; line-height: 1.6;">Nuestros jerseys <strong>Premium 1:1</strong> cuentan con los mismos materiales, peso y detalles que las versiones de tienda, pero a una fracción del precio. Mira nuestro cara a cara.</p>
+                
+                <ul style="list-style: none; padding: 0; color: #ccc; font-size: 15px; margin-bottom: 30px;">
+                    <li style="margin-bottom: 15px;">✔️ <strong>Telas oficiales:</strong> Tecnología transpirable idéntica.</li>
+                    <li style="margin-bottom: 15px;">✔️ <strong>Detalles precisos:</strong> Escudos bordados o termosellados.</li>
+                    <li style="margin-bottom: 15px;">✔️ <strong>Etiquetas:</strong> Códigos y marquillas incluidas.</li>
+                </ul>
+            </div>
 
-<section id="whatsapp-promo" class="missing-jersey-section animar">
-  <div class="missing-img-box">
-    <img src="img/seccion-whatsapp.png" alt="Henry Arsenal Jersey">
-  </div>
-  <div class="missing-text-box">
-    <h3>¿No viste la camiseta que estabas buscando?</h3>
-    <p>No te preocupes, mándanos un mensaje por WhatsApp y te ayudamos a encontrar la camiseta que estás buscando.</p>
-    <button class="btn-black" onclick="comprarWhatsApp()">Enviar Mensaje</button>
-  </div>
-</section>
+            <div class="calidad-video-wrapper" style="flex: 1; display: flex; justify-content: center; position: relative; min-width: 300px;">
+                <video autoplay loop muted playsinline style="width: 100%; max-width: 350px; border-radius: 12px; z-index: 2; box-shadow: 0 20px 40px rgba(0,0,0,0.8); border: 1px solid #333;">
+                    <source src="img/ui/video-calidad.mp4" type="video/mp4">
+                </video>
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 90%; background: #d4af37; filter: blur(80px); opacity: 0.15; z-index: 1; border-radius: 50%;"></div>
+            </div>
 
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-col">
-      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
-      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
-    </div>
-    <div class="footer-col">
-      <h4>AYUDA</h4>
-      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
-      <p><a href="#" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
-  </div>
-</footer>
+        </div>
+    </section>
 
-<script src="productos.js"></script>
-<script src="promos.js"></script>
-<script src="app.js"></script>
+    <section class="colecciones-section">
+        <h2 style="font-size: 32px; margin-bottom: 10px;">Encuentra tu Estilo</h2>
+        <p style="color: #888;">Explora por época, edad o competición.</p>
 
-<script>
-// Funciones simplificadas solo para el comportamiento del Home (SPA local)
-function limpiarVista(){
-  const secciones = ["hero", "trust-badges", "categorias", "promo-mid", "seccion-productos", "whatsapp-promo"];
-  secciones.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.style.display = "none";
-  });
-}
+        <div class="colecciones-grid">
+            <div class="coleccion-card" onclick="window.location.href='catalogo.html?cat=temporada'">
+                <img src="img/ui/cat-temporada.jpg" loading="lazy" alt="Temporada 25/26">
+                <div class="coleccion-info">
+                    <h3>Temporada 25/26</h3>
+                    <p>VER COLECCIÓN ➔</p>
+                </div>
+            </div>
+            <div class="coleccion-card" onclick="window.location.href='catalogo.html?cat=retro-clubes'">
+                <img src="img/ui/cat-retro-clubes.jpg" loading="lazy" alt="Retro Clubes">
+                <div class="coleccion-info">
+                    <h3>Retro Clubes</h3>
+                    <p>VER COLECCIÓN ➔</p>
+                </div>
+            </div>
+            <div class="coleccion-card" onclick="window.location.href='catalogo.html?cat=retro-selecciones'">
+                <img src="img/ui/cat-retro-selecciones.jpg" loading="lazy" alt="Retro Selecciones">
+                <div class="coleccion-info">
+                    <h3>Retro Selecciones</h3>
+                    <p>VER COLECCIÓN ➔</p>
+                </div>
+            </div>
+            <div class="coleccion-card" onclick="window.location.href='catalogo.html?cat=mundial'">
+                <img src="img/ui/cat-mundial.jpg" loading="lazy" alt="Copa del Mundo">
+                <div class="coleccion-info">
+                    <h3>Rumbo al 2026</h3>
+                    <p>VER COLECCIÓN ➔</p>
+                </div>
+            </div>
+            <div class="coleccion-card" onclick="window.location.href='catalogo.html?cat=kids'">
+                <img src="img/ui/cat-kids.jpg" loading="lazy" alt="Kids">
+                <div class="coleccion-info">
+                    <h3>Tallas Kids</h3>
+                    <p>VER COLECCIÓN ➔</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-function irHome(){
-  // Si se llama desde otra página, redirige al index
-  if (!document.getElementById("hero")) {
-    window.location.href = "index.html";
-    return;
-  }
-  
-  limpiarVista();
-  document.getElementById("hero").style.display = "flex";
-  document.getElementById("trust-badges").style.display = "flex";
-  document.getElementById("categorias").style.display = "block";
-  document.getElementById("promo-mid").style.display = "flex";
-  document.getElementById("seccion-productos").style.display = "block";
-  document.getElementById("whatsapp-promo").style.display = "flex"; 
-  document.getElementById("titulo-categoria").innerText = "LOS MÁS BUSCADOS";
-  
-  renderPLP(productos);
-}
+    <section class="whatsapp-split-section" style="background: #000; border-top: 1px solid #222; border-bottom: 1px solid #222; overflow: hidden;">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; flex-wrap: wrap;">
+            
+            <div style="flex: 1; position: relative; min-width: 300px; line-height: 0;">
+                <img src="img/ui/jugador-whatsapp.jpg" alt="Cotiza tu Jersey Premium" style="width: 100%; height: 100%; object-fit: cover; min-height: 500px;" loading="lazy">
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%);"></div>
+            </div>
 
-function seleccionarCategoria(e, tipo){
-  e.preventDefault();
-  limpiarVista();
-  document.getElementById("seccion-productos").style.display = "block";
-  mostrarCategoria(tipo);
-  document.getElementById("menu-lateral").classList.remove("open");
-}
-</script>
+            <div style="flex: 1; padding: 60px; text-align: left; min-width: 300px;">
+                <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 15px; font-weight: bold;">¿BUSCAS ALGO ESPECIAL?</h4>
+                <h2 style="color: #fff; font-size: 40px; line-height: 1.1; margin-bottom: 25px;">Si no lo tenemos, <br><span style="color: #d4af37;">te lo conseguimos.</span></h2>
+                <p style="color: #aaa; font-size: 17px; line-height: 1.6; margin-bottom: 40px; max-width: 500px;">Podemos traer casi cualquier jersey del mundo bajo pedido: clásicos, ediciones limitadas o de clubes internacionales. Personalizado con tu nombre, número y parches oficiales.</p>
+                
+                <button onclick="window.location.href='https://wa.me/521XXXXXXXXXX?text=Hola%2C%20busco%20cotizar%20un%20jersey%20especial'" style="background: #25D366; color: white; border: none; padding: 18px 45px; font-size: 16px; font-weight: bold; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                    COTIZAR POR WHATSAPP 📲
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="img/ui/logo.png" alt="La 12 Logo" loading="lazy">
+                <p style="font-size: 14px; line-height: 1.6;">La pasión por el fútbol llevada a su máxima expresión. Calidad Premium 1:1 para verdaderos aficionados.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Colecciones</h4>
+                <ul>
+                    <li><a href="catalogo.html?cat=temporada">Temporada Actual</a></li>
+                    <li><a href="catalogo.html?cat=retro-clubes">Retro Clubes</a></li>
+                    <li><a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a></li>
+                    <li><a href="catalogo.html?cat=kids">Niños</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Atención al Cliente</h4>
+                <ul>
+                    <li><a href="contacto.html">Contacto y Soporte</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes</a></li>
+                    <li><a href="tallas.html">Guía de Tallas</a></li>
+                    <li><a href="cuidados.html">Cuidados de Lavado</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Políticas</h4>
+                <ul>
+                    <li><a href="politicas.html">Envíos y Entregas</a></li>
+                    <li><a href="politicas.html">Cambios y Devoluciones</a></li>
+                    <li><a href="resenas.html">Dejar una Reseña</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 La 12 Jersey Store. Todos los derechos reservados. | Diseñado para la afición.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20sobre%20la%20tienda" class="whatsapp-flotante" target="_blank" rel="noopener noreferrer">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="app.js"></script>
+
 </body>
 </html>

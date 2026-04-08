@@ -1,40 +1,223 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Políticas de Envío - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Políticas y Garantías - La 12 Jersey Store</title>
+    
+    <meta property="og:title" content="Políticas y Garantías - La 12 Jersey Store">
+    <meta property="og:description" content="Conoce nuestras políticas de envío, cambios, devoluciones y privacidad. Tu compra está protegida.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .politicas-header {
+            background: #0a0a0a;
+            padding: 60px 20px 30px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .politicas-container {
+            max-width: 900px;
+            margin: 50px auto 80px;
+            padding: 0 20px;
+        }
+
+        .politicas-caja {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .politicas-seccion {
+            margin-bottom: 50px;
+        }
+
+        .politicas-seccion:last-child {
+            margin-bottom: 0;
+        }
+
+        .politicas-seccion h2 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .politicas-seccion h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .politicas-seccion p {
+            color: #bbb;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .politicas-seccion ul {
+            color: #bbb;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .politicas-seccion li {
+            margin-bottom: 8px;
+        }
+
+        .politicas-alerta {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .politicas-alerta p {
+            color: #d4af37;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .politicas-caja {
+                padding: 25px;
+            }
+            .politicas-seccion h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #0a0a0a; color: #fff;">
 
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'"><img src="img/logo.png"></div>
-  <div class="nav-actions"><div class="tema-toggle" onclick="cambiarTema()">🌙</div><div class="carrito-icon" onclick="window.location.href='carrito.html'">🛒 <span id="contador-carrito">0</span></div></div>
-</header>
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
+    </div>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header"><h3>MENÚ</h3><span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span></div>
-  <a href="index.html">Inicio</a><a href="resenas.html">⭐ Opiniones</a><a href="tracking.html">📦 Rastrear pedido</a><hr style="border-color:#333; margin: 20px 0;"><a href="cuidados.html">👕 Cuidados del jersey</a><a href="tallas.html">📏 Guía de tallas</a><a href="contacto.html">📞 Contáctanos</a><a href="faq.html">❓ Preguntas Frecuentes</a><a href="politicas.html">🚚 Políticas de envío</a>
-</div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-<div class="checkout-container" style="margin-top: 60px; margin-bottom: 60px;">
-  <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">🚚 Políticas de Envío y Devoluciones</h2>
-  
-  <p style="color: #ccc; line-height: 1.8; margin-bottom: 20px;">En <b>La 12 Jersey Store</b> queremos que tu experiencia sea la mejor. Aquí te detallamos cómo funcionan nuestros envíos:</p>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
 
-  <h3 style="color: white; margin-bottom: 10px;">1. Tiempos de Entrega</h3>
-  <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">Todos los pedidos se procesan y se envían desde nuestras bodegas. El tiempo estimado de entrega a la puerta de tu casa es de <b>12 a 20 días hábiles</b>. Una vez enviado, te proporcionaremos un número de guía para que lo rastrees desde nuestra web.</p>
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
+    </div>
 
-  <h3 style="color: white; margin-bottom: 10px;">2. Costos de Envío</h3>
-  <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">El costo de envío a todo México es fijo, pero si tu compra es de 4 jerseys o más, el envío es <b>completamente GRATIS</b>.</p>
+    <section class="politicas-header">
+        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">TÉRMINOS LEGALES</h4>
+        <h1 style="color: #fff; font-size: 36px; margin-bottom: 15px; text-transform: uppercase;">Políticas de la Tienda 🛡️</h1>
+        <p style="color: #aaa; font-size: 16px; max-width: 600px; margin: 0 auto;">Transparencia y claridad en cada pedido. Lee detenidamente nuestras reglas sobre envíos, garantías y privacidad.</p>
+    </section>
 
-  <h3 style="color: white; margin-bottom: 10px;">3. Cambios y Devoluciones</h3>
-  <p style="color: #ccc; line-height: 1.6; margin-bottom: 20px;">Al tratarse de productos de importación, solo realizamos cambios o devoluciones si el producto llega con defecto de fábrica (costuras rotas, manchado o error en nuestro estampado). <b>No hay cambios por error en la selección de talla</b>, por lo que te invitamos a revisar nuestra "Guía de Tallas" antes de confirmar.</p>
-</div>
+    <section class="politicas-container">
+        <div class="politicas-caja">
 
-<footer class="footer"><div class="footer-bottom"><p>© 2026 La 12 Jersey Store.</p></div></footer>
-<script src="app.js"></script>
+            <div class="politicas-seccion">
+                <h2>1. Políticas de Envío</h2>
+                <p>En <strong>La 12 Jersey Store</strong> nos esforzamos por que recibas tus productos lo antes posible. Manejamos tarifas fijas y transparentes para toda la República Mexicana.</p>
+                
+                <h3>Costos de Envío</h3>
+                <ul>
+                    <li>De 1 a 3 jerseys: <strong>$130.00 MXN</strong>.</li>
+                    <li>4 jerseys o más: <strong>ENVÍO GRATIS</strong>.</li>
+                </ul>
+
+                <h3>Tiempos de Procesamiento y Entrega</h3>
+                <p>Nuestros tiempos varían dependiendo del tipo de inventario:</p>
+                <ul>
+                    <li><strong>Stock Nacional:</strong> Procesamiento en 24-48 hrs. Entrega estimada de 3 a 5 días hábiles a través de paqueterías exprés (Estafeta, FedEx o DHL).</li>
+                    <li><strong>Bajo Pedido o Personalizados:</strong> Si el producto no está en México o incluye un dorsal personalizado, el tiempo estimado de entrega es de <strong>15 a 20 días hábiles</strong> desde el almacén internacional hasta tu domicilio.</li>
+                </ul>
+
+                <div class="politicas-alerta">
+                    <p>Nota: Al confirmar tu compra por WhatsApp, te indicaremos con precisión el estatus de tu producto (Stock o Bajo Pedido) para tu total tranquilidad.</p>
+                </div>
+            </div>
+
+            <div class="politicas-seccion">
+                <h2>2. Cambios y Devoluciones</h2>
+                <p>Debido a la naturaleza de nuestro producto y para garantizar siempre mercancía nueva a nuestros clientes, aplicamos políticas estrictas de cambios.</p>
+
+                <h3>¿Cuándo SI aplica un cambio o devolución?</h3>
+                <ul>
+                    <li>Si recibes un producto con <strong>defecto de fábrica</strong> evidente (desgarres, estampados mal aplicados de origen, manchas previas al uso).</li>
+                    <li>Si cometimos un <strong>error en el despacho</strong> (te enviamos un modelo, talla o versión distinta a la que figura en tu nota de confirmación de WhatsApp).</li>
+                </ul>
+                <p>Tienes <strong>48 horas</strong> a partir de que la paquetería marca el pedido como "Entregado" para reportar cualquiera de estas incidencias vía WhatsApp, enviando fotos y videos como evidencia.</p>
+
+                <h3>¿Cuándo NO aplica un cambio o devolución?</h3>
+                <ul>
+                    <li><strong>Errores de Talla:</strong> No realizamos cambios si elegiste una talla equivocada. Te pedimos encarecidamente revisar nuestra <a href="tallas.html" style="color:#d4af37;">Guía de Tallas</a> antes de comprar, especialmente en "Versión Jugador", ya que vienen ajustadas.</li>
+                    <li><strong>Prendas Personalizadas:</strong> Todo jersey que lleve número, nombre (ya sea del jugador o propio) o parches extra, se considera una <strong>venta final</strong> y no admite cambios ni cancelaciones bajo ninguna circunstancia (salvo defecto de fábrica).</li>
+                    <li><strong>Daños por mal lavado:</strong> No cubrimos desgaste o desprendimiento de logos por ignorar nuestra <a href="cuidados.html" style="color:#d4af37;">Guía de Cuidados</a> (ej. uso de secadora o plancha).</li>
+                </ul>
+            </div>
+
+            <div class="politicas-seccion">
+                <h2>3. Pagos y Cancelaciones</h2>
+                <p>Todos los pedidos se gestionan mediante confirmación por WhatsApp para brindar atención humana y evitar fraudes.</p>
+                <ul>
+                    <li><strong>Apartados y Pagos:</strong> Para procesar tu pedido, requerimos el pago del 100% (o el porcentaje acordado por WhatsApp en productos bajo pedido) vía Transferencia Bancaria (SPEI), OXXO o Link de Pago.</li>
+                    <li><strong>Cancelaciones:</strong> Si realizaste tu pago y deseas cancelar, solo tienes un margen de <strong>12 horas</strong> para hacerlo siempre y cuando el producto no sea personalizado y no haya sido despachado. Una vez generado el número de guía, la venta es final.</li>
+                </ul>
+            </div>
+
+            <div class="politicas-seccion">
+                <h2>4. Aviso de Privacidad</h2>
+                <p>En La 12 Jersey Store valoramos y respetamos tu información personal.</p>
+                <p>Los datos solicitados (nombre completo, dirección, teléfono y correo) son utilizados <strong>exclusivamente para el proceso de envío y facturación</strong> de tu pedido. No compartimos, vendemos ni rentamos tu información a terceros ni agencias de publicidad. Toda la comunicación directa la realizamos a través de nuestro número oficial de WhatsApp comercial.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20sobre%20sus%20políticas" class="whatsapp-flotante" target="_blank">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="app.js"></script>
+
 </body>
 </html>

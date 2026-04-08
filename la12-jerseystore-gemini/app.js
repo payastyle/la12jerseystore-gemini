@@ -1,542 +1,447 @@
-// ================== VARIABLES GLOBALES ==================
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-let tallaSeleccionada = null;
+/* ==========================================================================
+   LA 12 JERSEY STORE - CEREBRO PRINCIPAL (app.js)
+   ========================================================================== */
+
+// ================= VARIABLES GLOBALES =================
+let carrito = JSON.parse(localStorage.getItem('carritoLa12')) || [];
 let productoActual = null;
-let productosFiltrados = [];
-let vistaActual = 'grid';
-let indexResena = 0;
-let intervaloResenas;
 
-// ================== LÓGICA DEL CARRITO ==================
-function guardarCarrito() {
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  actualizarContador();
+let pdpEstado = {
+    version: 'Versión Fan',
+    dorsal: 'Sin Dorsal',
+    dorsalTexto: '',
+    talla: ''
+};
+
+const nombresCategoriasLegibles = {
+    "temporada": "Temporada 25/26",
+    "mundial": "Copa del Mundo 26",
+    "retro-clubes": "Retro Clubes",
+    "retro-selecciones": "Retro Selecciones",
+    "kids": "Kids",
+    "anime": "Edición Anime"
+};
+
+// ================= INICIALIZACIÓN =================
+document.addEventListener("DOMContentLoaded", () => {
+    actualizarContadoresGlobales();
+
+    if (window.location.pathname.includes('producto.html')) {
+        cargarProducto();
+    } else if (window.location.pathname.includes('carrito.html')) {
+        actualizarCarrito();
+    }
+});
+
+// ================= LÓGICA DE PRODUCTO (PDP) =================
+function cargarProducto() {
+    const params = new URLSearchParams(window.location.search);
+    const idProducto = params.get('id');
+    const contenedor = document.getElementById('pdp-contenedor');
+
+    // Aseguramos que productos.js esté cargado
+    if (typeof productos !== 'undefined') {
+        productoActual = productos.find(p => p.id === idProducto);
+    }
+
+    if (!productoActual || !contenedor) return;
+
+    const categoria = productoActual.tipoProducto;
+    const pNormal = productoActual.precioNormal || (productoActual.precio + 500);
+    const pOferta = productoActual.precio;
+    const ahorro = Math.round(((pNormal - pOferta) / pNormal) * 100);
+
+    let htmlVersiones = '';
+    if (['temporada', 'mundial', 'anime'].includes(categoria)) {
+        htmlVersiones = `
+            <button class="btn-opcion seleccionada" onclick="cambiarOpcionPDP('version', 'Versión Fan', this)">Versión Fan</button>
+            <button class="btn-opcion" onclick="cambiarOpcionPDP('version', 'Versión Jugador', this)">Versión Jugador (+ $120)</button>
+            <button class="btn-opcion" onclick="cambiarOpcionPDP('version', 'Manga Larga', this)">Manga Larga (+ $120)</button>
+        `;
+    } else {
+        htmlVersiones = `<button class="btn-opcion seleccionada" onclick="cambiarOpcionPDP('version', 'Versión Fan', this)">Versión Fan</button>`;
+    }
+
+    contenedor.innerHTML = `
+        <div class="pdp-layout">
+            <div class="pdp-galeria">
+                <img src="${productoActual.imagenes[0]}" id="pdp-imagen-principal" alt="${productoActual.nombre}">
+                <div class="pdp-miniaturas">
+                    ${productoActual.imagenes.map(img => `<img src="${img}" onclick="document.getElementById('pdp-imagen-principal').src='${img}'">`).join('')}
+                </div>
+            </div>
+
+            <div class="pdp-info">
+                <p class="pdp-liga">${nombresCategoriasLegibles[categoria] || categoria}</p>
+                <h1 class="pdp-titulo">${productoActual.nombre}</h1>
+                
+                <div class="contenedor-precios-pdp" style="margin-bottom: 20px; display: flex; align-items: center;">
+                    <span class="precio-original-tachado" style="text-decoration: line-through; color: #888; font-size: 18px; margin-right: 10px;">$${pNormal}</span>
+                    <span class="precio-actual-oferta" id="pdp-precio-dinamico" style="font-size: 28px; color: #d4af37; font-weight: 800;">$${pOferta}</span>
+                    <span class="badge-ahorro" style="background: #cc0000; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px; font-weight: bold;">${ahorro}% OFF</span>
+                </div>
+
+                <div class="opcion-bloque">
+                    <h3>1. Elige la Versión</h3>
+                    <div class="opciones-grid">${htmlVersiones}</div>
+                </div>
+
+                <div class="opcion-bloque">
+                    <h3>2. ¿Nombre y Número?</h3>
+                    <div class="opciones-grid">
+                        <button class="btn-opcion seleccionada" onclick="cambiarOpcionPDP('dorsal', 'Sin Dorsal', this)">Sin Dorsal</button>
+                        <button class="btn-opcion" onclick="cambiarOpcionPDP('dorsal', 'Con Dorsal', this)">Personalizado (+ $80)</button>
+                    </div>
+                    <input type="text" id="input-dorsal" placeholder="Ej: MESSI 10" style="display: none; width: 100%; padding: 10px; margin-top: 10px; border-radius: 4px; border: 1px solid #444; background: #111; color: white;">
+                </div>
+
+                <div class="opcion-bloque">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3>3. Selecciona tu Talla</h3>
+                        <a href="tallas.html" style="color: #aaa; font-size: 12px; text-decoration: underline;">Guía de Tallas</a>
+                    </div>
+                    <div class="opciones-grid" id="contenedor-tallas"></div>
+                </div>
+
+                <button class="btn-principal" onclick="agregarAlCarrito()" style="width: 100%; padding: 15px; font-size: 16px; margin-top: 20px;">AGREGAR AL CARRITO 🛒</button>
+                
+                <button class="btn-opcion" id="btn-compartir" style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 15px; border: 1px solid #333; color: #fff; background: transparent; padding: 10px;" onclick="compartirJersey()">
+                    <span style="font-size: 1.2em; margin-right: 8px;">🔗</span> Compartir Jersey
+                </button>
+            </div>
+        </div>
+    `;
+
+    renderizarTallasDisponibles();
+    calcularPrecioDinamico();
 }
 
-function actualizarContador() {
-  const contador = document.getElementById("contador-carrito");
-  if(contador) contador.innerText = carrito.length;
+function renderizarTallasDisponibles() {
+    const categoria = productoActual.tipoProducto;
+    const contTallas = document.getElementById('contenedor-tallas');
+    let tallas = [];
+
+    if (categoria === 'kids') {
+        tallas = ['16', '18', '20', '22', '24', '26', '28'];
+    } else if (['retro-clubes', 'retro-selecciones'].includes(categoria)) {
+        tallas = ['S', 'M', 'L', 'XL', 'XXL'];
+    } else {
+        tallas = ['S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'];
+    }
+
+    let html = '';
+    tallas.forEach(talla => {
+        let esExtra = ['XXL', '3XL', '4XL'].includes(talla) ? ' (+ $35)' : '';
+        html += `<button class="btn-opcion" onclick="cambiarOpcionPDP('talla', '${talla}', this)">${talla}${esExtra}</button>`;
+    });
+    contTallas.innerHTML = html;
 }
 
-function eliminarProducto(index) {
-  carrito.splice(index, 1);
-  guardarCarrito();
-  actualizarCarrito();
+function cambiarOpcionPDP(tipo, valor, elemento) {
+    pdpEstado[tipo] = valor;
+    const botones = elemento.parentElement.querySelectorAll('.btn-opcion');
+    botones.forEach(btn => btn.classList.remove('seleccionada'));
+    elemento.classList.add('seleccionada');
+
+    if (tipo === 'dorsal') {
+        document.getElementById('input-dorsal').style.display = (valor === 'Con Dorsal') ? 'block' : 'none';
+    }
+    calcularPrecioDinamico();
+}
+
+function calcularPrecioDinamico() {
+    let base = productoActual.precio;
+    let extra = 0;
+
+    if (pdpEstado.version !== 'Versión Fan') extra += 120;
+    if (pdpEstado.dorsal === 'Con Dorsal') extra += 80;
+    if (['XXL', '3XL', '4XL'].includes(pdpEstado.talla)) extra += 35;
+
+    let precioFinal = base + extra;
+    document.getElementById('pdp-precio-dinamico').innerText = `$${precioFinal}`;
+    return precioFinal;
+}
+
+function compartirJersey() {
+    if (navigator.share) {
+        navigator.share({
+            title: `La 12 Jersey Store - ${productoActual.nombre}`,
+            text: `¡Checa este jersey premium de ${productoActual.nombre}!`,
+            url: window.location.href
+        }).catch((error) => console.log('Error al compartir', error));
+    } else {
+        alert("Copia y pega este enlace para compartir el jersey:\n\n" + window.location.href);
+    }
+}
+
+// ================= CARRITO Y CÁLCULOS =================
+function agregarAlCarrito() {
+    if (!pdpEstado.talla) {
+        alert("Por favor, selecciona una talla antes de agregar al carrito.");
+        return;
+    }
+
+    let dorsalTxt = '';
+    if (pdpEstado.dorsal === 'Con Dorsal') {
+        dorsalTxt = document.getElementById('input-dorsal').value.trim();
+        if (!dorsalTxt) {
+            alert("Elegiste la opción 'Con Dorsal', por favor escribe el nombre y número.");
+            return;
+        }
+    }
+
+    const item = {
+        id: productoActual.id,
+        nombre: productoActual.nombre,
+        imagenes: productoActual.imagenes,
+        precio: calcularPrecioDinamico(),
+        versionSelec: pdpEstado.version,
+        talla: pdpEstado.talla,
+        dorsalTexto: dorsalTxt,
+        cantidad: 1,
+        categoria: nombresCategoriasLegibles[productoActual.tipoProducto] || productoActual.tipoProducto
+    };
+
+    carrito.push(item);
+    guardarCarrito();
+    actualizarContadoresGlobales();
+    alert("¡Producto agregado al carrito con éxito!");
 }
 
 function actualizarCarrito() {
-  const contenedor = document.getElementById("carrito-productos");
-  if(!contenedor) return;
+    const contenedor = document.getElementById("carrito-productos-lista");
+    if (!contenedor) return;
 
-  contenedor.innerHTML = "";
-  let subtotal = 0;
+    contenedor.innerHTML = "";
+    let subtotalGeneral = 0;
+    let totalPrendas = 0;
 
-  if (carrito.length === 0) {
-    contenedor.innerHTML = "<p style='color:#888; text-align:center;'>Tu carrito está vacío.</p>";
-    document.getElementById("subtotal").innerText = "0";
-    document.getElementById("envio").innerText = "0";
-    document.getElementById("total").innerText = "0";
-    return;
-  }
+    carrito.forEach((p, i) => {
+        let precioLinea = p.precio * p.cantidad;
+        subtotalGeneral += precioLinea;
+        totalPrendas += p.cantidad;
 
-  carrito.forEach((p, i) => {
-    contenedor.innerHTML += `
-      <div class="item-carrito" style="display:flex; justify-content:space-between; margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid #333;">
-        <div>
-          <p><b>${p.nombre}</b></p>
-          <p style="color:#888; font-size:14px;">Talla: ${p.talla || "-"}</p>
-        </div>
-        <div style="text-align:right;">
-          <p>$${p.precio}</p>
-          <button onclick="eliminarProducto(${i})" style="background:transparent; color:red; border:none; cursor:pointer; font-size:12px; margin-top:5px;">Eliminar</button>
-        </div>
-      </div>
-    `;
-    subtotal += p.precio;
-  });
-
-  let envio = carrito.length >= 4 ? 0 : 50;
-  let total = subtotal + envio;
-
-  if(document.getElementById("subtotal")) document.getElementById("subtotal").innerText = subtotal;
-  if(document.getElementById("envio")) document.getElementById("envio").innerText = envio;
-  if(document.getElementById("total")) document.getElementById("total").innerText = total;
-
-  actualizarContador();
-}
-
-// ================== PÁGINA DE INICIO (HOME) ==================
-function renderPLP(lista) {
-  const contenedor = document.getElementById("productos-categoria");
-  if(!contenedor) return;
-
-  contenedor.innerHTML = "";
-  
-  // En el home mostramos máximo 8 productos destacados
-  const destacados = lista.slice(0, 8);
-
-  destacados.forEach(p => {
-    let badge = "";
-    if(p.tipoProducto === "retro") badge = `<div class="badge">Retro</div>`;
-    if(p.tipoProducto === "niño") badge = `<div class="badge">Niño</div>`;
-    let badgeStock = p.stock === false ? `<div class="badge" style="background:red; color:white; top:40px;">Agotado</div>` : '';
-
-    let imgFront = p.imagenes[0];
-    let imgBack = p.imagenes[1] ? p.imagenes[1] : p.imagenes[0];
-
-    contenedor.innerHTML += `
-      <div class="plp-card animar" onclick="verProducto('${p.id}')">
-        ${badge}
-        ${badgeStock}
-        <div class="imagen-contenedor">
-          <img src="${imgFront}" class="img-front">
-          <img src="${imgBack}" class="img-back">
-        </div>
-        <div class="plp-info">
-          <h3>${p.nombre}</h3>
-          <p class="categoria">${p.liga || "Jersey"}</p>
-          <p class="precio">$${p.precio}</p>
-        </div>
-      </div>
-    `;
-  });
-  animarScroll();
-}
-
-function generarRecomendados() {
-  const contenedor = document.getElementById("productos-recomendados");
-  if(!contenedor || typeof productos === "undefined") return;
-
-  contenedor.innerHTML = "";
-  const aleatorios = [...productos].sort(()=>0.5 - Math.random()).slice(0,4);
-
-  aleatorios.forEach(p=>{
-    let imgFront = p.imagenes[0];
-    let imgBack = p.imagenes[1] ? p.imagenes[1] : p.imagenes[0];
-
-    contenedor.innerHTML += `
-      <div class="plp-card animar" onclick="verProducto('${p.id}')">
-        <div class="imagen-contenedor">
-          <img src="${imgFront}" class="img-front">
-          <img src="${imgBack}" class="img-back">
-        </div>
-        <div class="plp-info">
-          <h3>${p.nombre}</h3>
-          <p class="precio">$${p.precio}</p>
-        </div>
-      </div>
-    `;
-  });
-  animarScroll();
-}
-
-function verProducto(id) {
-  window.location.href = `producto.html?id=${id}`;
-}
-
-// ================== PÁGINA DE PRODUCTO (PDP) ==================
-function cargarProducto() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
-  const contenedor = document.getElementById("detalle-producto");
-  const errorContenedor = document.getElementById("mensaje-error");
-
-  if (!id || typeof productos === "undefined") return;
-
-  productoActual = productos.find(p => p.id === id);
-
-  if (!productoActual) {
-    if(contenedor) contenedor.style.display = "none";
-    if(errorContenedor) errorContenedor.style.display = "block";
-    return;
-  }
-
-  let miniaturasHTML = '';
-  if (productoActual.imagenes.length > 1) {
-    productoActual.imagenes.forEach((img, index) => {
-      miniaturasHTML += `<img src="${img}" class="miniatura ${index === 0 ? 'activa' : ''}" onclick="cambiarImagenPrincipal(this, '${img}')">`;
+        contenedor.innerHTML += `
+            <div class="cart-item" style="display: flex; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px;">
+                <img src="${p.imagenes[0]}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;">
+                <div style="flex: 1;">
+                    <h4 style="margin: 0 0 5px; color: #fff;">${p.nombre}</h4>
+                    <p style="margin: 0; color: #aaa; font-size: 13px;">${p.talla} | ${p.versionSelec} ${p.dorsalTexto ? '| ' + p.dorsalTexto : ''}</p>
+                    <p style="margin: 5px 0 0; color: #d4af37; font-weight: bold;">$${p.precio.toFixed(2)} c/u</p>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between;">
+                    <button onclick="eliminarProducto(${i})" style="background: none; border: none; color: #cc0000; cursor: pointer; font-size: 18px;">🗑️</button>
+                    <div style="display: flex; align-items: center; gap: 10px; background: #222; padding: 5px 10px; border-radius: 20px;">
+                        <button onclick="cambiarCantidad(${i}, -1)" style="background: none; border: none; color: white; cursor: pointer;">-</button>
+                        <span style="color: white; font-weight: bold;">${p.cantidad}</span>
+                        <button onclick="cambiarCantidad(${i}, 1)" style="background: none; border: none; color: white; cursor: pointer;">+</button>
+                    </div>
+                </div>
+            </div>
+        `;
     });
-  }
 
-  let stockMensaje = productoActual.stock === false 
-    ? `<p style="color:red; font-weight:bold; margin-bottom:15px;">❌ Agotado temporalmente</p>` 
-    : `<p style="color:#00ff88; font-weight:bold; margin-bottom:15px;">✅ En Stock - Listo para envío</p>`;
-
-  let botonComprar = productoActual.stock === false
-    ? `<button class="btn-principal" style="background:#555; cursor:not-allowed;" disabled>AGOTADO</button>`
-    : `<button class="btn-principal" onclick="agregarAlCarritoPDP()">AGREGAR AL CARRITO 🛒</button>`;
-
-  contenedor.innerHTML = `
-    <div class="pdp-galeria">
-      <div class="imagen-principal-box">
-        <img src="${productoActual.imagenes[0]}" id="imagen-principal">
-      </div>
-      <div class="pdp-miniaturas">${miniaturasHTML}</div>
-    </div>
+    // 1. Calcular el Envío (Lee de promo.js si existe)
+    let costoEnvio = 0;
+    let promoEnvioActiva = false;
+    let envMeta = 4; // Por defecto
     
-    <div class="pdp-info">
-      <p class="pdp-liga">${productoActual.liga || "Jersey"} | ${productoActual.equipo || ""}</p>
-      <h1 class="pdp-titulo">${productoActual.nombre}</h1>
-      <h2 class="pdp-precio">$${productoActual.precio}</h2>
-      
-      ${stockMensaje}
-
-      <div class="pdp-tallas">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <h3>Selecciona tu talla</h3>
-          <a href="tallas.html" style="color:#d4af37; font-size:14px; text-decoration:none;">Ver guía de tallas📏</a>
-        </div>
-        <div class="grid-tallas">
-          <button class="btn-talla" onclick="seleccionarTalla(this, 'S')">S</button>
-          <button class="btn-talla" onclick="seleccionarTalla(this, 'M')">M</button>
-          <button class="btn-talla" onclick="seleccionarTalla(this, 'L')">L</button>
-          <button class="btn-talla" onclick="seleccionarTalla(this, 'XL')">XL</button>
-          <button class="btn-talla" onclick="seleccionarTalla(this, 'XXL')">XXL</button>
-        </div>
-      </div>
-
-      ${botonComprar}
-
-      <div class="pdp-descripcion">
-        <h3>Detalles del Producto</h3>
-        <p>${productoActual.descripcion || "Jersey de la más alta calidad, logos bordados/termosellados y tela transpirable."}</p>
-      </div>
-      
-      <div class="trust-badges-pdp">
-        <p>🔒 Pago 100% Seguro</p>
-        <p>🚚 Envío a todo México</p>
-      </div>
-    </div>
-  `;
-}
-
-function cambiarImagenPrincipal(elemento, url) {
-  document.getElementById("imagen-principal").src = url;
-  document.querySelectorAll(".miniatura").forEach(img => img.classList.remove("activa"));
-  elemento.classList.add("activa");
-}
-
-function seleccionarTalla(boton, talla) {
-  tallaSeleccionada = talla;
-  document.querySelectorAll(".btn-talla").forEach(btn => btn.classList.remove("seleccionada"));
-  boton.classList.add("seleccionada");
-}
-
-function agregarAlCarritoPDP() {
-  if (!tallaSeleccionada) {
-    alert("⚠️ Por favor, selecciona una talla antes de agregar al carrito.");
-    return;
-  }
-  let productoParaCarrito = { ...productoActual, talla: tallaSeleccionada };
-  carrito.push(productoParaCarrito);
-  guardarCarrito();
-
-  const toast = document.getElementById("toast-notificacion");
-  if(toast){
-    toast.classList.add("mostrar");
-    setTimeout(() => { toast.classList.remove("mostrar"); }, 3000);
-  }
-
-  tallaSeleccionada = null;
-  document.querySelectorAll(".btn-talla").forEach(btn => btn.classList.remove("seleccionada"));
-}
-
-// ================== PÁGINA DE CATÁLOGO (Filtros y Orden) ==================
-function iniciarCatalogo() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const categoriaURL = urlParams.get('cat');
-  
-  if (categoriaURL) {
-    productosFiltrados = productos.filter(p => p.tipoProducto === categoriaURL);
-    let titulo = categoriaURL.replace("-", " ").toUpperCase();
-    document.getElementById("catalogo-titulo").innerText = titulo;
-  } else {
-    productosFiltrados = [...productos];
-    document.getElementById("catalogo-titulo").innerText = "TODOS LOS JERSEYS";
-  }
-  aplicarFiltrosYOrden();
-}
-
-function actualizarLabelPrecio() {
-  const label = document.getElementById("precio-label");
-  const input = document.getElementById("filtro-precio");
-  if(label && input) label.innerText = input.value;
-}
-
-function aplicarFiltrosYOrden() {
-  const stockEl = document.getElementById("filtro-stock");
-  const ligaEl = document.getElementById("filtro-liga");
-  const precioEl = document.getElementById("filtro-precio");
-  const ordenEl = document.getElementById("ordenar-select");
-
-  if(!stockEl || !ligaEl || !precioEl || !ordenEl) return;
-
-  const soloStock = stockEl.checked;
-  const liga = ligaEl.value;
-  const precioMax = parseInt(precioEl.value);
-  const orden = ordenEl.value;
-
-  let resultado = productosFiltrados.filter(p => {
-    let pasaStock = soloStock ? p.stock === true : true;
-    let pasaLiga = liga === "todas" ? true : (p.liga && p.liga.toLowerCase() === liga);
-    let pasaPrecio = p.precio <= precioMax;
-    return pasaStock && pasaLiga && pasaPrecio;
-  });
-
-  resultado.sort((a, b) => {
-    if (orden === "precio-menor") return a.precio - b.precio;
-    if (orden === "precio-mayor") return b.precio - a.precio;
-    if (orden === "a-z") return a.nombre.localeCompare(b.nombre);
-    if (orden === "z-a") return b.nombre.localeCompare(a.nombre);
-    if (orden === "recientes") {
-      let fechaA = new Date(a.fecha || "2000-01-01");
-      let fechaB = new Date(b.fecha || "2000-01-01");
-      return fechaB - fechaA; 
+    if (typeof PROMOS !== 'undefined') {
+        promoEnvioActiva = PROMOS.envioGratis.activo;
+        envMeta = PROMOS.envioGratis.cantidadMinima;
+        costoEnvio = PROMOS.envioGratis.costoEnvio;
     }
-  });
 
-  document.getElementById("contador-productos").innerText = resultado.length;
-  renderizarCatalogoFinal(resultado);
-}
-
-function renderizarCatalogoFinal(lista) {
-  const contenedor = document.getElementById("productos-catalogo");
-  if (!contenedor) return;
-
-  contenedor.innerHTML = "";
-
-  if(lista.length === 0){
-    contenedor.innerHTML = `<p style="color:#888; grid-column: 1/-1; text-align:center; padding:50px;">No hay productos que coincidan con estos filtros.</p>`;
-    return;
-  }
-
-  contenedor.className = vistaActual === 'grid' ? "plp-grid" : "plp-list";
-
-  lista.forEach(p => {
-    let badgeStock = p.stock === false ? `<div class="badge" style="background:red; color:white;">Agotado</div>` : '';
-    let imgFront = p.imagenes[0];
-    let imgBack = p.imagenes[1] ? p.imagenes[1] : p.imagenes[0];
-
-    contenedor.innerHTML += `
-      <div class="plp-card animar" onclick="verProducto('${p.id}')">
-        ${badgeStock}
-        <div class="imagen-contenedor">
-          <img src="${imgFront}" class="img-front">
-          <img src="${imgBack}" class="img-back">
-        </div>
-        <div class="plp-info">
-          <h3>${p.nombre}</h3>
-          <p class="categoria">${p.liga || "Jersey"}</p>
-          <p class="precio">$${p.precio}</p>
-        </div>
-      </div>
-    `;
-  });
-  animarScroll();
-}
-
-function cambiarVista(tipo) {
-  vistaActual = tipo;
-  document.getElementById("btn-grid").classList.remove("active");
-  document.getElementById("btn-list").classList.remove("active");
-  document.getElementById(`btn-${tipo}`).classList.add("active");
-  aplicarFiltrosYOrden();
-}
-
-// ================== CHECKOUT Y PAGOS (CARRITO) ==================
-function irPaso2() {
-  if (carrito.length === 0) { alert("Tu carrito está vacío"); return; }
-  document.getElementById("paso1").style.display = "none";
-  document.getElementById("paso2").style.display = "block";
-}
-
-function irPaso3() {
-  const nombre = document.getElementById("nombre");
-  if (!nombre || !nombre.value) { alert("Completa tus datos para continuar."); return; }
-  document.getElementById("paso2").style.display = "none";
-  document.getElementById("paso3").style.display = "block";
-}
-
-function seleccionarMetodo(valor) {
-  document.querySelectorAll('.metodo-info').forEach(div => div.style.display = 'none');
-
-  if (valor === "PayPal") {
-    document.getElementById("area-paypal").style.display = "block";
-    renderizarPaypal(); 
-  } else if (valor === "Transferencia") {
-    document.getElementById("area-transferencia").style.display = "block";
-  } else if (valor === "OXXO") {
-    document.getElementById("area-oxxo").style.display = "block";
-  }
-}
-
-function renderizarPaypal() {
-  const total = document.getElementById("total").innerText;
-  const container = document.getElementById("paypal-button-container");
-  
-  if(!container) return;
-  container.innerHTML = ""; 
-
-  // Asegura que paypal SDK esté cargado
-  if(typeof paypal !== "undefined") {
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{ amount: { value: total } }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('¡Pago aprobado! Redirigiendo a WhatsApp para confirmar detalles y validar tu captura.');
-          finalizarCompraWhatsApp('PayPal (Pagado)', details.id);
-          localStorage.removeItem("carrito");
-          window.location.href = "index.html";
-        });
-      }
-    }).render('#paypal-button-container');
-  }
-}
-
-function finalizarCompraWhatsApp(metodo, ordenID = "N/A") {
-  const numero = "521XXXXXXXXXX"; // Configura tu número de WhatsApp aquí
-  const nombreCliente = document.getElementById("nombre").value || "Cliente";
-  const total = document.getElementById("total").innerText;
-
-  let mensaje = `✅ *NUEVO PEDIDO - LA 12 JERSEY STORE*\n\n`;
-  mensaje += `👤 *Cliente:* ${nombreCliente}\n`;
-  mensaje += `💳 *Método:* ${metodo}\n`;
-  if(ordenID !== "N/A") mensaje += `🆔 *ID Pago:* ${ordenID}\n`;
-  mensaje += `💰 *Total:* $${total}\n\n`;
-  mensaje += `📦 *PRODUCTOS:* \n`;
-
-  carrito.forEach((p, i) => {
-    mensaje += `${i + 1}. ${p.nombre} (Talla: ${p.talla || "N/A"})\n`;
-  });
-
-  mensaje += `\n*Por favor, adjunto mi captura de pantalla/ticket arriba.*`;
-
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
-}
-
-function comprarWhatsApp() {
-  let numero = "521XXXXXXXXXX";
-  let mensaje = "🔥 Contacto - La 12 Jersey Store 🔥\n\nHola, necesito ayuda o me gustaría cotizar una camiseta.";
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`, "_blank");
-}
-
-// ================== PÁGINA DE RESEÑAS ==================
-function renderResenaActual() {
-  const contenedor = document.getElementById("tarjeta-carrusel-contenido");
-  if(!contenedor || typeof resenas === "undefined" || resenas.length === 0) return;
-
-  const r = resenas[indexResena];
-  const estrellas = "⭐".repeat(r.estrellas);
-
-  contenedor.innerHTML = `
-    <div class="tarjeta-presentacion">
-      <img src="${r.imagen}" alt="${r.nombre}" onerror="this.src='img/logo.png'">
-      <h4>${r.nombre}</h4>
-      <p class="estrellas-tarjeta">${estrellas}</p>
-      <p class="comentario-tarjeta">"${r.comentario}"</p>
-    </div>
-  `;
-}
-
-function cambiarResena(direccion) {
-  if(typeof resenas === "undefined" || resenas.length === 0) return;
-
-  if (direccion === 'siguiente') {
-    indexResena = (indexResena + 1) % resenas.length;
-  } else if (direccion === 'anterior') {
-    indexResena = (indexResena - 1 + resenas.length) % resenas.length;
-  }
-  
-  renderResenaActual();
-  reiniciarIntervaloResenas(); 
-}
-
-function reiniciarIntervaloResenas() {
-  clearInterval(intervaloResenas);
-  intervaloResenas = setInterval(() => {
-    cambiarResena('siguiente');
-  }, 10000); // Rota cada 10 seg
-}
-
-function iniciarCarruselTarjeta() {
-  const contenedor = document.getElementById("tarjeta-carrusel-contenido");
-  if(!contenedor) return;
-  renderResenaActual();
-  reiniciarIntervaloResenas();
-}
-
-// ================== UI / UX (TEMA, SCROLL Y MENÚ) ==================
-function cambiarTema() {
-  document.body.classList.toggle("light");
-  localStorage.setItem("tema", document.body.classList.contains("light") ? "light" : "dark");
-}
-
-function cargarTema() {
-  if (localStorage.getItem("tema") === "light") {
-    document.body.classList.add("light");
-  }
-}
-
-function animarScroll() {
-  document.querySelectorAll(".plp-card, .animar").forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 50) {
-      el.classList.add("visible");
+    if (totalPrendas > 0) {
+        if (promoEnvioActiva && totalPrendas >= envMeta) {
+            costoEnvio = 0;
+        }
+    } else {
+        costoEnvio = 0;
     }
-  });
-}
 
-function toggleMenu(e) {
-  if(e) e.stopPropagation();
-  document.getElementById("menu-lateral").classList.toggle("open");
-}
-
-document.addEventListener("click", function(e) {
-  const menu = document.getElementById("menu-lateral");
-  const btn = document.querySelector(".menu-icon");
-
-  if(menu && btn){
-    if(menu.classList.contains("open") && !menu.contains(e.target) && !btn.contains(e.target)){
-      menu.classList.remove("open");
+    // 2. Calcular Descuentos de Cupones (Lee de promo.js si aplicaron uno)
+    let montoDescuento = 0;
+    if (typeof cuponAplicado !== 'undefined' && cuponAplicado !== null) {
+        montoDescuento = subtotalGeneral * cuponAplicado.descuento; 
     }
-  }
-});
 
-// ================== INIT (ENRUTADOR PRINCIPAL) ==================
-document.addEventListener("DOMContentLoaded", () => {
-  actualizarContador();
-  actualizarCarrito();
-  cargarTema();
-  animarScroll();
+    // 3. Total Final
+    const totalFinal = subtotalGeneral - montoDescuento + costoEnvio;
 
-  // 1. Home (index.html)
-  if (document.getElementById("hero") && typeof productos !== "undefined") {
-    renderPLP(productos);
-  }
+    // 4. Actualizar la Interfaz (UI)
+    if(document.getElementById("subtotal")) document.getElementById("subtotal").innerText = `$${subtotalGeneral.toFixed(2)}`;
+    
+    // Inyectar o actualizar el descuento visualmente
+    const txtDescuento = document.getElementById("descuento-linea");
+    if (montoDescuento > 0) {
+        if (!txtDescuento) {
+            const resumenTotal = document.querySelector(".resumen-total");
+            const divDescuento = document.createElement("div");
+            divDescuento.id = "descuento-linea";
+            divDescuento.className = "resumen-linea";
+            divDescuento.innerHTML = `<span>Desc. (${cuponAplicado.descuento * 100}%)</span> <span style="color: #28a745;">-$${montoDescuento.toFixed(2)}</span>`;
+            resumenTotal.parentNode.insertBefore(divDescuento, resumenTotal);
+        } else {
+            txtDescuento.innerHTML = `<span>Desc. (${cuponAplicado.descuento * 100}%)</span> <span style="color: #28a745;">-$${montoDescuento.toFixed(2)}</span>`;
+        }
+    } else if (txtDescuento) {
+        txtDescuento.remove(); 
+    }
 
-  // 2. Catálogo (catalogo.html)
-  if (document.getElementById("productos-catalogo")) {
-    iniciarCatalogo();
-  }
+    // Actualizar Envío visualmente
+    const txtEnvio = document.getElementById("envio");
+    if(txtEnvio) {
+        if (costoEnvio === 0 && totalPrendas >= envMeta && promoEnvioActiva) {
+            txtEnvio.innerHTML = `<span style="color: #28a745; font-weight: bold;">GRATIS (Promo)</span>`;
+        } else {
+            txtEnvio.innerText = `$${costoEnvio.toFixed(2)}`;
+        }
+    }
 
-  // 3. Detalles de Producto (producto.html)
-  if (document.getElementById("detalle-producto")) {
-    cargarProducto();
-  }
+    if(document.getElementById("total")) document.getElementById("total").innerText = `$${totalFinal.toFixed(2)}`;
+    
+    mostrarAvisoEnvioGratis(totalPrendas, promoEnvioActiva, envMeta);
+    actualizarContadoresGlobales();
+}
 
-  // 4. Página de Reseñas (resenas.html)
-  if (document.getElementById("tarjeta-carrusel-contenido")) {
-    iniciarCarruselTarjeta();
-  }
+function mostrarAvisoEnvioGratis(totalPrendas, activa, meta) {
+    const resumen = document.querySelector(".cart-summary-sidebar");
+    if (!resumen) return;
 
-  // 5. Recomendados (presente en Reseñas, Home o donde se agregue)
-  if (document.getElementById("productos-recomendados")) {
-    generarRecomendados();
-  }
-});
+    let aviso = document.getElementById("aviso-promo-envio");
+    if (!aviso) {
+        aviso = document.createElement("div");
+        aviso.id = "aviso-promo-envio";
+        aviso.style = "background: #111; border: 1px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;";
+        resumen.prepend(aviso);
+    }
 
-window.addEventListener("scroll", animarScroll);
+    if (totalPrendas === 0 || !activa) {
+        aviso.style.display = "none";
+        return;
+    }
+
+    aviso.style.display = "block";
+    const faltan = meta - totalPrendas;
+    const porcentaje = Math.min((totalPrendas / meta) * 100, 100);
+
+    if (totalPrendas < meta) {
+        aviso.innerHTML = `
+            <span style="font-size: 13px; color: #ccc;">
+                Te faltan <b>${faltan} ${faltan === 1 ? 'jersey' : 'jerseys'}</b> para el <b>Envío Gratis</b> 🚚
+            </span>
+            <div style="width: 100%; height: 8px; background-color: #333; border-radius: 10px; margin-top: 10px; overflow: hidden;">
+                <div style="height: 100%; background-color: #d4af37; width: ${porcentaje}%; transition: width 0.6s ease;"></div>
+            </div>
+        `;
+    } else {
+        aviso.innerHTML = `
+            <div style="color: #28a745; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>🚚 ¡Tu envío es GRATIS!</span>
+            </div>
+            <div style="width: 100%; height: 8px; background-color: #333; border-radius: 10px; margin-top: 10px; overflow: hidden;">
+                <div style="height: 100%; background-color: #28a745; width: 100%; transition: width 0.6s ease;"></div>
+            </div>
+        `;
+    }
+}
+
+function cambiarCantidad(index, delta) {
+    carrito[index].cantidad += delta;
+    if (carrito[index].cantidad <= 0) {
+        eliminarProducto(index);
+    } else {
+        guardarCarrito();
+        actualizarCarrito();
+    }
+}
+
+function eliminarProducto(index) {
+    carrito.splice(index, 1);
+    guardarCarrito();
+    actualizarCarrito();
+}
+
+function guardarCarrito() {
+    localStorage.setItem('carritoLa12', JSON.stringify(carrito));
+}
+
+function actualizarContadoresGlobales() {
+    const contador = document.getElementById('contador-carrito');
+    if (contador) {
+        let total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+        contador.innerText = total;
+    }
+}
+
+// ================= WHATSAPP CHECKOUT =================
+function finalizarCompraWhatsApp() {
+    if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+
+    const nombreForm = document.getElementById("cliente-nombre") ? document.getElementById("cliente-nombre").value : "Cliente Web";
+    
+    let mensaje = `*NUEVO PEDIDO - LA 12 JERSEY STORE* ⚽\n`;
+    mensaje += `👤 *Cliente:* ${nombreForm}\n\n`;
+    mensaje += `*--- DETALLE DEL PEDIDO ---*\n`;
+
+    let totalPrendas = 0;
+    let subtotalGeneral = 0;
+
+    carrito.forEach((p, i) => {
+        totalPrendas += p.cantidad;
+        subtotalGeneral += (p.precio * p.cantidad);
+        mensaje += `*${i + 1}. ${p.nombre}*\n`;
+        mensaje += `📏 Talla: ${p.talla} | 👕 Versión: ${p.versionSelec}\n`;
+        if (p.dorsalTexto) mensaje += `🔢 Dorsal: ${p.dorsalTexto}\n`;
+        mensaje += `💰 ${p.cantidad} x $${p.precio.toFixed(2)}\n\n`;
+    });
+
+    let costoEnvioFinal = 0;
+    if (typeof PROMOS !== 'undefined') {
+        if (PROMOS.envioGratis.activo && totalPrendas >= PROMOS.envioGratis.cantidadMinima) {
+            costoEnvioFinal = 0;
+        } else {
+            costoEnvioFinal = PROMOS.envioGratis.costoEnvio;
+        }
+    } else {
+        costoEnvioFinal = (totalPrendas > 0 && totalPrendas < 4) ? 130 : 0;
+    }
+
+    let montoDescuento = 0;
+    if (typeof cuponAplicado !== 'undefined' && cuponAplicado !== null) {
+        montoDescuento = subtotalGeneral * cuponAplicado.descuento; 
+    }
+
+    let totalFinal = subtotalGeneral - montoDescuento + costoEnvioFinal;
+
+    mensaje += `*--- RESUMEN FINANCIERO ---*\n`;
+    mensaje += `Subtotal: $${subtotalGeneral.toFixed(2)}\n`;
+    
+    if (montoDescuento > 0) {
+        mensaje += `🔥 *Descuento (${cuponAplicado.codigo}):* -$${montoDescuento.toFixed(2)}\n`;
+    }
+    
+    mensaje += `Envío: ${costoEnvioFinal === 0 ? '*GRATIS*' : '$' + costoEnvioFinal.toFixed(2)}\n`;
+    mensaje += `*TOTAL A PAGAR: $${totalFinal.toFixed(2)}*\n\n`;
+    
+    mensaje += `¡Confirmo mi pedido para recibir los métodos de pago! 💳`;
+
+    const numeroTuWhatsApp = "521XXXXXXXXXX"; // REEMPLAZA ESTO
+    const url = `https://wa.me/${numeroTuWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    
+    window.open(url, '_blank');
+}
+
+// ================= INTERFAZ (UI) =================
+function toggleMenu(event) {
+    const menu = document.getElementById("menu-lateral");
+    if (menu.style.left === "0px") {
+        menu.style.left = "-300px";
+    } else {
+        menu.style.left = "0px";
+    }
+}

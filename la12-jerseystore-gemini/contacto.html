@@ -1,36 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Contacto - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - La 12 Jersey Store</title>
+    
+    <meta property="og:title" content="Contacto - La 12 Jersey Store">
+    <meta property="og:description" content="¿Necesitas ayuda con tu pedido o buscas un jersey especial? Contáctanos.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .contacto-header {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('img/ui/jugador-whatsapp.jpg') center/cover;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .contacto-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contacto-card {
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s;
+        }
+
+        .contacto-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+        }
+
+        .contacto-icono {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .contacto-card h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .contacto-card p {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-contacto {
+            display: inline-block;
+            background: #222;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #444;
+            transition: 0.3s;
+        }
+
+        .btn-wa { background: #25D366; color: white; border: none; }
+        .btn-wa:hover { background: #1ebe57; }
+        
+        .btn-ig { background: #E1306C; color: white; border: none; }
+        .btn-ig:hover { background: #c1255b; }
+
+        .faq-rapido {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .faq-rapido h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #0a0a0a; color: #fff;">
 
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'"><img src="img/logo.png"></div>
-  <div class="nav-actions"><div class="tema-toggle" onclick="cambiarTema()">🌙</div><div class="carrito-icon" onclick="window.location.href='carrito.html'">🛒 <span id="contador-carrito">0</span></div></div>
-</header>
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💬 ATENCIÓN PERSONALIZADA POR WHATSAPP</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
+    </div>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header"><h3>MENÚ</h3><span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span></div>
-  <a href="index.html">Inicio</a><a href="resenas.html">⭐ Opiniones</a><a href="tracking.html">📦 Rastrear pedido</a><hr style="border-color:#333; margin: 20px 0;"><a href="cuidados.html">👕 Cuidados del jersey</a><a href="tallas.html">📏 Guía de tallas</a><a href="contacto.html">📞 Contáctanos</a><a href="faq.html">❓ Preguntas Frecuentes</a><a href="politicas.html">🚚 Políticas de envío</a>
-</div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-<div class="checkout-container" style="margin-top: 60px; margin-bottom: 60px; text-align: center;">
-  <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; text-align: left;">📞 Contáctanos</h2>
-  <p style="color: #ccc; margin-bottom: 30px; line-height: 1.6; text-align: left;">¿Tienes dudas con tu pedido, tallas o quieres cotizar un jersey que no ves en el catálogo? Estamos para ayudarte.</p>
-  
-  <div style="background: #222; padding: 30px; border-radius: 8px; border: 1px solid #333; margin-bottom: 20px;">
-    <h3 style="color: white; margin-bottom: 15px;">Atención rápida por WhatsApp</h3>
-    <p style="color: #888; margin-bottom: 20px;">De Lunes a Sábado de 10:00 AM a 8:00 PM</p>
-    <button class="btn-principal" style="background: #25D366; color: white; width: auto; padding: 15px 40px;" onclick="comprarWhatsApp()">Escríbenos en WhatsApp 📲</button>
-  </div>
-</div>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
 
-<footer class="footer"><div class="footer-bottom"><p>© 2026 La 12 Jersey Store.</p></div></footer>
-<script src="app.js"></script>
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
+    </div>
+
+    <section class="contacto-header">
+        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ESTAMOS PARA AYUDARTE</h4>
+        <h1 style="color: #fff; font-size: 40px; text-transform: uppercase;">Contáctanos</h1>
+        <p style="color: #ccc; font-size: 16px; max-width: 600px; margin: 15px auto 0;">¿Tienes dudas sobre una talla, un pedido en tránsito o buscas un jersey que no está en catálogo? Habla directamente con nosotros.</p>
+    </section>
+
+    <div class="contacto-container">
+        
+        <div class="contacto-card">
+            <div class="contacto-icono">💬</div>
+            <h3>Ventas y Cotizaciones</h3>
+            <p>Atención rápida y personalizada. Cotiza jerseys especiales, confirma disponibilidad o cierra tu pedido directamente.</p>
+            <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20necesito%20ayuda%20para%20comprar%20un%20jersey" class="btn-contacto btn-wa" target="_blank">ESCRÍBENOS POR WHATSAPP</a>
+        </div>
+
+        <div class="contacto-card">
+            <div class="contacto-icono">📦</div>
+            <h3>Dudas sobre tu Pedido</h3>
+            <p>¿Ya compraste y quieres saber el estatus de tu envío? Ten a la mano tu nombre o número de guía.</p>
+            <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20quiero%20saber%20el%20estatus%20de%20mi%20pedido" class="btn-contacto" target="_blank">SOPORTE DE ENVÍOS</a>
+        </div>
+
+        <div class="contacto-card">
+            <div class="contacto-icono">📸</div>
+            <h3>Redes Sociales</h3>
+            <p>Síguenos para ver fotos reales de nuestros productos, nuevos ingresos, sorteos y reseñas de otros clientes.</p>
+            <a href="https://instagram.com/tu_cuenta_la12" class="btn-contacto btn-ig" target="_blank">SÍGUENOS EN INSTAGRAM</a>
+        </div>
+
+    </div>
+
+    <div class="faq-rapido">
+        <h2>¿Dudas Rápidas?</h2>
+        <p style="color: #aaa; margin-bottom: 30px; font-size: 16px;">Antes de escribirnos, revisa nuestras guías. Quizá la respuesta que buscas está a un clic de distancia.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="tallas.html" class="btn-contacto" style="background: transparent;">📏 VER GUÍA DE TALLAS</a>
+            <a href="faq.html" class="btn-contacto" style="background: transparent;">❓ PREGUNTAS FRECUENTES</a>
+            <a href="politicas.html" class="btn-contacto" style="background: transparent;">🛡️ POLÍTICAS Y GARANTÍA</a>
+        </div>
+    </div>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20general" class="whatsapp-flotante" target="_blank">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="app.js"></script>
+    
 </body>
 </html>

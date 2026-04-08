@@ -1,74 +1,38 @@
-// ================== RESEÑAS ==================
-const resenas = [
+/* ==========================================================================
+   LÓGICA DE RESEÑAS Y CUPONES - LA 12 (resenas.js)
+   ========================================================================== */
 
-  {
-    nombre: "Carlos M.",
-    estrellas: 5,
-    comentario: "La calidad está increíble 🔥 parece original.",
-    imagen: "img/resenas/resena1.jpg"
-  },
+function enviarResenaWhatsApp() {
+    // 1. Capturar los valores del formulario
+    const nombre = document.getElementById("resena-nombre").value.trim();
+    const calificacion = document.getElementById("resena-estrellas").value;
+    const mensajeResena = document.getElementById("resena-comentario").value.trim();
 
-  {
-    nombre: "Luis G.",
-    estrellas: 5,
-    comentario: "Me llegó rápido y todo perfecto 💯",
-    imagen: "img/resenas/resena2.jpg"
-  },
+    // 2. Validación básica para que no te manden mensajes vacíos
+    if (nombre === "" || mensajeResena === "") {
+        alert("⚠️ Por favor, llena tu nombre y tu comentario para poder generar tu cupón.");
+        return;
+    }
 
-  {
-    nombre: "Andrea R.",
-    estrellas: 4,
-    comentario: "Muy buena calidad, volvería a comprar.",
-    imagen: "img/resenas/resena3.jpg"
-  },
+    // 3. Construir el mensaje estructurado para WhatsApp
+    let mensajeWS = `*NUEVA RESEÑA DE CLIENTE - LA 12* ⭐️\n\n`;
+    mensajeWS += `👤 *Cliente:* ${nombre}\n`;
+    mensajeWS += `🏅 *Calificación:* ${calificacion}\n`;
+    mensajeWS += `💬 *Comentario:* "${mensajeResena}"\n\n`;
+    mensajeWS += `🎁 *Vengo a solicitar mi cupón del 20% OFF por haber dejado mi reseña.*`;
 
-  {
-    nombre: "Miguel T.",
-    estrellas: 5,
-    comentario: "Pedí con nombre y número y quedó brutal 😍",
-    imagen: "img/resenas/resena4.jpg"
-  },
+    // 4. Configurar tu número y enviar
+    // OJO: Recuerda reemplazar las 'X' por tu número real con código de país (Ej: 5218112345678)
+    const numeroTuWhatsApp = "521XXXXXXXXXX"; 
+    const url = `https://wa.me/${numeroTuWhatsApp}?text=${encodeURIComponent(mensajeWS)}`;
 
-  {
-    nombre: "José L.",
-    estrellas: 5,
-    comentario: "Excelente atención por WhatsApp y envío rápido.",
-    imagen: "img/resenas/resena5.jpg"
-  },
+    // Abre WhatsApp en una nueva pestaña
+    window.open(url, '_blank');
 
-  {
-    nombre: "Daniela P.",
-    estrellas: 4,
-    comentario: "Muy bonita jersey, la tela está muy bien.",
-    imagen: "img/resenas/resena6.jpg"
-  },
+    // 5. Limpiar el formulario y agradecer al cliente
+    document.getElementById("resena-nombre").value = "";
+    document.getElementById("resena-comentario").value = "";
+    document.getElementById("resena-estrellas").selectedIndex = 0; // Regresa a las 5 estrellas por defecto
 
-  {
-    nombre: "Fernando C.",
-    estrellas: 5,
-    comentario: "Se ve igual que original 🔥 100% recomendado.",
-    imagen: "img/resenas/resena7.jpg"
-  },
-
-  {
-    nombre: "Ricardo S.",
-    estrellas: 5,
-    comentario: "Compré 4 jerseys y sí me dieron envío gratis 😎",
-    imagen: "img/resenas/resena8.jpg"
-  },
-
-  {
-    nombre: "María G.",
-    estrellas: 5,
-    comentario: "Me encantó, súper buena calidad 👌",
-    imagen: "img/resenas/resena9.jpg"
-  },
-
-  {
-    nombre: "Juan P.",
-    estrellas: 4,
-    comentario: "Todo bien, solo tardó un poco más de lo esperado.",
-    imagen: "img/resenas/resena10.jpg"
-  }
-
-];
+    alert("¡Gracias por tu reseña! 🎉\n\nSerás redirigido a WhatsApp donde te entregaremos tu código de descuento.");
+}

@@ -1,41 +1,87 @@
-📁 tu-tienda-la-12/
+1. El Mapa Exacto del Proyecto (Las 5 Zonas)
+Así debes crear tus archivos y carpetas en tu computadora. Ni un archivo más, ni un archivo menos:
+
+Plaintext
+📁 tu-tienda-la12/             
 │
-├── 🌐 VISTAS PRINCIPALES DE VENTA (El núcleo del negocio)
-│   ├── 📄 index.html         (Home: Banners promocionales, categorías principales y productos destacados)
-│   ├── 📄 catalogo.html      (Catálogo Avanzado: Filtros por liga, precio, disponibilidad y ordenamiento)
-│   ├── 📄 producto.html      (Detalle del Jersey: Galería de fotos, selección de talla y botón "Agregar al Carrito")
-│   └── 📄 carrito.html       (Checkout en 3 pasos con integración de PayPal, OXXO, Transferencia y envío a WhatsApp)
+├── 🛒 ZONA 1: TIENDA PRINCIPAL
+│   ├── index.html              (Home: Cintilla, Carrusel 3D, Video 1:1, WhatsApp Split)
+│   ├── catalogo.html           (PLP: Cuadrícula de productos con hover 2da imagen, buscador y filtros)
+│   ├── producto.html           (PDP: Detalles, acordeones, versión, dorsal, precios tachados/oferta)
+│   └── carrito.html            (Checkout minimalista, barra de envío gratis, form de pago)
 │
-├── ℹ️ PÁGINAS DE INFORMACIÓN (Atención al cliente y Confianza)
-│   ├── 📄 resenas.html       (Tarjeta de presentación interactiva con opiniones de clientes)
-│   ├── 📄 tracking.html      (Sistema de rastreo premium con redirección directa a 17Track)
-│   ├── 📄 cuidados.html      (Guía de lavado para cuidar los estampados)
-│   ├── 📄 tallas.html        (Explicación de tallas Fan vs. Player)
-│   ├── 📄 contacto.html      (Datos de contacto y botón directo a tu WhatsApp)
-│   ├── 📄 faq.html           (Preguntas frecuentes)
-│   └── 📄 politicas.html     (Reglas de envío y devoluciones)
+├── 🏅 ZONA 2: COLECCIONES
+│   ├── ligas.html              (Exploración por Liga)
+│   └── marcas.html             (Exploración por Marca)
 │
-├── 🎨 DISEÑO
-│   └── 📄 style.css          (Todo el diseño visual, modo oscuro/claro, animaciones y responsivo)
+├── 🛡️ ZONA 3: SOPORTE Y CONFIANZA
+│   ├── tracking.html           (Rastreo de envíos)
+│   ├── faq.html                (Preguntas Frecuentes)
+│   ├── politicas.html          (Políticas de devolución y privacidad)
+│   ├── tallas.html             (Guía de medidas de los jerseys)
+│   ├── cuidados.html           (Reglas de lavado sin secadora)
+│   └── resenas.html            (Formulario de opiniones con incentivo del 20% OFF)
 │
-├── 🧠 LÓGICA Y DATOS (Tus "Bases de Datos" en JavaScript)
-│   ├── 📄 app.js             (El motor: controla el carrito, PayPal, las vistas, los filtros y los cálculos)
-│   ├── 📄 productos.js       (Aquí guardas todo tu inventario de jerseys)
-│   ├── 📄 resenas.js         (Aquí guardas las opiniones)
-│   └── 📄 promos.js          (Aquí configuras los cupones de descuento)
+├── ⚙️ ZONA 4: SISTEMA (Tu back-office)
+│   ├── admin.html              (Panel oculto para dar de alta productos)
+│   ├── admin.js                (Código del panel)
+│   └── productos.js            (Tu "Base de Datos" de inventario)
 │
-├── ⚙️ PANEL DE ADMINISTRACIÓN (Tu herramienta privada)
-│   ├── 📄 admin.html         (Tu pantalla para crear nuevos productos, cupones o reseñas sin tocar código complejo)
-│   ├── 📄 admin.css          (El estilo visual del panel)
-│   └── 📄 admin.js           (El código que genera el fragmento exacto que vas a pegar en tus bases de datos)
+├── 🎨 ZONA 5: EL MOTOR
+│   ├── style.css               (Todo el diseño visual, animaciones y adaptación a celular)
+│   └── app.js                  (El "Cerebro": carrito, notificaciones, filtros y WhatsApp)
 │
-└── 📂 img/                   (Tu directorio de imágenes)
-    ├── 🖼️ logo.png
-    ├── 🖼️ promo.jpg          (Banner principal del Home)
-    ├── 🖼️ seccion-whatsapp.png (La imagen del jersey de Henry/Arsenal)
-    ├── 🖼️ facebook.png       (Logo red social)
-    ├── 🖼️ instagram.png      (Logo red social)
-    ├── 🖼️ tiktok.png         (Logo red social)
-    ├── 📁 categorias/        (Las fotos circulares: retro.jpg, actual.jpg, etc.)
-    ├── 📁 productos/         (Fotos de los jerseys)
-    └── 📁 resenas/           (Fotos de perfil de tus clientes)
+└── 📂 img/                     (CARPETAS DE IMÁGENES AUTOMATIZADAS)
+    ├── ui/                     (logo.png, banners, video-calidad.mp4)
+    ├── ligas/                  (fondos de premier, laliga, etc)
+    ├── marcas/                 (fondos de nike, adidas, etc)
+    ├── temporada/          
+    ├── mundial/            
+    ├── retro-clubes/       
+    ├── retro-selecciones/  
+    ├── kids/               
+    └── anime/              
+2. Las 5 Reglas de Oro de tu Código (Para no cometer errores)
+Para que todo el ecosistema funcione perfecto, asegúrate de que estos "motores" estén bien configurados en tus archivos .js:
+
+1. El Navbar Universal (En todos tus .html):
+Asegúrate de pegar el mismo bloque de código (Cintilla de Promos + Header + Menú Lateral) debajo de la etiqueta <body> en absolutamente todos tus archivos HTML para que el cliente nunca se pierda.
+
+2. La Lógica de Precios en la PDP (app.js):
+Recuerda que el precio "Tachado" es solo visual. Todo el cálculo de carrito se hace sobre el Precio de Oferta.
+
+Versión Jugador / Manga Larga = +$120
+
+Con Dorsal = +$80
+
+Tallas Extra (XXL, 3XL, 4XL) = +$35
+
+3. La Regla del Envío en el Carrito (app.js):
+El sistema ya está programado para sumar la cantidad de prendas, no de modelos:
+
+De 1 a 3 jerseys = $130.00 de envío.
+
+4 o más jerseys = Envío GRATIS (con la barra de progreso verde llenándose dinámicamente).
+
+4. Las Rutas Automáticas del Panel (admin.js):
+Tú ya no escribes "img/temporada/foto.jpg". Tú solo seleccionas la categoría "Temporada" y escribes "foto.jpg". El código de admin.js une esos datos y crea la ruta exacta para que tu productos.js quede limpio.
+
+5. El Botón de WhatsApp Final (app.js):
+Cuando el cliente le da a "Confirmar Pedido" en el checkout, el sistema lee todos sus inputs (Nombre, Dirección, Email, País) y te manda un desglose perfecto a tu celular, incluyendo el subtotal, el costo de envío exacto y el total final a cobrar.
+
+3. Tu Guía de Tamaños de Imagen (Para el diseñador)
+Mantener estas proporciones es lo que evitará que tu página se vea descuadrada:
+
+Jerseys (Productos): 1000 x 1000 px (Formato Cuadrado 1:1).
+
+Foto 1: Jersey frente. Foto 2: Jersey espalda o jugador.
+
+Hero Banner (Promo): 1920 x 1080 px (Horizontal). Sujeto al centro.
+
+Banner WhatsApp Split: 1000 x 1200 px (Vertical). Foto de jugador.
+
+Carrusel de Colecciones: 600 x 760 px (Vertical).
+
+Video Comparativa: Formato vertical estilo TikTok/Reels (1080x1920 px).
+
+Regla general: Siempre usa formato .JPG o .WebP para que tu tienda cargue rápido (menos de 200kb por foto).

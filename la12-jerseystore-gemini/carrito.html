@@ -1,148 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Carrito - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://www.paypal.com/sdk/js?client-id=AZvbETmsrRvyeUbqUvonjwRQAGxw6d4sR-DDIdhL2EXQ-_NE43CfM4WNbHewbBz3XqitM7Lc-LvLgZ_F&currency=MXN"></script>
-</head>
-<body>
-
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'">
-    <img src="img/logo.png" alt="La 12 Jersey Store">
-  </div>
-  <div class="nav-actions">
-    <div class="tema-toggle" onclick="cambiarTema()">🌙</div>
-    <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-      🛒 <span id="contador-carrito">0</span>
-    </div>
-  </div>
-</header>
-
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header">
-    <h3>MENÚ</h3>
-    <span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span>
-  </div>
-  <a href="index.html">Inicio</a>
-  <a href="catalogo.html?cat=reciente">Temporada 25/26</a>
-  <a href="catalogo.html?cat=retro">Colección Retro</a>
-  <a href="catalogo.html?cat=niño">Kids</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="resenas.html">⭐ Opiniones</a>
-  <a href="tracking.html">📦 Rastrear pedido</a>
-  <hr style="border-color:#333; margin: 20px 0;">
-  <a href="cuidados.html">👕 Cuidados del jersey</a>
-  <a href="tallas.html">📏 Guía de tallas</a>
-  <a href="contacto.html">📞 Contáctanos</a>
-  <a href="faq.html">❓ Preguntas Frecuentes</a>
-  <a href="politicas.html">🚚 Políticas de envío</a>
-</div>
-
-<div class="checkout-container">
-
-  <div id="paso1" class="checkout-step">
-    <h2>Tu carrito</h2>
-    <div id="carrito-productos"></div>
-    <div class="resumen" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #333; text-align: right;">
-      <p style="color:#888;">Subtotal: $<span id="subtotal">0</span></p>
-      <p style="color:#888;">Envío: $<span id="envio">0</span></p>
-      <h3 style="margin-top:10px; color:#d4af37; font-size: 24px;">Total: $<span id="total">0</span></h3>
-    </div>
-    <button class="btn-principal" onclick="irPaso2()">Proceder al pago</button>
-  </div>
-
-  <div id="paso2" class="checkout-step" style="display:none;">
-    <h2>Datos de envío</h2>
-    <div class="formulario">
-      <input type="text" id="nombre" placeholder="Nombre completo">
-      <input type="text" id="direccion" placeholder="Dirección, Número y Colonia">
-      <input type="text" id="cp" placeholder="Código Postal">
-      <input type="text" id="ciudad" placeholder="Ciudad y Estado">
-      <input type="text" id="telefono" placeholder="Teléfono (WhatsApp)">
-    </div>
-    <button class="btn-principal" onclick="irPaso3()">Continuar al pago</button>
-  </div>
-
-  <div id="paso3" class="checkout-step" style="display:none;">
-    <h2>Finalizar Compra</h2>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - La 12 Jersey Store</title>
     
-    <div class="metodos-pago">
-      <label class="radio-pago">
-        <input type="radio" name="pago" value="PayPal" onchange="seleccionarMetodo(this.value)"> PayPal / Tarjeta 💳
-      </label>
-      <label class="radio-pago">
-        <input type="radio" name="pago" value="Transferencia" onchange="seleccionarMetodo(this.value)"> Transferencia Bancaria 🏦
-      </label>
-      <label class="radio-pago">
-        <input type="radio" name="pago" value="OXXO" onchange="seleccionarMetodo(this.value)"> Pago en OXXO 🏪
-      </label>
+    <meta property="og:title" content="Carrito - La 12 Jersey Store">
+    <meta property="og:description" content="Finaliza tu compra de forma segura por WhatsApp.">
+    <meta property="og:image" content="img/ui/og-image.jpg">
+    <link rel="icon" type="image/png" href="img/ui/favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .checkout-main {
+            flex: 2;
+        }
+        .cart-summary-sidebar {
+            flex: 1;
+            background: #111;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            position: sticky;
+            top: 100px;
+        }
+        .form-cliente {
+            background: #111;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+        }
+        .form-cliente label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .form-cliente input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .form-cliente input:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        .resumen-linea {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #ccc;
+            font-size: 16px;
+        }
+        .resumen-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 800px) {
+            .checkout-container {
+                flex-direction: column;
+            }
+            .cart-summary-sidebar {
+                position: static;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: #0a0a0a; color: #fff;">
+
+    <div class="announcement-bar">
+        <div class="announcement-slider">
+            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
+            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+        </div>
     </div>
 
-    <div id="detalle-pago" style="margin-top: 20px;">
-      
-      <div id="area-paypal" class="metodo-info" style="display:none;">
-        <p style="color:#d4af37; margin-bottom:15px; font-size:14px; background: rgba(212, 175, 55, 0.1); padding: 10px; border-left: 3px solid #d4af37;">
-          ⚠️ <b>IMPORTANTE:</b> Al finalizar, toma captura de pantalla de tu comprobante para validarlo por WhatsApp.
-        </p>
-        <div id="paypal-button-container"></div>
-      </div>
+    <header class="navbar">
+        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
+        </div>
+        <div class="nav-actions">
+            <div class="carrito-icon">
+                🛒 <span id="contador-carrito">0</span>
+            </div>
+        </div>
+    </header>
 
-      <div id="area-transferencia" class="metodo-info" style="display:none; background:#1a1a1a; padding:15px; border-radius:8px;">
-        <h4 style="color:gold; margin-bottom: 10px;">Datos para Transferencia:</h4>
-        <p style="color: #ccc; margin-bottom: 5px;">Banco: <b>BBVA</b></p>
-        <p style="color: #ccc; margin-bottom: 5px;">CLABE: <b>0000 0000 0000 0000 00</b></p>
-        <p style="color: #ccc; margin-bottom: 5px;">Nombre: <b>Julio Luna</b></p>
-        <button class="btn-principal" style="margin-top:15px;" onclick="finalizarCompraWhatsApp('Transferencia')">Enviar Comprobante por WhatsApp 📲</button>
-      </div>
+    <div id="menu-lateral" class="menu-lateral">
+        <div class="menu-header">
+            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
+            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+        </div>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+        
+        <p class="menu-seccion-titulo">COLECCIONES</p>
+        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
+        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
+        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
+        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
+        <a href="catalogo.html?cat=kids">Kids</a>
 
-      <div id="area-oxxo" class="metodo-info" style="display:none; background:#1a1a1a; padding:15px; border-radius:8px;">
-        <h4 style="color:#ff4500; margin-bottom: 10px;">Pago en OXXO:</h4>
-        <p style="color: #ccc; margin-bottom: 5px;">Número de Tarjeta: <b>4000 0000 0000 0000</b></p>
-        <p style="color: #ccc; margin-bottom: 5px;">A nombre de: <b>Julio Luna</b></p>
-        <p style="font-size:12px; color:#888; margin-top: 10px;">* Recuerda que OXXO cobra comisión por depósito.</p>
-        <button class="btn-principal" style="margin-top:15px;" onclick="finalizarCompraWhatsApp('OXXO')">Enviar Ticket por WhatsApp 📲</button>
-      </div>
-
+        <p class="menu-seccion-titulo">AYUDA</p>
+        <a href="tracking.html">📍 Rastrear Pedido</a>
+        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
+        <a href="tallas.html">📏 Guía de Tallas</a>
     </div>
-  </div>
 
-</div>
+    <div class="checkout-container">
+        
+        <div class="checkout-main">
+            <h1 style="margin-bottom: 30px; color: #fff; font-size: 28px;">TU CARRITO 🛒</h1>
+            
+            <div class="form-cliente">
+                <h3 style="color: #d4af37; margin-bottom: 20px; font-size: 18px;">Tus Datos Básicos</h3>
+                <label for="cliente-nombre">Nombre Completo:</label>
+                <input type="text" id="cliente-nombre" placeholder="Ej: Julio César" required>
+                <p style="color: #888; font-size: 12px; margin-top: -10px;">* La dirección completa te la solicitaremos por WhatsApp para tu seguridad.</p>
+            </div>
 
-<footer class="footer">
-  <div class="footer-content" style="align-items: flex-start; text-align: left;">
-    <div class="footer-col">
-      <img src="img/logo.png" alt="Logo" style="height:40px; margin-bottom:15px;">
-      <p>Tu tienda de fútbol de confianza. Las mejores versiones jugador y aficionado.</p>
-      <div class="social-links">
-        <a href="#" target="_blank"><img src="img/facebook.png" alt="Facebook"></a>
-        <a href="#" target="_blank"><img src="img/instagram.png" alt="Instagram"></a>
-        <a href="#" target="_blank"><img src="img/tiktok.png" alt="TikTok"></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4 style="color: #d4af37;">INFORMACIÓN</h4>
-      <p><a href="cuidados.html" style="color:#888; text-decoration:none;">Cuidados del jersey</a></p>
-      <p><a href="tallas.html" style="color:#888; text-decoration:none;">Guía de tallas</a></p>
-      <p><a href="politicas.html" style="color:#888; text-decoration:none;">Políticas de envío</a></p>
-    </div>
-    <div class="footer-col">
-      <h4 style="color: #d4af37;">AYUDA Y SOPORTE</h4>
-      <p><a href="tracking.html" style="color:#888; text-decoration:none;">Rastrea tu pedido</a></p>
-      <p><a href="faq.html" style="color:#888; text-decoration:none;">Preguntas Frecuentes</a></p>
-      <p><a href="contacto.html" style="color:#888; text-decoration:none;">Contáctanos</a></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 La 12 Jersey Store. Todos los derechos reservados.</p>
-  </div>
-</footer>
+            <div id="carrito-productos-lista" style="background: #111; padding: 25px; border-radius: 8px; border: 1px solid #333;">
+                <p style="color: #aaa; text-align: center;">Cargando tus jerseys...</p>
+            </div>
+        </div>
 
-<script src="productos.js"></script>
-<script src="app.js"></script>
+        <div class="cart-summary-sidebar">
+            <h3 style="color: #d4af37; margin-bottom: 25px; font-size: 20px;">RESUMEN DEL PEDIDO</h3>
+            
+            <div id="aviso-promo-envio"></div>
+
+            <div style="margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 20px;">
+                <p style="color: #ccc; font-size: 14px; margin-bottom: 10px;">¿Tienes un código de descuento?</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="input-cupon" placeholder="Ej: PRIMERA12" style="flex: 1; padding: 10px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; text-transform: uppercase;">
+                    <button onclick="aplicarCupon()" style="background: #d4af37; color: #000; border: none; padding: 0 15px; font-weight: bold; border-radius: 4px; cursor: pointer;">APLICAR</button>
+                </div>
+                <p id="mensaje-cupon" style="font-size: 13px; margin-top: 8px; font-weight: bold;"></p>
+            </div>
+
+            <div class="resumen-linea">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            
+            <div class="resumen-linea">
+                <span>Envío</span>
+                <span id="envio">$130.00</span>
+            </div>
+            
+            <div class="resumen-total">
+                <span>TOTAL FINAL</span>
+                <span id="total" style="color: #d4af37;">$0.00</span>
+            </div>
+
+            <button class="btn-principal" onclick="finalizarCompraWhatsApp()" style="width: 100%; margin-top: 30px; padding: 18px; font-size: 16px; background: #25D366; color: white; border-radius: 30px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase;">
+                CONFIRMAR PEDIDO 📲
+            </button>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="color: #888; font-size: 12px;">🔒 Compra 100% Segura. Pago mediante transferencia o depósito OXXO.</p>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20con%20mi%20carrito" class="whatsapp-flotante" target="_blank">
+        <span style="font-size: 30px;">💬</span>
+    </a>
+
+    <script src="promo.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>

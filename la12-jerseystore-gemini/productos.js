@@ -1,158 +1,64 @@
-// ================== PRODUCTOS ==================
+/* ==========================================================================
+   BASE DE DATOS DE PRODUCTOS - LA 12 JERSEY STORE
+   
+   INSTRUCCIONES:
+   - Este archivo es el "inventario" de tu tienda.
+   - Cada producto está encerrado entre llaves { ... } y separado por una coma.
+   - Cuando uses tu Panel de Administración (admin.html), copia el texto que 
+     te genera y pégalo al final de esta lista, justo antes del corchete final ].
+   ========================================================================== */
+
 const productos = [
-
-  {
-    id: "real-madrid-2025-local-1",
-    nombre: "Real Madrid 2025 Local",
-    precio: 750,
-    tipoProducto: "reciente",
-    liga: "la liga",
-    equipo: "real madrid",
-    descripcion: "Jersey temporada 25/26 versión fan o jugador.",
-    imagenes: [
-      "img/productos/real-madrid-1/1.jpg",
-      "img/productos/real-madrid-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "barcelona-2025-visitante-1",
-    nombre: "Barcelona 2025 Visitante",
-    precio: 750,
-    tipoProducto: "reciente",
-    liga: "la liga",
-    equipo: "barcelona",
-    descripcion: "Diseño moderno visitante temporada 25/26.",
-    imagenes: [
-      "img/productos/barcelona-1/1.jpg",
-      "img/productos/barcelona-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "mexico-2026-local-1",
-    nombre: "México 2026 Local",
-    precio: 800,
-    tipoProducto: "mundial",
-    liga: "selecciones",
-    equipo: "mexico",
-    descripcion: "Jersey oficial mundial 2026.",
-    imagenes: [
-      "img/productos/mexico-1/1.jpg",
-      "img/productos/mexico-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "argentina-2026-campeon-1",
-    nombre: "Argentina Campeón 2026",
-    precio: 800,
-    tipoProducto: "mundial",
-    liga: "selecciones",
-    equipo: "argentina",
-    descripcion: "Edición especial campeón del mundo.",
-    imagenes: [
-      "img/productos/argentina-1/1.jpg",
-      "img/productos/argentina-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "milan-2007-retro-1",
-    nombre: "AC Milan 2007 Retro",
-    precio: 850,
-    tipoProducto: "retro",
-    liga: "serie a",
-    equipo: "milan",
-    descripcion: "Jersey histórica Champions League 2007.",
-    imagenes: [
-      "img/productos/milan-1/1.jpg",
-      "img/productos/milan-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "manchester-united-1999-retro-1",
-    nombre: "Manchester United 1999 Retro",
-    precio: 850,
-    tipoProducto: "retro",
-    liga: "premier league",
-    equipo: "manchester united",
-    descripcion: "Temporada del triplete histórico.",
-    imagenes: [
-      "img/productos/united-1/1.jpg",
-      "img/productos/united-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "america-2025-local-1",
-    nombre: "América 2025 Local",
-    precio: 700,
-    tipoProducto: "reciente",
-    liga: "liga mx",
-    equipo: "america",
-    descripcion: "Nueva jersey local Club América.",
-    imagenes: [
-      "img/productos/america-1/1.jpg",
-      "img/productos/america-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "chivas-2025-local-1",
-    nombre: "Chivas 2025 Local",
-    precio: 700,
-    tipoProducto: "reciente",
-    liga: "liga mx",
-    equipo: "chivas",
-    descripcion: "Clásica jersey rayada Chivas.",
-    imagenes: [
-      "img/productos/chivas-1/1.jpg",
-      "img/productos/chivas-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "psg-2025-local-1",
-    nombre: "PSG 2025 Local",
-    precio: 780,
-    tipoProducto: "reciente",
-    liga: "ligue 1",
-    equipo: "psg",
-    descripcion: "Jersey Paris Saint-Germain 25/26.",
-    imagenes: [
-      "img/productos/psg-1/1.jpg",
-      "img/productos/psg-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "dragon-ball-anime-1",
-    nombre: "Jersey Anime Dragon Ball",
-    precio: 650,
-    tipoProducto: "anime",
-    liga: "anime",
-    equipo: "dragon ball",
-    descripcion: "Diseño exclusivo estilo anime.",
-    imagenes: [
-      "img/productos/anime-1/1.jpg",
-      "img/productos/anime-1/2.jpg"
-    ]
-  },
-
-  {
-    id: "real-madrid-nino-1",
-    nombre: "Real Madrid Niño 2025",
-    precio: 650,
-    tipoProducto: "niño",
-    liga: "la liga",
-    equipo: "real madrid",
-    descripcion: "Versión infantil temporada 25/26.",
-    imagenes: [
-      "img/productos/nino-1/1.jpg",
-      "img/productos/nino-1/2.jpg"
-    ]
-  }
-
+    {
+        id: "RM-LOCAL-25",
+        nombre: "Real Madrid Local 25/26",
+        precioNormal: 1499,
+        precio: 899,
+        tipoProducto: "temporada",
+        liga: "La Liga",
+        marca: "Adidas",
+        equipo: "Real Madrid",
+        descripcion: "El nuevo jersey del rey de Europa para la temporada actual. Cuenta con tecnología transpirable y escudo termosellado en versión jugador.",
+        imagenes: ["img/temporada/rm-local-frente.jpg", "img/temporada/rm-local-espalda.jpg"],
+        stock: true
+    },
+    {
+        id: "TIGRES-LOCAL-25",
+        nombre: "Tigres UANL Local 25/26",
+        precioNormal: 1399,
+        precio: 849,
+        tipoProducto: "temporada",
+        liga: "Liga MX",
+        marca: "Adidas",
+        equipo: "Tigres UANL",
+        descripcion: "El manto incomparable. Jersey de local de los Tigres de la UANL. Calidad Premium 1:1, ideal para alentar en el Volcán.",
+        imagenes: ["img/temporada/tigres-local-frente.jpg", "img/temporada/tigres-local-espalda.jpg"],
+        stock: true
+    },
+    {
+        id: "MILAN-RETRO-07",
+        nombre: "AC Milan Local 2006/07",
+        precioNormal: 1599,
+        precio: 949,
+        tipoProducto: "retro-clubes",
+        liga: "Serie A",
+        marca: "Adidas",
+        equipo: "AC Milan",
+        descripcion: "El icónico jersey con el que conquistaron Europa. Un clásico indispensable para cualquier coleccionista con detalles fieles a la época.",
+        imagenes: ["img/retro-clubes/milan-07-frente.jpg", "img/retro-clubes/milan-07-espalda.jpg"],
+        stock: true
+    },
+    {
+        id: "MEX-RETRO-98",
+        nombre: "México Local 1998",
+        precioNormal: 1699,
+        precio: 999,
+        tipoProducto: "retro-selecciones",
+        liga: "Selecciones",
+        marca: "ABA Sport",
+        equipo: "México",
+        descripcion: "El legendario jersey del Calendario Azteca usado en Francia 98. Telas y diseño idénticos a los originales de los años 90.",
+        imagenes: ["img/retro-selecciones/mexico-98-frente.jpg", "img/retro-selecciones/mexico-98-espalda.jpg"],
+        stock: true
+    }
 ];
