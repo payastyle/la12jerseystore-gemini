@@ -1,94 +1,72 @@
-/* ==========================================================================
-   LÓGICA DEL PANEL ADMIN - LA 12
-   ========================================================================== */
+// admin.js - Lógica para el Panel de Administración de La 12
 
-// Navegación
-function abrirSeccion(id) {
-    document.querySelectorAll('.seccion-admin').forEach(s => s.classList.remove('activo'));
-    document.getElementById(id).classList.add('activo');
-}
-
-function volverInicio() {
-    document.querySelectorAll('.seccion-admin').forEach(s => s.classList.remove('activo'));
-    document.getElementById('inicio-admin').classList.add('activo');
-}
-
-// Generar Producto
 function generarProducto() {
-    const id = document.getElementById('nombre').value.toUpperCase().replace(/\s+/g, '-');
+    // 1. Capturar todos los valores del formulario (Incluyendo el nuevo campo de Marca)
     const nombre = document.getElementById('nombre').value;
     const precio = document.getElementById('precio').value;
-    const tipo = document.getElementById('tipoProducto').value;
+    const tipo = document.getElementById('tipo').value;
+    const marca = document.getElementById('marca').value; 
     const liga = document.getElementById('liga').value;
     const equipo = document.getElementById('equipo').value;
-    const img1 = document.getElementById('imagen').value;
-    const img2 = document.getElementById('imagen2').value;
-    const desc = document.getElementById('descripcion').value;
+    const img1 = document.getElementById('img1').value;
+    const img2 = document.getElementById('img2').value;
+    const desc = document.getElementById('desc').value;
 
+    // 2. Validación básica para no generar productos rotos
+    if (!nombre || !precio || !img1) {
+        alert('⚠️ Por favor, llena al menos el Nombre, Precio y la Imagen 1 (Principal).');
+        return;
+    }
+
+    // 3. Generar un ID automático (Todo en mayúsculas y espacios reemplazados por guiones)
+    const id = nombre.toUpperCase().trim().replace(/\s+/g, '-');
+    
+    // 4. Formatear el arreglo de imágenes (si hay una segunda imagen, la incluye)
     const imagenes = img2 ? `["${img1}", "${img2}"]` : `["${img1}"]`;
+    
+    // 5. Calcular el precio tachado (Precio Normal) sumándole 500 para el efecto de descuento
+    const precioSugerido = parseInt(precio) + 500;
 
+    // 6. Construir el código final del producto (Con la sintaxis exacta para productos.js)
     const resultado = `{
     id: "${id}",
     nombre: "${nombre}",
-    precioNormal: ${parseInt(precio) + 500},
+    precioNormal: ${precioSugerido},
     precio: ${parseInt(precio)},
     tipoProducto: "${tipo}",
     liga: "${liga}",
-    marca: "Genérica",
+    marca: "${marca}",
     equipo: "${equipo}",
     descripcion: "${desc}",
     imagenes: ${imagenes},
     stock: true
-  },`;
+},`;
 
-    document.getElementById('resultado-producto').innerText = resultado;
-}
-
-// Generar Reseña (Para que la pegues en el HTML de reseñas)
-function generarResena() {
-    const nombre = document.getElementById('resena-nombre').value;
-    const estrellas = document.getElementById('resena-estrellas').value;
-    const comentario = document.getElementById('resena-comentario').value;
-    const producto = document.getElementById('resena-producto').value;
-    const letra = nombre.charAt(0).toUpperCase();
-
-    const resultado = `<div class="resena-card">
-    <div class="resena-header">
-        <div class="resena-cliente">
-            <div class="resena-avatar">${letra}</div>
-            <div>
-                <h4 style="color: #fff; margin: 0 0 5px;">${nombre}</h4>
-                <span style="color: #28a745; font-size: 12px;">✔️ Compra Verificada</span>
-            </div>
-        </div>
-        <div class="resena-estrellas">${estrellas}</div>
-    </div>
-    <p class="resena-texto">"${comentario}"</p>
-    <div class="resena-producto">Producto comprado: <span>${producto}</span></div>
-</div>`;
-
-    document.getElementById('resultado-resena').innerText = resultado;
-}
-
-// Generar Promo
-function generarPromo() {
-    const codigo = document.getElementById('cupon-codigo').value.toUpperCase();
-    const descuento = document.getElementById('cupon-descuento').value;
-
-    const resultado = `{
-    codigo: "${codigo}",
-    descuento: ${descuento},
-    activo: true
-  },`;
-
-    document.getElementById('resultado-promo').innerText = resultado;
-}
-
-// Copiar al portapapeles
-function copiarTexto(id) {
-    const texto = document.getElementById(id).innerText;
-    if(!texto) return alert("Primero genera el código.");
+    // 7. Mostrar el resultado en la pantalla del Panel
+    const contenedorResultado = document.getElementById('resultado-producto');
+    contenedorResultado.innerText = resultado;
     
-    navigator.clipboard.writeText(texto);
-    alert("¡Código copiado! Pégalo en tu archivo .js correspondiente.");
+    // Efecto visual: iluminar el borde de verde para confirmar que se generó
+    contenedorResultado.style.borderColor = '#25D366';
+    setTimeout(() => {
+        contenedorResultado.style.borderColor = 'var(--border-admin)';
+    }, 1000);
+}
+
+// 🎁 BONUS: Función Pro para copiar el código con un botón
+function copiarCodigo() {
+    const codigo = document.getElementById('resultado-producto').innerText;
+    
+    if (codigo === "Esperando datos..." || codigo === "") {
+        alert('Primero llena los datos y haz clic en "Generar Código".');
+        return;
+    }
+    
+    // Copiar al portapapeles del usuario
+    navigator.clipboard.writeText(codigo).then(() => {
+        alert('✅ ¡Código copiado! Ve a tu archivo productos.js y pégalo.');
+    }).catch(err => {
+        console.error('Error al copiar el texto: ', err);
+        alert('Hubo un error al copiar. Por favor, selecciona el texto manualmente.');
+    });
 }

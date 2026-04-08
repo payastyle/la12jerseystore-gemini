@@ -1,64 +1,73 @@
-/* ==========================================================================
-   BASE DE DATOS DE PRODUCTOS - LA 12 JERSEY STORE
-   
-   INSTRUCCIONES:
-   - Este archivo es el "inventario" de tu tienda.
-   - Cada producto está encerrado entre llaves { ... } y separado por una coma.
-   - Cuando uses tu Panel de Administración (admin.html), copia el texto que 
-     te genera y pégalo al final de esta lista, justo antes del corchete final ].
-   ========================================================================== */
+// ==========================================
+// BASE DE DATOS - LA 12 JERSEY STORE
+// ==========================================
+// Nota: Usa tu página admin.html para generar el código de nuevos productos 
+// y solo pégalos aquí adentro de los corchetes [ ].
 
 const productos = [
     {
-        id: "RM-LOCAL-25",
-        nombre: "Real Madrid Local 25/26",
+        id: "TIGRES-UANL-LOCAL-24-25",
+        nombre: "Tigres UANL Local 24/25",
+        precioNormal: 1699,
+        precio: 1199,
+        tipoProducto: "Jugador",
+        liga: "Liga MX",
+        marca: "Adidas",
+        equipo: "Tigres",
+        descripcion: "Jersey oficial de local. Versión jugador con escudos termosellados y tecnología de ventilación avanzada. Calidad premium 1:1.",
+        imagenes: ["img/tigres-local-1.jpg", "img/tigres-local-2.jpg"],
+        stock: true
+    },
+    {
+        id: "REAL-MADRID-LOCAL-23-24",
+        nombre: "Real Madrid Local 23/24",
         precioNormal: 1499,
-        precio: 899,
-        tipoProducto: "temporada",
+        precio: 999,
+        tipoProducto: "Fan",
         liga: "La Liga",
         marca: "Adidas",
         equipo: "Real Madrid",
-        descripcion: "El nuevo jersey del rey de Europa para la temporada actual. Cuenta con tecnología transpirable y escudo termosellado en versión jugador.",
-        imagenes: ["img/temporada/rm-local-frente.jpg", "img/temporada/rm-local-espalda.jpg"],
+        descripcion: "El clásico blanco del Rey de Europa. Versión fan con escudo bordado, ideal para uso casual o para ir al estadio.",
+        imagenes: ["img/rm-local-1.jpg"],
         stock: true
     },
     {
-        id: "TIGRES-LOCAL-25",
-        nombre: "Tigres UANL Local 25/26",
-        precioNormal: 1399,
-        precio: 849,
-        tipoProducto: "temporada",
-        liga: "Liga MX",
-        marca: "Adidas",
-        equipo: "Tigres UANL",
-        descripcion: "El manto incomparable. Jersey de local de los Tigres de la UANL. Calidad Premium 1:1, ideal para alentar en el Volcán.",
-        imagenes: ["img/temporada/tigres-local-frente.jpg", "img/temporada/tigres-local-espalda.jpg"],
-        stock: true
-    },
-    {
-        id: "MILAN-RETRO-07",
-        nombre: "AC Milan Local 2006/07",
+        id: "MAN-CITY-VISITA-23-24",
+        nombre: "Manchester City Visita 23/24",
         precioNormal: 1599,
-        precio: 949,
-        tipoProducto: "retro-clubes",
-        liga: "Serie A",
-        marca: "Adidas",
-        equipo: "AC Milan",
-        descripcion: "El icónico jersey con el que conquistaron Europa. Un clásico indispensable para cualquier coleccionista con detalles fieles a la época.",
-        imagenes: ["img/retro-clubes/milan-07-frente.jpg", "img/retro-clubes/milan-07-espalda.jpg"],
+        precio: 1099,
+        tipoProducto: "Fan",
+        liga: "Premier League",
+        marca: "Puma",
+        equipo: "Manchester City",
+        descripcion: "Jersey de visita de los actuales campeones. Detalles texturizados y corte recto súper cómodo.",
+        imagenes: ["img/city-visita-1.jpg"],
         stock: true
     },
     {
-        id: "MEX-RETRO-98",
-        nombre: "México Local 1998",
-        precioNormal: 1699,
-        precio: 999,
-        tipoProducto: "retro-selecciones",
+        id: "ARSENAL-LOCAL-KIDS-24",
+        nombre: "Arsenal Local 23/24 (Niño)",
+        precioNormal: 1299,
+        precio: 799,
+        tipoProducto: "Kids",
+        liga: "Premier League",
+        marca: "Adidas",
+        equipo: "Arsenal",
+        descripcion: "Kit completo para los más pequeños. Tela resistente y cómoda para jugar todo el día.",
+        imagenes: ["img/arsenal-kids-1.jpg"],
+        stock: true
+    },
+    {
+        id: "MEXICO-RETRO-98",
+        nombre: "Selección Mexicana Retro 1998",
+        precioNormal: 1700,
+        precio: 1200,
+        tipoProducto: "Retro",
         liga: "Selecciones",
-        marca: "ABA Sport",
+        marca: "Otro",
         equipo: "México",
-        descripcion: "El legendario jersey del Calendario Azteca usado en Francia 98. Telas y diseño idénticos a los originales de los años 90.",
-        imagenes: ["img/retro-selecciones/mexico-98-frente.jpg", "img/retro-selecciones/mexico-98-espalda.jpg"],
+        descripcion: "El mítico jersey del calendario Azteca de Francia 98. Reedición exacta con la marca ABA Sport. Una joya para coleccionistas.",
+        imagenes: ["img/mexico-98-1.jpg"],
         stock: true
     }
 ];

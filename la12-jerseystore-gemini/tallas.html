@@ -1,44 +1,344 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Guía de Tallas - La 12 Jersey Store</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Tallas - La 12 Jersey Store</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tallas-wrapper {
+            max-width: 900px;
+            margin: 170px auto 50px;
+            padding: 0 20px;
+            color: var(--color-texto);
+        }
+        
+        .tallas-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .tallas-header h1 {
+            color: var(--dorado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .tallas-header p {
+            color: #888;
+            font-size: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Alerta Versión Jugador */
+        .alerta-tallas {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--dorado);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .alerta-tallas span {
+            font-size: 35px;
+        }
+
+        /* Tablas de Tallas */
+        .tabla-contenedor {
+            background: var(--bg-tarjetas);
+            border: 1px solid var(--color-borde);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .tabla-titulo {
+            background: var(--bg-input);
+            padding: 15px 20px;
+            font-weight: bold;
+            color: var(--dorado);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-borde);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid var(--color-borde);
+        }
+
+        th {
+            background: rgba(0,0,0,0.2);
+            color: #ccc;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        td {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .medicion-tip {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: -20px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .alerta-tallas {
+                flex-direction: column;
+                text-align: center;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header class="navbar">
-  <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-  <div class="logo" onclick="window.location.href='index.html'"><img src="img/logo.png"></div>
-  <div class="nav-actions"><div class="tema-toggle" onclick="cambiarTema()">🌙</div><div class="carrito-icon" onclick="window.location.href='carrito.html'">🛒 <span id="contador-carrito">0</span></div></div>
-</header>
+    <div class="promo-cintillo-container">
+        <div class="promo-cintillo-track">
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+        </div>
+    </div>
 
-<div id="menu-lateral" class="menu-lateral">
-  <div class="menu-header"><h3>MENÚ</h3><span onclick="toggleMenu(event)" style="cursor:pointer; font-size:24px;">✕</span></div>
-  <a href="index.html">Inicio</a><a href="resenas.html">⭐ Opiniones</a><a href="tracking.html">📦 Rastrear pedido</a><hr style="border-color:#333; margin: 20px 0;"><a href="cuidados.html">👕 Cuidados del jersey</a><a href="tallas.html">📏 Guía de tallas</a><a href="contacto.html">📞 Contáctanos</a><a href="faq.html">❓ Preguntas Frecuentes</a><a href="politicas.html">🚚 Políticas de envío</a>
-</div>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
+                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+            </div>
 
-<div class="checkout-container" style="margin-top: 60px; margin-bottom: 60px;">
-  <h2 style="color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">📏 Guía de Tallas</h2>
-  
-  <h3 style="color: white; margin-bottom: 10px;">Versión Aficionado (Fan)</h3>
-  <p style="color: #ccc; margin-bottom: 20px;">Corte recto y relajado. Ideal para el uso diario. Pide tu talla habitual.</p>
-  
-  <h3 style="color: white; margin-bottom: 10px; margin-top: 30px;">Versión Jugador (Player)</h3>
-  <p style="color: #ccc; margin-bottom: 20px;">Corte ajustado y tela elástica. Diseñada para ir pegada al cuerpo. <b>Te recomendamos pedir UNA TALLA MÁS</b> a la que usas normalmente.</p>
+            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px; visibility: hidden;">
+                <input type="text">
+            </div>
 
-  <div style="background: #222; padding: 20px; border-radius: 8px; border: 1px solid #333; text-align: center;">
-    <p style="color: #d4af37; font-weight: bold; margin-bottom: 10px;">Medidas aproximadas (Pecho x Largo)</p>
-    <p style="color: #ccc; margin-bottom: 5px;"><b>S:</b> 50 cm x 70 cm</p>
-    <p style="color: #ccc; margin-bottom: 5px;"><b>M:</b> 52 cm x 72 cm</p>
-    <p style="color: #ccc; margin-bottom: 5px;"><b>L:</b> 54 cm x 74 cm</p>
-    <p style="color: #ccc; margin-bottom: 5px;"><b>XL:</b> 56 cm x 76 cm</p>
-    <p style="color: #ccc; margin-bottom: 5px;"><b>XXL:</b> 58 cm x 78 cm</p>
-  </div>
-</div>
+            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
+                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
+                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
+                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<footer class="footer"><div class="footer-bottom"><p>© 2026 La 12 Jersey Store.</p></div></footer>
-<script src="app.js"></script>
+    <main class="tallas-wrapper">
+        <div class="tallas-header">
+            <h1>Guía de Tallas</h1>
+            <p>Encuentra el ajuste perfecto. Recuerda que nuestras medidas son aproximadas y pueden tener una variación de 1 a 2 centímetros debido a la fabricación.</p>
+        </div>
+
+        <div class="alerta-tallas">
+            <span>⚠️</span>
+            <div>
+                <h3 style="color: var(--dorado); margin-bottom: 5px; text-transform: uppercase; font-size: 15px;">Aviso Importante: Versión Jugador</h3>
+                <p style="color: var(--color-texto); font-size: 14px; line-height: 1.5;">
+                    Los jerseys <strong>Versión Jugador</strong> tienen un <strong>corte ajustado (atlético)</strong> diseñado para pegarse al cuerpo. Si no te gusta la ropa muy ajustada, te recomendamos pedir <strong>UNA TALLA MÁS GRANDE</strong> de la que usas normalmente en playeras casuales.
+                </p>
+            </div>
+        </div>
+
+        <p class="medicion-tip">* Las medidas se toman con la prenda en plano. El ancho es de axila a axila y el largo es del cuello a la cintura.</p>
+
+        <div class="tabla-contenedor">
+            <div class="tabla-titulo">Versión Fan y Retro (Adulto)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>Ancho (Axila a Axila)</th>
+                        <th>Largo (Cuello a Cintura)</th>
+                        <th>Equivalencia Sugerida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S (Chica)</td>
+                        <td>49 - 51 cm</td>
+                        <td>69 - 71 cm</td>
+                        <td>Talla 36</td>
+                    </tr>
+                    <tr>
+                        <td>M (Mediana)</td>
+                        <td>51 - 53 cm</td>
+                        <td>71 - 73 cm</td>
+                        <td>Talla 38</td>
+                    </tr>
+                    <tr>
+                        <td>L (Grande)</td>
+                        <td>54 - 56 cm</td>
+                        <td>73 - 75 cm</td>
+                        <td>Talla 40</td>
+                    </tr>
+                    <tr>
+                        <td>XL (Extra Grande)</td>
+                        <td>56 - 58 cm</td>
+                        <td>75 - 78 cm</td>
+                        <td>Talla 42</td>
+                    </tr>
+                    <tr>
+                        <td>XXL (Doble Extra)</td>
+                        <td>58 - 60 cm</td>
+                        <td>78 - 81 cm</td>
+                        <td>Talla 44</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tabla-contenedor">
+            <div class="tabla-titulo">Versión Jugador (Corte Ajustado)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>Ancho (Axila a Axila)</th>
+                        <th>Largo (Cuello a Cintura)</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>S (Chica)</td>
+                        <td>46 - 48 cm</td>
+                        <td>69 - 71 cm</td>
+                        <td>Muy ceñido</td>
+                    </tr>
+                    <tr>
+                        <td>M (Mediana)</td>
+                        <td>48 - 50 cm</td>
+                        <td>71 - 73 cm</td>
+                        <td>Ajuste atlético</td>
+                    </tr>
+                    <tr>
+                        <td>L (Grande)</td>
+                        <td>50 - 52 cm</td>
+                        <td>73 - 75 cm</td>
+                        <td>Ajuste atlético</td>
+                    </tr>
+                    <tr>
+                        <td>XL (Extra Grande)</td>
+                        <td>52 - 54 cm</td>
+                        <td>75 - 77 cm</td>
+                        <td>Corte pegado</td>
+                    </tr>
+                    <tr>
+                        <td>XXL (Doble Extra)</td>
+                        <td>54 - 56 cm</td>
+                        <td>77 - 79 cm</td>
+                        <td>Corte pegado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tabla-contenedor">
+            <div class="tabla-titulo">Versión Niños (Kids Kit)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>Edad Sugerida</th>
+                        <th>Altura Promedio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>16</td>
+                        <td>3 - 4 años</td>
+                        <td>90 - 100 cm</td>
+                    </tr>
+                    <tr>
+                        <td>18</td>
+                        <td>4 - 5 años</td>
+                        <td>100 - 110 cm</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>5 - 6 años</td>
+                        <td>110 - 120 cm</td>
+                    </tr>
+                    <tr>
+                        <td>22</td>
+                        <td>7 - 8 años</td>
+                        <td>120 - 130 cm</td>
+                    </tr>
+                    <tr>
+                        <td>24</td>
+                        <td>9 - 10 años</td>
+                        <td>130 - 140 cm</td>
+                    </tr>
+                    <tr>
+                        <td>26</td>
+                        <td>11 - 12 años</td>
+                        <td>140 - 150 cm</td>
+                    </tr>
+                    <tr>
+                        <td>28</td>
+                        <td>13 - 14 años</td>
+                        <td>150 - 160 cm</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <footer>
+        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;" alt="La 12 Logo">
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
+        </div>
+        
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="catalogo.html" style="color: #666; font-size: 12px; text-decoration: none;">Catálogo</a>
+            <span style="color: #444;">|</span>
+            <a href="tallas.html" style="color: var(--dorado); font-size: 12px; text-decoration: none;">Guía de Tallas</a>
+            <span style="color: #444;">|</span>
+            <a href="resenas.html" style="color: #666; font-size: 12px; text-decoration: none;">Reseñas</a>
+            <span style="color: #444;">|</span>
+            <a href="cuidados.html" style="color: #666; font-size: 12px; text-decoration: none;">Cuidados de Lavado</a>
+            <span style="color: #444;">|</span>
+            <a href="faq.html" style="color: #666; font-size: 12px; text-decoration: none;">Preguntas Frecuentes</a>
+            <span style="color: #444;">|</span>
+            <a href="politicas.html" style="color: #666; font-size: 12px; text-decoration: none;">Políticas</a>
+            <span style="color: #444;">|</span>
+            <a href="contacto.html" style="color: #666; font-size: 12px; text-decoration: none;">Contacto</a>
+        </div>
+
+        <p style="color: #555; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
+    </footer>
+
+    <script src="productos.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

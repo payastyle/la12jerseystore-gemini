@@ -4,185 +4,266 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - La 12 Jersey Store</title>
-    
-    <meta property="og:title" content="Contacto - La 12 Jersey Store">
-    <meta property="og:description" content="¿Necesitas ayuda con tu pedido o buscas un jersey especial? Contáctanos.">
-    <meta property="og:image" content="img/ui/og-image.jpg">
-    <link rel="icon" type="image/png" href="img/ui/favicon.png">
-
     <link rel="stylesheet" href="style.css">
-    
     <style>
-        .contacto-header {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('img/ui/jugador-whatsapp.jpg') center/cover;
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .contacto-container {
+        .contacto-wrapper {
             max-width: 1000px;
-            margin: 50px auto;
+            margin: 170px auto 50px; /* Margen superior para librar el header fijo */
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
         }
-
-        .contacto-card {
-            background: #111;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 40px 30px;
+        
+        .contacto-header {
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s;
+            margin-bottom: 40px;
+        }
+        
+        .contacto-header h1 {
+            color: var(--dorado);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 28px;
+        }
+        
+        .contacto-header p {
+            color: #888;
+            font-size: 15px;
+            margin-top: 10px;
         }
 
-        .contacto-card:hover {
-            transform: translateY(-5px);
-            border-color: #d4af37;
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
-        .contacto-icono {
-            font-size: 40px;
-            margin-bottom: 20px;
+        /* Tarjeta de Información */
+        .contacto-info {
+            background: var(--bg-tarjetas);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--color-borde);
         }
 
-        .contacto-card h3 {
-            color: #fff;
+        .contacto-info h3 {
+            color: var(--color-texto);
             margin-bottom: 15px;
             font-size: 20px;
+            text-transform: uppercase;
         }
 
-        .contacto-card p {
+        .contacto-info p {
             color: #aaa;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .btn-contacto {
-            display: inline-block;
-            background: #222;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
+        .contacto-info hr {
+            border: 0;
+            border-top: 1px solid var(--color-borde);
+            margin: 20px 0;
+        }
+
+        /* Formulario */
+        .contacto-form {
+            background: var(--bg-tarjetas);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--color-borde);
+        }
+
+        .form-contacto-grupo {
+            margin-bottom: 15px;
+        }
+
+        .form-contacto-grupo label {
+            display: block;
+            color: var(--dorado);
+            font-size: 12px;
             font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .form-contacto-grupo input, 
+        .form-contacto-grupo textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--bg-input);
+            color: var(--color-texto);
+            border: 1px solid var(--color-borde);
+            border-radius: 6px;
             font-size: 14px;
-            border: 1px solid #444;
+            outline: none;
             transition: 0.3s;
         }
 
-        .btn-wa { background: #25D366; color: white; border: none; }
-        .btn-wa:hover { background: #1ebe57; }
-        
-        .btn-ig { background: #E1306C; color: white; border: none; }
-        .btn-ig:hover { background: #c1255b; }
-
-        .faq-rapido {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
-            text-align: center;
+        .form-contacto-grupo input:focus, 
+        .form-contacto-grupo textarea:focus {
+            border-color: var(--dorado);
         }
 
-        .faq-rapido h2 {
-            color: #d4af37;
-            margin-bottom: 20px;
+        .form-contacto-grupo textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Botones */
+        .btn-contacto-wa {
+            display: block;
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-contacto-wa:hover {
+            background: #1ebc5a;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            background: var(--dorado);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body style="background-color: #0a0a0a; color: #fff;">
+<body>
 
-    <div class="announcement-bar">
-        <div class="announcement-slider">
-            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
-            <div class="announcement-item">💬 ATENCIÓN PERSONALIZADA POR WHATSAPP</div>
-            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+    <div class="promo-cintillo-container">
+        <div class="promo-cintillo-track">
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
         </div>
     </div>
 
-    <header class="navbar">
-        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-        <div class="logo" onclick="window.location.href='index.html'">
-            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
-        </div>
-        <div class="nav-actions">
-            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-                🛒 <span id="contador-carrito">0</span>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
+                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+            </div>
+
+            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px; visibility: hidden;">
+                <input type="text">
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
+                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
+                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
+                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <div id="menu-lateral" class="menu-lateral">
-        <div class="menu-header">
-            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
-            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
-        </div>
-        <a href="index.html">🏠 Inicio</a>
-        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
-        
-        <p class="menu-seccion-titulo">COLECCIONES</p>
-        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
-        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
-        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
-        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
-        <a href="catalogo.html?cat=kids">Kids</a>
-
-        <p class="menu-seccion-titulo">AYUDA</p>
-        <a href="tracking.html">📍 Rastrear Pedido</a>
-        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
-        <a href="tallas.html">📏 Guía de Tallas</a>
-    </div>
-
-    <section class="contacto-header">
-        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ESTAMOS PARA AYUDARTE</h4>
-        <h1 style="color: #fff; font-size: 40px; text-transform: uppercase;">Contáctanos</h1>
-        <p style="color: #ccc; font-size: 16px; max-width: 600px; margin: 15px auto 0;">¿Tienes dudas sobre una talla, un pedido en tránsito o buscas un jersey que no está en catálogo? Habla directamente con nosotros.</p>
-    </section>
-
-    <div class="contacto-container">
-        
-        <div class="contacto-card">
-            <div class="contacto-icono">💬</div>
-            <h3>Ventas y Cotizaciones</h3>
-            <p>Atención rápida y personalizada. Cotiza jerseys especiales, confirma disponibilidad o cierra tu pedido directamente.</p>
-            <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20necesito%20ayuda%20para%20comprar%20un%20jersey" class="btn-contacto btn-wa" target="_blank">ESCRÍBENOS POR WHATSAPP</a>
+    <main class="contacto-wrapper">
+        <div class="contacto-header">
+            <h1>Contacto</h1>
+            <p>Estamos aquí para ayudarte. Mándanos un mensaje y te responderemos a la brevedad.</p>
         </div>
 
-        <div class="contacto-card">
-            <div class="contacto-icono">📦</div>
-            <h3>Dudas sobre tu Pedido</h3>
-            <p>¿Ya compraste y quieres saber el estatus de tu envío? Ten a la mano tu nombre o número de guía.</p>
-            <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20quiero%20saber%20el%20estatus%20de%20mi%20pedido" class="btn-contacto" target="_blank">SOPORTE DE ENVÍOS</a>
+        <div class="contacto-grid">
+            
+            <div class="contacto-info">
+                <h3>Atención Rápida</h3>
+                <p>¿Buscas un jersey que no está en el catálogo? ¿Tienes dudas con tu talla o pedido? Escríbenos directamente.</p>
+                
+                <hr>
+                
+                <p>📍 <strong>Ubicación:</strong> General Escobedo, Nuevo León (Envíos a todo México)</p>
+                <p>🕒 <strong>Horario:</strong> Lunes a Sábado de 10:00 AM a 8:00 PM</p>
+                <p>📦 <strong>Mayoreo:</strong> Manejamos precios especiales a partir de 10 piezas.</p>
+
+                <a href="https://wa.me/521XXXXXXXXXX" target="_blank" class="btn-contacto-wa">
+                    Escríbenos por WhatsApp 💬
+                </a>
+            </div>
+
+            <div class="contacto-form">
+                <div class="form-contacto-grupo">
+                    <label>Tu Nombre</label>
+                    <input type="text" id="c-nombre" placeholder="Ej: Juan Pérez">
+                </div>
+                <div class="form-contacto-grupo">
+                    <label>Número de Pedido (Opcional)</label>
+                    <input type="text" id="c-pedido" placeholder="Ej: #1024">
+                </div>
+                <div class="form-contacto-grupo">
+                    <label>¿En qué te ayudamos?</label>
+                    <textarea id="c-mensaje" placeholder="Escribe aquí tu duda, consulta de jersey o problema con tu orden..."></textarea>
+                </div>
+                <button class="btn-enviar" onclick="enviarFormularioWA()">Enviar Mensaje</button>
+            </div>
+
         </div>
+    </main>
 
-        <div class="contacto-card">
-            <div class="contacto-icono">📸</div>
-            <h3>Redes Sociales</h3>
-            <p>Síguenos para ver fotos reales de nuestros productos, nuevos ingresos, sorteos y reseñas de otros clientes.</p>
-            <a href="https://instagram.com/tu_cuenta_la12" class="btn-contacto btn-ig" target="_blank">SÍGUENOS EN INSTAGRAM</a>
+    <footer>
+        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
         </div>
+        <p style="color: #666; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
+    </footer>
 
-    </div>
-
-    <div class="faq-rapido">
-        <h2>¿Dudas Rápidas?</h2>
-        <p style="color: #aaa; margin-bottom: 30px; font-size: 16px;">Antes de escribirnos, revisa nuestras guías. Quizá la respuesta que buscas está a un clic de distancia.</p>
-        
-        <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="tallas.html" class="btn-contacto" style="background: transparent;">📏 VER GUÍA DE TALLAS</a>
-            <a href="faq.html" class="btn-contacto" style="background: transparent;">❓ PREGUNTAS FRECUENTES</a>
-            <a href="politicas.html" class="btn-contacto" style="background: transparent;">🛡️ POLÍTICAS Y GARANTÍA</a>
-        </div>
-    </div>
-
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20general" class="whatsapp-flotante" target="_blank">
-        <span style="font-size: 30px;">💬</span>
-    </a>
-
+    <script src="productos.js"></script>
     <script src="app.js"></script>
-    
+    <script>
+        // Lógica específica de esta página para enviar el formulario a WhatsApp
+        function enviarFormularioWA() {
+            const nombre = document.getElementById('c-nombre').value.trim();
+            const pedido = document.getElementById('c-pedido').value.trim();
+            const mensaje = document.getElementById('c-mensaje').value.trim();
+
+            if (!nombre || !mensaje) {
+                alert("Por favor, llena al menos tu nombre y el mensaje.");
+                return;
+            }
+
+            let textoWA = `Hola La 12, soy *${nombre}*.\n\n`;
+            if (pedido) {
+                textoWA += `📦 *Referente a mi pedido:* ${pedido}\n\n`;
+            }
+            textoWA += `💬 *Mensaje:* ${mensaje}`;
+
+            // Recuerda reemplazar las X por tu número real
+            const url = `https://wa.me/521XXXXXXXXXX?text=${encodeURIComponent(textoWA)}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>

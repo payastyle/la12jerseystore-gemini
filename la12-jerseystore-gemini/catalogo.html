@@ -3,382 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Oficial - La 12 Jersey Store</title>
-    
-    <meta property="og:title" content="Catálogo - La 12 Jersey Store">
-    <meta property="og:description" content="Explora nuestra colección premium de jerseys. Calidad 1:1 garantizada.">
-    <meta property="og:image" content="img/ui/og-image.jpg">
-    <link rel="icon" type="image/png" href="img/ui/favicon.png">
-
+    <title>Catálogo Completo - La 12 Jersey Store</title>
     <link rel="stylesheet" href="style.css">
-    
     <style>
-        .catalogo-header {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('img/ui/banner-catalogo.jpg') center/cover;
-            padding: 60px 20px;
+        /* Ajuste específico para que el catálogo tenga un título limpio al inicio */
+        .header-catalogo {
             text-align: center;
-            border-bottom: 1px solid #333;
-        }
-        
-        .catalogo-container {
-            max-width: 1400px;
-            margin: 40px auto;
+            margin: 170px auto 30px;
             padding: 0 20px;
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
         }
-
-        /* Sidebar de Filtros */
-        .filtros-sidebar {
-            flex: 0 0 250px;
-            background: #111;
-            padding: 25px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            position: sticky;
-            top: 100px;
-        }
-        .filtro-grupo {
-            margin-bottom: 25px;
-        }
-        .filtro-grupo h4 {
-            color: #d4af37;
-            margin-bottom: 15px;
-            font-size: 14px;
-            letter-spacing: 1px;
+        .header-catalogo h1 {
+            color: var(--dorado);
             text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 24px;
         }
-        .filtro-grupo select, .filtro-grupo input {
-            width: 100%;
-            padding: 10px;
-            background: #222;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 4px;
-        }
-        .filtro-grupo input:focus, .filtro-grupo select:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-
-        /* Cuadrícula de Productos */
-        .productos-main {
-            flex: 1;
-        }
-        .grid-catalogo {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        /* Tarjeta de Producto (Card) */
-        .plp-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            cursor: pointer;
-        }
-        .plp-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            border-color: #333;
-        }
-        .plp-img-container {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            background: #0a0a0a;
-        }
-        .plp-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.4s ease;
-        }
-        .plp-img-hover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0; /* Oculta la segunda imagen por defecto */
-        }
-        .plp-card:hover .plp-img-hover {
-            opacity: 1; /* Muestra la segunda imagen al pasar el mouse */
-        }
-        .plp-info {
-            padding: 20px;
-            text-align: center;
-        }
-        .plp-categoria {
+        .header-catalogo p {
             color: #888;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .plp-nombre {
-            color: #fff;
-            font-size: 16px;
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-        .plp-precios {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .plp-precio-viejo {
-            color: #666;
-            text-decoration: line-through;
             font-size: 14px;
-        }
-        .plp-precio-oferta {
-            color: #d4af37;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .btn-ver-detalle {
-            background: transparent;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 10px 20px;
-            width: 100%;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-        .plp-card:hover .btn-ver-detalle {
-            background: #fff;
-            color: #000;
-        }
-
-        /* Móvil */
-        @media (max-width: 900px) {
-            .catalogo-container {
-                flex-direction: column;
-            }
-            .filtros-sidebar {
-                position: static;
-                width: 100%;
-            }
-            .grid-catalogo {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* 2 columnas en celular */
-                gap: 15px;
-            }
-            .plp-info {
-                padding: 15px 10px;
-            }
-            .plp-nombre {
-                font-size: 14px;
-            }
+            margin-top: 5px;
         }
     </style>
 </head>
-<body style="background-color: #0a0a0a; color: #fff;">
+<body>
 
-    <div class="announcement-bar">
-        <div class="announcement-slider">
-            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
-            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
-            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+    <div class="promo-cintillo-container">
+        <div class="promo-cintillo-track">
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
         </div>
     </div>
 
-    <header class="navbar">
-        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-        <div class="logo" onclick="window.location.href='index.html'">
-            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
-        </div>
-        <div class="nav-actions">
-            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-                🛒 <span id="contador-carrito">0</span>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
+                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+            </div>
+
+            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px;">
+                <input type="text" id="buscador-principal" placeholder="Buscar por equipo, liga o marca..." 
+                    style="width: 100%; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--color-borde); background: var(--bg-input); color: var(--color-texto);">
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
+                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
+                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
+                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <div id="menu-lateral" class="menu-lateral">
-        <div class="menu-header">
-            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
-            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+    <nav>
+        <div style="display: flex; justify-content: center; gap: 25px;">
+            <a href="#" onclick="filtrarPorLiga('Liga MX')" class="nav-link">Liga MX</a>
+            <a href="#" onclick="filtrarPorLiga('La Liga')" class="nav-link">La Liga</a>
+            <a href="#" onclick="filtrarPorLiga('Premier League')" class="nav-link">Premier</a>
+            <span style="color: var(--color-borde);">|</span>
+            <a href="#" onclick="filtrarPorMarca('Nike')" class="nav-link">Nike</a>
+            <a href="#" onclick="filtrarPorMarca('Adidas')" class="nav-link">Adidas</a>
+            <a href="#" onclick="filtrarPorMarca('Puma')" class="nav-link">Puma</a>
+            <a href="#" onclick="renderizarProductos(productos)" class="nav-link" style="color: var(--dorado);">Ver Todo</a>
         </div>
-        <a href="index.html">🏠 Inicio</a>
-        <a href="catalogo.html" style="color: #d4af37;">🔥 Ver Todo el Catálogo</a>
-        
-        <p class="menu-seccion-titulo">COLECCIONES</p>
-        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
-        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
-        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
-        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
-        <a href="catalogo.html?cat=kids">Kids</a>
-        <a href="catalogo.html?cat=anime">Edición Anime</a>
+    </nav>
 
-        <p class="menu-seccion-titulo">AYUDA</p>
-        <a href="tracking.html">📍 Rastrear Pedido</a>
-        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
-        <a href="tallas.html">📏 Guía de Tallas</a>
+    <div class="header-catalogo">
+        <h1>Colección Completa</h1>
+        <p>Encuentra las mejores versiones Fan y Jugador calidad 1:1</p>
     </div>
 
-    <section class="catalogo-header">
-        <h1 style="color: #fff; font-size: 36px; margin-bottom: 10px; text-transform: uppercase;" id="titulo-catalogo">Colección Completa</h1>
-        <p style="color: #ccc; font-size: 16px;">Encuentra tu pasión. Filtra por equipo, liga o colección.</p>
-    </section>
-
-    <div class="catalogo-container">
-        
-        <aside class="filtros-sidebar">
-            <div class="filtro-grupo">
-                <h4>Buscador</h4>
-                <input type="text" id="filtro-busqueda" placeholder="Ej: Real Madrid, Messi..." onkeyup="aplicarFiltros()">
-            </div>
-            
-            <div class="filtro-grupo">
-                <h4>Categoría</h4>
-                <select id="filtro-categoria" onchange="aplicarFiltros()">
-                    <option value="todas">Todas las categorías</option>
-                    <option value="temporada">Temporada 25/26</option>
-                    <option value="mundial">Copa del Mundo 26</option>
-                    <option value="retro-clubes">Retro Clubes</option>
-                    <option value="retro-selecciones">Retro Selecciones</option>
-                    <option value="kids">Kids</option>
-                    <option value="anime">Edición Anime</option>
-                </select>
-            </div>
-
-            <div class="filtro-grupo">
-                <h4>Liga / Competición</h4>
-                <select id="filtro-liga" onchange="aplicarFiltros()">
-                    <option value="todas">Todas las Ligas</option>
-                    <option value="La Liga">La Liga</option>
-                    <option value="Premier League">Premier League</option>
-                    <option value="Serie A">Serie A</option>
-                    <option value="Selecciones">Selecciones Nacionales</option>
-                    <option value="Liga MX">Liga MX</option>
-                </select>
-            </div>
-            
-            <button class="btn-principal" style="width: 100%; padding: 10px; font-size: 14px;" onclick="limpiarFiltros()">LIMPIAR FILTROS</button>
-        </aside>
-
-        <main class="productos-main">
-            <div class="grid-catalogo" id="contenedor-productos-grid">
-                </div>
-            <div id="mensaje-no-resultados" style="display: none; text-align: center; padding: 50px 20px; color: #888;">
-                <h2>No encontramos jerseys con esos filtros 😔</h2>
-                <p>Intenta buscar de otra manera o contáctanos para pedírtelo por encargo.</p>
-            </div>
+    <main id="contenedor-productos" class="productos-grid" style="max-width: 1200px; margin: 0 auto 50px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
         </main>
 
-    </div>
-
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20estoy%20buscando%20un%20jersey" class="whatsapp-flotante" target="_blank">
-        <span style="font-size: 30px;">💬</span>
-    </a>
+    <footer>
+        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
+        </div>
+        <p style="color: #666; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
+    </footer>
 
     <script src="productos.js"></script>
     <script src="app.js"></script>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Revisar si en la URL viene una categoría (ej: catalogo.html?cat=retro-clubes)
-            const params = new URLSearchParams(window.location.search);
-            const categoriaURL = params.get('cat');
-            
-            if (categoriaURL) {
-                // Actualizar el selector visualmente
-                const selectCat = document.getElementById('filtro-categoria');
-                if (selectCat.querySelector(`option[value="${categoriaURL}"]`)) {
-                    selectCat.value = categoriaURL;
-                    // Actualizar el título de la página
-                    document.getElementById('titulo-catalogo').innerText = selectCat.options[selectCat.selectedIndex].text;
-                }
-            }
-
-            // Renderizar por primera vez
-            aplicarFiltros();
-        });
-
-        function aplicarFiltros() {
-            const busqueda = document.getElementById('filtro-busqueda').value.toLowerCase();
-            const categoria = document.getElementById('filtro-categoria').value;
-            const liga = document.getElementById('filtro-liga').value;
-            const contenedor = document.getElementById('contenedor-productos-grid');
-            const msjError = document.getElementById('mensaje-no-resultados');
-
-            // Asegurarnos de que el array "productos" existe (viene de productos.js)
-            if (typeof productos === 'undefined' || productos.length === 0) {
-                contenedor.innerHTML = '<p style="color:#aaa;">Aún no hay productos disponibles. Usa el panel para agregarlos.</p>';
-                return;
-            }
-
-            // Filtrar el array
-            const resultados = productos.filter(p => {
-                const coincideBusqueda = p.nombre.toLowerCase().includes(busqueda) || (p.equipo && p.equipo.toLowerCase().includes(busqueda));
-                const coincideCat = categoria === 'todas' || p.tipoProducto === categoria;
-                const coincideLiga = liga === 'todas' || p.liga === liga;
-                
-                return coincideBusqueda && coincideCat && coincideLiga && p.stock === true;
-            });
-
-            // Limpiar contenedor
-            contenedor.innerHTML = '';
-
-            if (resultados.length === 0) {
-                msjError.style.display = 'block';
-            } else {
-                msjError.style.display = 'none';
-                
-                resultados.forEach(p => {
-                    const pNormal = p.precioNormal || (p.precio + 500);
-                    const pOferta = p.precio;
-                    
-                    // Nombres bonitos para las categorías
-                    const nombresCat = {
-                        "temporada": "Temporada 25/26", "mundial": "Mundial 26", 
-                        "retro-clubes": "Retro Clubes", "retro-selecciones": "Retro Selecciones", 
-                        "kids": "Kids", "anime": "Anime"
-                    };
-
-                    // Detectar si hay una segunda imagen para el efecto hover
-                    let imgHtml = `<img src="${p.imagenes[0]}" alt="${p.nombre}">`;
-                    if (p.imagenes.length > 1) {
-                        imgHtml += `<img src="${p.imagenes[1]}" class="plp-img-hover" alt="${p.nombre} Detalle">`;
-                    }
-
-                    // Construir la tarjeta
-                    const htmlCard = `
-                        <div class="plp-card" onclick="window.location.href='producto.html?id=${p.id}'">
-                            <div class="plp-img-container">
-                                ${imgHtml}
-                            </div>
-                            <div class="plp-info">
-                                <p class="plp-categoria">${nombresCat[p.tipoProducto] || p.tipoProducto}</p>
-                                <h3 class="plp-nombre">${p.nombre}</h3>
-                                <div class="plp-precios">
-                                    <span class="plp-precio-viejo">$${pNormal}</span>
-                                    <span class="plp-precio-oferta">$${pOferta}</span>
-                                </div>
-                                <button class="btn-ver-detalle">VER DETALLES</button>
-                            </div>
-                        </div>
-                    `;
-                    contenedor.innerHTML += htmlCard;
-                });
-            }
-        }
-
-        function limpiarFiltros() {
-            document.getElementById('filtro-busqueda').value = '';
-            document.getElementById('filtro-categoria').value = 'todas';
-            document.getElementById('filtro-liga').value = 'todas';
-            document.getElementById('titulo-catalogo').innerText = 'Colección Completa';
-            aplicarFiltros();
-        }
-    </script>
 </body>
 </html>

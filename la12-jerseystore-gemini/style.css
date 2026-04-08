@@ -1,351 +1,257 @@
-/* ==========================================================================
-   LA 12 JERSEY STORE - ESTILOS GLOBALES MAESTROS (style.css)
-   Tema: Premium Dark Mode (Negro, Gris Oscuro, Dorado)
-   ========================================================================== */
-
-/* ================= VARIABLES Y RESET ================= */
+/* ==================================================
+   VARIABLES GLOBALES (Modo Oscuro por defecto)
+================================================== */
 :root {
-    --bg-dark: #0a0a0a;
-    --bg-card: #111111;
-    --dorado: #d4af37;
-    --dorado-hover: #b5952f;
-    --texto-blanco: #ffffff;
-    --texto-gris: #aaaaaa;
-    --borde: #333333;
-    --whatsapp: #25D366;
-    --whatsapp-hover: #1ebe57;
-    --rojo-error: #cc0000;
+    --bg-principal: #0a0a0a;
+    --bg-tarjetas: #141414;
+    --bg-input: #1a1a1a;
+    --color-texto: #ffffff;
+    --color-borde: #333333;
+    --dorado: #d4af37; /* Color principal premium */
+    --success: #25D366; /* Verde WhatsApp / Promos */
+    --danger: #ff4444;
 }
 
+/* Variables para el Modo Claro */
+[data-theme="light"] {
+    --bg-principal: #f4f4f4;
+    --bg-tarjetas: #ffffff;
+    --bg-input: #eeeeee;
+    --color-texto: #111111;
+    --color-borde: #dddddd;
+    --dorado: #b8860b;
+}
+
+/* ==================================================
+   RESET Y AJUSTES GENERALES
+================================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Tipografía limpia y moderna */
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--texto-blanco);
-    overflow-x: hidden;
-}
-
-a {
-    text-decoration: none;
-    color: var(--dorado);
-}
-
-/* ================= ANIMACIONES GLOBALES ================= */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ================= CINTILLA DE ANUNCIOS (ANNOUNCEMENT BAR) ================= */
-.announcement-bar {
-    background-color: var(--dorado);
-    color: #000;
-    text-align: center;
-    padding: 8px 10px;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1001;
-}
-
-.announcement-item {
-    display: none; /* Controlado por promo.js */
-}
-
-/* ================= NAVBAR (ENCABEZADO) ================= */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background-color: #050505;
-    border-bottom: 1px solid var(--borde);
-    position: fixed;
-    top: 32px; /* Justo debajo de la cintilla */
-    width: 100%;
-    z-index: 1000;
-}
-
-.logo img {
-    height: 40px; /* Ajusta según el tamaño de tu logo */
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.logo img:hover {
-    transform: scale(1.05);
-}
-
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--texto-blanco);
-}
-
-.carrito-icon {
-    font-size: 24px;
-    cursor: pointer;
-    position: relative;
-}
-
-#contador-carrito {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: var(--rojo-error);
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 50%;
-}
-
-/* Evitar que el contenido se esconda debajo del navbar fijo */
-body {
-    padding-top: 100px;
-}
-
-/* ================= MENÚ LATERAL (SIDEBAR) ================= */
-.menu-lateral {
-    position: fixed;
-    top: 0;
-    left: -300px; /* Oculto por defecto */
-    width: 280px;
-    height: 100vh;
-    background-color: #111;
-    z-index: 2000;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.8);
-    transition: left 0.3s ease;
-    overflow-y: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-principal);
+    color: var(--color-texto);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.menu-header {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--borde);
-    margin-bottom: 10px;
+/* Scrollbar personalizado tipo premium */
+::-webkit-scrollbar {
+    width: 8px;
 }
-
-.close-menu {
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--texto-gris);
+::-webkit-scrollbar-track {
+    background: var(--bg-principal);
 }
-
-.close-menu:hover {
-    color: var(--dorado);
-}
-
-.menu-lateral a {
-    padding: 12px 20px;
-    color: var(--texto-blanco);
-    font-size: 15px;
-    border-bottom: 1px solid #1a1a1a;
-    transition: background 0.3s, padding-left 0.3s;
-}
-
-.menu-lateral a:hover {
-    background-color: #222;
-    padding-left: 25px;
-    color: var(--dorado);
-}
-
-.menu-seccion-titulo {
-    color: #666;
-    font-size: 11px;
-    letter-spacing: 2px;
-    margin-top: 25px;
-    margin-bottom: 5px;
-    padding-left: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-/* ================= BOTONES GLOBALES ================= */
-.btn-principal {
-    background-color: var(--dorado);
-    color: #000;
-    border: none;
+::-webkit-scrollbar-thumb {
+    background: var(--dorado);
     border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-    text-align: center;
 }
 
-.btn-principal:hover {
-    background-color: var(--dorado-hover);
-    transform: translateY(-2px);
-}
-
-/* Botones de Opciones (Tallas, Versiones, Dorsal) */
-.btn-opcion {
-    background: #222;
-    color: #fff;
-    border: 1px solid #444;
-    padding: 12px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.btn-opcion:hover {
-    border-color: #666;
-}
-
-.btn-opcion.seleccionada {
-    background: rgba(212, 175, 55, 0.1);
-    border-color: var(--dorado);
-    color: var(--dorado);
-    font-weight: bold;
-}
-
-/* ================= PÁGINA DE PRODUCTO (PDP) GENERADA POR JS ================= */
-.pdp-layout {
-    display: flex;
-    gap: 50px;
-    max-width: 1200px;
-    margin: 20px auto 60px;
-    padding: 0 20px;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Galería de Imágenes */
-.pdp-galeria {
-    flex: 1;
-    min-width: 300px;
-}
-
-#pdp-imagen-principal {
+/* ==================================================
+   CINTILLO DE PROMOCIONES (Animación Marquee)
+================================================== */
+.promo-cintillo-container {
     width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid var(--borde);
-    margin-bottom: 15px;
-}
-
-.pdp-miniaturas {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-}
-
-.pdp-miniaturas img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid var(--borde);
-    opacity: 0.6;
-    transition: opacity 0.3s, border-color 0.3s;
-}
-
-.pdp-miniaturas img:hover, .pdp-miniaturas img:active {
-    opacity: 1;
-    border-color: var(--dorado);
-}
-
-/* Información del Producto */
-.pdp-info {
-    flex: 1;
-    min-width: 300px;
-}
-
-.pdp-liga {
-    color: var(--dorado);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    background: var(--success);
+    color: #000;
+    overflow: hidden;
+    white-space: nowrap;
+    position: fixed;
+    top: 0;
+    z-index: 1001;
+    padding: 8px 0;
     font-weight: bold;
+    font-size: 12px;
 }
 
-.pdp-titulo {
-    font-size: 32px;
-    line-height: 1.2;
-    margin-bottom: 20px;
+.promo-cintillo-track {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
 }
 
-.opcion-bloque {
-    margin-bottom: 25px;
-}
-
-.opcion-bloque h3 {
-    font-size: 15px;
-    color: var(--texto-gris);
-    margin-bottom: 12px;
-    text-transform: uppercase;
+.promo-item {
+    display: inline-block;
+    padding: 0 40px;
     letter-spacing: 1px;
 }
 
-.opciones-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
 }
 
-/* ================= BOTÓN FLOTANTE DE WHATSAPP ================= */
-.whatsapp-flotante {
+/* ==================================================
+   HEADER Y NAVEGACIÓN FIJA
+================================================== */
+header {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--whatsapp);
-    color: #fff;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    top: 30px; /* Debajo del cintillo */
+    width: 100%;
+    background: var(--bg-principal);
+    border-bottom: 1px solid var(--color-borde);
     z-index: 1000;
+    padding: 15px 20px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+nav {
+    position: fixed;
+    top: 100px; /* Debajo del header */
+    width: 100%;
+    background: var(--bg-tarjetas);
+    border-bottom: 1px solid var(--color-borde);
+    z-index: 999;
+    padding: 12px 0;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Ocultar barra de scroll en el menú de navegación para celulares */
+nav::-webkit-scrollbar {
+    display: none; 
+}
+
+.nav-link {
+    color: var(--color-texto);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--dorado);
+}
+
+/* Inputs y Buscador Globales */
+input, select, textarea {
+    font-family: inherit;
+    outline: none;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: var(--dorado) !important;
+}
+
+/* ==================================================
+   TARJETAS DE PRODUCTOS (Grid y Hover)
+================================================== */
+.producto-card {
+    background: var(--bg-tarjetas);
+    border: 1px solid var(--color-borde);
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeInUp 0.5s ease backwards;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--dorado);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Botón de Wishlist (Corazón) */
+.fav-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    z-index: 10;
     transition: all 0.3s ease;
-    text-decoration: none;
+    font-size: 16px;
+    backdrop-filter: blur(2px);
 }
 
-.whatsapp-flotante:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 6px 15px rgba(37, 211, 102, 0.4);
+.fav-btn:hover {
+    transform: scale(1.15);
+    background: rgba(0, 0, 0, 0.9);
 }
 
-/* ================= RESPONSIVE (MÓVILES) ================= */
+.fav-btn.active {
+    background: #fff;
+    text-shadow: 0 0 5px rgba(255,0,0,0.5);
+}
+
+/* ==================================================
+   FOOTER
+================================================== */
+footer {
+    background: var(--bg-tarjetas);
+    border-top: 1px solid var(--color-borde);
+    padding: 40px 20px 30px;
+    text-align: center;
+    margin-top: auto; /* Empuja el footer siempre al fondo */
+}
+
+footer a {
+    transition: opacity 0.3s;
+}
+
+footer a:hover {
+    opacity: 0.7;
+}
+
+/* ==================================================
+   ANIMACIONES GLOBALES
+================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================================================
+   RESPONSIVO (Ajustes para Celulares)
+================================================== */
 @media (max-width: 768px) {
-    .pdp-layout {
-        flex-direction: column;
-        gap: 30px;
-        margin-top: 10px;
+    /* Ajuste de Header en móviles */
+    header > div {
+        flex-wrap: wrap;
+        gap: 15px;
     }
     
-    .pdp-titulo {
-        font-size: 26px;
+    .search-container {
+        order: 3;
+        flex: 100% !important;
+        margin: 0 !important;
     }
 
-    .opciones-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    nav {
+        top: 145px; /* Baja el menú porque el buscador bajó de línea */
     }
 
-    .whatsapp-flotante {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-        font-size: 24px;
+    /* Márgenes superiores para contenido (para no quedar debajo del menú fijo) */
+    .hero-banner, .pdp-wrapper, .checkout-container, .contacto-wrapper, .faq-wrapper, .cuidados-wrapper, .resenas-wrapper, .politicas-wrapper {
+        margin-top: 210px !important;
+    }
+    
+    .header-catalogo {
+        margin-top: 210px !important;
+    }
+
+    /* Reducir texto del cintillo en celular */
+    .promo-cintillo-container {
+        font-size: 10px;
     }
 }

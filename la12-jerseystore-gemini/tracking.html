@@ -3,218 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rastrea tu Pedido - La 12 Jersey Store</title>
+    <title>Rastreo Universal - La 12 Jersey Store</title>
     
     <meta property="og:title" content="Rastrea tu pedido en La 12">
-    <meta property="og:description" content="Sigue el trayecto de tu jersey premium hasta la puerta de tu casa usando nuestro rastreador universal.">
-    <meta property="og:image" content="img/ui/og-image.jpg">
-    <link rel="icon" type="image/png" href="img/ui/favicon.png">
-
+    <meta property="og:description" content="Sigue el trayecto de tu jersey premium hasta tu casa con nuestro rastreador universal.">
     <link rel="stylesheet" href="style.css">
     
     <style>
-        .tracking-hero {
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('img/ui/promo.jpg') center/cover;
-            padding: 80px 20px 40px;
-            text-align: center;
-            border-bottom: 1px solid #333;
-        }
-
-        .tracking-container {
-            max-width: 900px;
-            margin: 50px auto 80px;
+        .tracking-wrapper {
+            max-width: 1000px;
+            margin: 170px auto 50px;
             padding: 0 20px;
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
         }
 
-        /* Caja de Rastreo */
-        .tracking-box {
-            flex: 1;
-            min-width: 300px;
-            background: #111;
-            border: 1px solid #d4af37;
-            border-radius: 8px;
+        .tracking-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Caja de Rastreo Principal */
+        .tracking-main-card {
+            background: var(--bg-tarjetas);
+            border: 1px solid var(--dorado);
+            border-radius: 15px;
             padding: 40px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
         }
 
-        .tracking-box h3 {
-            color: #d4af37;
-            font-size: 24px;
-            margin-bottom: 20px;
+        .tracking-main-card h2 {
+            color: var(--dorado);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-size: 22px;
         }
 
-        .form-grupo {
-            margin-bottom: 25px;
+        .tracking-input-box {
+            margin: 30px 0;
             text-align: left;
         }
 
-        .form-grupo label {
+        .tracking-input-box label {
             display: block;
-            color: #aaa;
+            color: #888;
+            font-size: 12px;
+            font-weight: bold;
             margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .form-grupo input {
-            width: 100%;
-            padding: 15px;
-            background: #222;
-            border: 1px solid #444;
-            color: #fff;
-            border-radius: 4px;
-            font-size: 16px;
-            font-family: inherit;
             text-transform: uppercase;
         }
 
-        .form-grupo input:focus {
-            outline: none;
-            border-color: #d4af37;
-        }
-
-        /* Caja de Información */
-        .tracking-info {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px 0;
-        }
-
-        .tracking-info h4 {
+        .tracking-input-box input {
+            width: 100%;
+            padding: 18px;
+            background: var(--bg-input);
+            border: 1px solid var(--color-borde);
             color: #fff;
-            font-size: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .tracking-input-box input:focus {
+            border-color: var(--dorado);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-rastrear-17 {
+            width: 100%;
+            padding: 18px;
+            background: var(--dorado);
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-rastrear-17:hover {
+            transform: translateY(-3px);
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+
+        /* Columna de Información */
+        .tracking-sidebar h3 {
+            color: #fff;
+            font-size: 18px;
             margin-bottom: 15px;
-            border-bottom: 1px dashed #333;
+            border-bottom: 1px solid var(--color-borde);
             padding-bottom: 10px;
         }
 
-        .tracking-info p {
-            color: #aaa;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        .info-block {
+            margin-bottom: 25px;
         }
 
-        .tracking-info ul {
-            color: #aaa;
-            font-size: 15px;
-            line-height: 1.6;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .tracking-info li {
-            margin-bottom: 10px;
+        .info-block h4 {
+            color: var(--dorado);
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
+        .info-block p, .info-block li {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .alerta-soporte {
+            background: rgba(37, 211, 102, 0.1);
+            border-left: 4px solid #25D366;
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 850px) {
+            .tracking-grid { grid-template-columns: 1fr; }
+            .tracking-wrapper { margin-top: 210px; }
+        }
     </style>
 </head>
-<body style="background-color: #0a0a0a; color: #fff;">
+<body>
 
-    <div class="announcement-bar">
-        <div class="announcement-slider">
-            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
-            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
-            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+    <div class="promo-cintillo-container">
+        <div class="promo-cintillo-track">
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
         </div>
     </div>
 
-    <header class="navbar">
-        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-        <div class="logo" onclick="window.location.href='index.html'">
-            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
-        </div>
-        <div class="nav-actions">
-            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-                🛒 <span id="contador-carrito">0</span>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+            </div>
+
+            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px; visibility: hidden;">
+                <input type="text">
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;"><span id="theme-icon">🌙</span></div>
+                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;">
+                    🛒 <span id="contador-carrito">0</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <div id="menu-lateral" class="menu-lateral">
-        <div class="menu-header">
-            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
-            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
-        </div>
-        <a href="index.html">🏠 Inicio</a>
-        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
-        
-        <p class="menu-seccion-titulo">COLECCIONES</p>
-        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
-        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
-        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
-        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
-        <a href="catalogo.html?cat=kids">Kids</a>
-
-        <p class="menu-seccion-titulo">AYUDA</p>
-        <a href="tracking.html" style="color: #d4af37;">📍 Rastrear Pedido</a>
-        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
-        <a href="tallas.html">📏 Guía de Tallas</a>
-    </div>
-
-    <section class="tracking-hero">
-        <h4 style="color: #d4af37; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px;">ESTADO DE TU ENVÍO</h4>
-        <h1 style="color: #fff; font-size: 40px; margin-bottom: 15px; text-transform: uppercase;">Sigue tu Jersey 📦</h1>
-        <p style="color: #ccc; font-size: 16px; max-width: 600px; margin: 0 auto;">Ingresa el número de guía que te proporcionamos por WhatsApp. Nuestro sistema universal detectará automáticamente tu paquete.</p>
-    </section>
-
-    <section class="tracking-container">
-        
-        <div class="tracking-box">
-            <h3>Rastreo Universal 🌍</h3>
-            <p style="color: #888; font-size: 13px; margin-bottom: 20px;">Desarrollado por 17TRACK</p>
+    <main class="tracking-wrapper">
+        <div class="tracking-grid">
             
-            <div class="form-grupo">
-                <label for="guia-input">Número de Guía (Tracking):</label>
-                <input type="text" id="guia-input" placeholder="Ej: 7894561230" required>
-            </div>
+            <section class="tracking-main-card">
+                <span style="font-size: 40px;">🌍</span>
+                <h2>Rastreo Universal</h2>
+                <p style="color: #666; font-size: 13px;">Powered by 17TRACK System</p>
 
-            <button class="btn-principal" onclick="rastrearPaquete()" style="width: 100%; padding: 15px; background: #d4af37; color: #000; border: none; font-weight: bold; border-radius: 30px; font-size: 16px; text-transform: uppercase; cursor: pointer; transition: 0.3s;">
-                BUSCAR PAQUETE 🔍
-            </button>
+                <div class="tracking-input-box">
+                    <label>Número de Guía (Tracking Number)</label>
+                    <input type="text" id="guia-input" placeholder="Ej: 7894561230" required>
+                </div>
+
+                <button class="btn-rastrear-17" onclick="rastrearEn17Track()">
+                    BUSCAR PAQUETE 🔍
+                </button>
+            </section>
+
+            <aside class="tracking-sidebar">
+                <h3>Información de Envío</h3>
+                
+                <div class="info-block">
+                    <h4>¿Dónde está mi guía?</h4>
+                    <p>Te enviamos tu código de rastreo por <strong>WhatsApp</strong> una vez que el paquete es recolectado por la paquetería.</p>
+                </div>
+
+                <div class="info-block">
+                    <h4>Tiempos de Actualización</h4>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>Stock Nacional:</strong> Se activa en 24h. Llega en 3-5 días.</li>
+                        <li><strong>Importación/Personalizado:</strong> El rastreo puede tardar 7 días en mostrar movimientos mientras llega a la aduana de México.</li>
+                    </ul>
+                </div>
+
+                <div class="alerta-soporte">
+                    <p style="color: #25D366; font-size: 13px; font-weight: bold; margin-bottom: 5px;">¿Problemas con tu entrega?</p>
+                    <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20tengo%20duda%20con%20el%20rastreo%20de%20mi%20guía" target="_blank" style="color: #fff; font-size: 12px; text-decoration: underline;">Contactar a Soporte Técnico</a>
+                </div>
+            </aside>
+
         </div>
+    </main>
 
-        <div class="tracking-info">
-            <h4>¿Dónde encuentro mi guía?</h4>
-            <p>Una vez que tu pedido ha sido procesado y empacado, te enviamos un mensaje a tu <strong>WhatsApp</strong> con la foto de tu guía o el código de rastreo.</p>
-            
-            <h4>Tiempos Estimados</h4>
-            <ul>
-                <li><strong>Stock Nacional:</strong> El código se activa en las primeras 24 horas y llega en 3-5 días hábiles.</li>
-                <li><strong>Bajo Pedido o Personalizado:</strong> Te daremos una guía internacional que puede tardar hasta 7-10 días en reflejar movimientos al llegar a aduana mexicana.</li>
-            </ul>
-
-            <div style="background: rgba(37, 211, 102, 0.1); border-left: 4px solid #25D366; padding: 15px; border-radius: 0 4px 4px 0; margin-top: 20px;">
-                <p style="margin: 0; color: #25D366; font-size: 14px; font-weight: bold;">¿Tienes problemas con tu guía o marca como entregado y no lo tienes?</p>
-                <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20un%20problema%20con%20el%20rastreo%20de%20mi%20pedido" target="_blank" style="color: #fff; text-decoration: underline; font-size: 13px; display: inline-block; margin-top: 5px;">Escríbenos a Soporte</a>
-            </div>
+    <footer>
+        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;">
+        <div style="margin-top: 10px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="catalogo.html" style="color: #666; font-size: 12px; text-decoration: none;">Catálogo</a>
+            <span style="color: #444;">|</span>
+            <a href="tracking.html" style="color: var(--dorado); font-size: 12px; text-decoration: none;">Rastreo</a>
+            <span style="color: #444;">|</span>
+            <a href="tallas.html" style="color: #666; font-size: 12px; text-decoration: none;">Tallas</a>
+            <span style="color: #444;">|</span>
+            <a href="contacto.html" style="color: #666; font-size: 12px; text-decoration: none;">Contacto</a>
         </div>
+        <p style="color: #555; font-size: 10px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
+    </footer>
 
-    </section>
-
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20con%20mi%20envío" class="whatsapp-flotante" target="_blank">
-        <span style="font-size: 30px;">💬</span>
-    </a>
-
-    <script src="promo.js"></script>
     <script src="app.js"></script>
-    
     <script>
-        function rastrearPaquete() {
+        function rastrearEn17Track() {
             const guia = document.getElementById("guia-input").value.trim();
-
             if (guia === "") {
                 alert("⚠️ Por favor, ingresa tu número de guía.");
                 return;
             }
-
-            // Construye la URL oficial de 17TRACK con el número de guía
-            const url = `https://t.17track.net/es#nums=${guia}`;
-
-            // Abre 17TRACK en una pestaña nueva (target="_blank")
-            window.open(url, '_blank');
+            // Redirige a la ventana de 17TRACK con el número de guía inyectado
+            window.open(`https://t.17track.net/es#nums=${guia}`, '_blank');
         }
     </script>
 </body>

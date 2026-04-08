@@ -4,264 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes - La 12 Jersey Store</title>
-    
-    <meta property="og:title" content="Preguntas Frecuentes - La 12 Jersey Store">
-    <meta property="og:description" content="Resolvemos todas tus dudas sobre envíos, calidad, pagos y personalizaciones.">
-    <meta property="og:image" content="img/ui/og-image.jpg">
-    <link rel="icon" type="image/png" href="img/ui/favicon.png">
-
     <link rel="stylesheet" href="style.css">
-    
     <style>
-        .faq-header {
-            background: #0a0a0a;
-            padding: 60px 20px 30px;
-            text-align: center;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto 60px;
+        .faq-wrapper {
+            max-width: 900px;
+            margin: 170px auto 50px;
             padding: 0 20px;
         }
-
-        .faq-grupo-titulo {
-            color: #d4af37;
-            font-size: 14px;
-            letter-spacing: 2px;
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-header h1 {
+            color: var(--dorado);
             text-transform: uppercase;
-            margin: 40px 0 15px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
+            letter-spacing: 3px;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .faq-header p {
+            color: #888;
+            font-size: 15px;
+        }
+
+        /* Estilos del Acordeón */
+        .faq-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .faq-item {
-            background: #111;
-            border: 1px solid #222;
-            margin-bottom: 10px;
-            border-radius: 6px;
+            background: var(--bg-tarjetas);
+            border: 1px solid var(--color-borde);
+            border-radius: 10px;
             overflow: hidden;
-            transition: border-color 0.3s;
-        }
-
-        .faq-item:hover {
-            border-color: #444;
         }
 
         .faq-pregunta {
             padding: 20px;
-            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
             font-weight: bold;
-            color: #fff;
-            font-size: 16px;
-            user-select: none;
+            font-size: 15px;
+            color: var(--color-texto);
+            transition: 0.3s;
         }
 
         .faq-pregunta:hover {
-            color: #d4af37;
+            color: var(--dorado);
         }
 
         .faq-icono {
-            font-size: 20px;
-            color: #666;
-            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 18px;
+            color: var(--dorado);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.activo .faq-icono {
+            transform: rotate(45deg);
+        }
+
+        .faq-item.activo .faq-pregunta {
+            border-bottom: 1px solid var(--color-borde);
+            color: var(--dorado);
         }
 
         .faq-respuesta {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease, padding 0.4s ease;
-            background: #0d0d0d;
+            background: var(--bg-principal);
         }
 
         .faq-respuesta p {
+            padding: 0 20px;
             color: #aaa;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.6;
             margin: 0;
         }
 
-        .faq-respuesta ul {
-            color: #aaa;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-top: 10px;
-            padding-left: 20px;
+        .faq-item.activo .faq-respuesta {
+            max-height: 300px; /* Suficiente para el texto */
+            padding: 20px 0;
         }
 
-        /* Clases activas para JS */
-        .faq-item.activo {
-            border-color: #d4af37;
+        /* Enlace a contacto si tienen más dudas */
+        .faq-contacto {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dashed var(--color-borde);
         }
-        .faq-item.activo .faq-icono {
-            transform: rotate(45deg); /* Cambia el + por un X */
-            color: #d4af37;
+
+        .faq-contacto p {
+            color: var(--color-texto);
+            margin-bottom: 15px;
         }
-        .faq-item.activo .faq-respuesta {
-            padding: 0 20px 20px;
-            max-height: 500px; /* Suficiente espacio para el texto */
+
+        .faq-contacto a {
+            color: var(--dorado);
+            text-decoration: none;
+            font-weight: bold;
+            border: 1px solid var(--dorado);
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        .faq-contacto a:hover {
+            background: var(--dorado);
+            color: #000;
         }
     </style>
 </head>
-<body style="background-color: #0a0a0a; color: #fff;">
+<body>
 
-    <div class="announcement-bar">
-        <div class="announcement-slider">
-            <div class="announcement-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 O MÁS PRENDAS</div>
-            <div class="announcement-item">💳 COMPRA SEGURA Y ATENCIÓN PERSONALIZADA</div>
-            <div class="announcement-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+    <div class="promo-cintillo-container">
+        <div class="promo-cintillo-track">
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
+            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
+            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
         </div>
     </div>
 
-    <header class="navbar">
-        <div class="menu-icon" onclick="toggleMenu(event)">☰</div>
-        <div class="logo" onclick="window.location.href='index.html'">
-            <img src="img/ui/logo.png" alt="La 12 Jersey Store">
-        </div>
-        <div class="nav-actions">
-            <div class="carrito-icon" onclick="window.location.href='carrito.html'">
-                🛒 <span id="contador-carrito">0</span>
+    <header>
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
+                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+            </div>
+
+            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px; visibility: hidden;">
+                <input type="text">
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
+                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
+                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
+                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+                </div>
             </div>
         </div>
     </header>
 
-    <div id="menu-lateral" class="menu-lateral">
-        <div class="menu-header">
-            <img src="img/ui/logo.png" alt="La 12 Logo" style="height: 30px; margin-bottom: 20px;">
-            <span class="close-menu" onclick="toggleMenu(event)">✕</span>
+    <main class="faq-wrapper">
+        <div class="faq-header">
+            <h1>Preguntas Frecuentes</h1>
+            <p>Resuelve tus dudas rápidamente antes de realizar tu pedido.</p>
         </div>
-        <a href="index.html">🏠 Inicio</a>
-        <a href="catalogo.html">🔥 Ver Todo el Catálogo</a>
+
+        <div class="faq-lista">
+            
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Qué significa Calidad Premium 1:1?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>Significa que nuestros jerseys son idénticos a los de tienda oficial. Utilizamos exactamente las mismas telas, costuras, tecnologías de ventilación y etiquetas (tanto internas como externas). La diferencia visual y de tacto es imperceptible.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Cuál es la diferencia entre Versión Fan y Versión Jugador?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>La <strong>Versión Fan</strong> tiene un corte más holgado (recto) y los escudos vienen bordados, ideal para uso casual diario. La <strong>Versión Jugador</strong> tiene un corte atlético (pegado al cuerpo), tela más ligera y transpirable, y los escudos vienen termosellados (plastificados) para evitar roces con la piel. <em>Si eliges versión jugador, te sugerimos pedir una talla más de la que usas normalmente.</em></p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Puedo personalizar mi jersey con cualquier nombre y número?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>¡Sí! Puedes ponerle el nombre y número de tu jugador favorito, o tu propio nombre. Selecciona la opción "Con Dorsal" en la página del producto y escribe los datos. Usamos la tipografía oficial correspondiente al equipo y la temporada.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Cuánto tiempo tarda en llegar mi pedido?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>Los envíos nacionales tardan de <strong>3 a 5 días hábiles</strong> por paquetería express una vez confirmado el pago. Si el jersey es personalizado, puede requerir de 1 a 2 días extra para su preparación.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Hacen cambios o devoluciones?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>Realizamos cambios únicamente por defecto de fábrica comprobable al recibir el producto. <strong>No hacemos cambios por error en la selección de talla</strong> (te invitamos a revisar nuestra guía de tallas) ni en <strong>jerseys personalizados</strong>, ya que se fabrican a la medida exacta de tu solicitud.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta" onclick="toggleFAQ(this)">
+                    <span>¿Es seguro pagar por Transferencia u Oxxo?</span>
+                    <span class="faq-icono">+</span>
+                </div>
+                <div class="faq-respuesta">
+                    <p>Totalmente. Somos una tienda establecida. Al elegir Transferencia u Oxxo, te daremos nuestros datos y podrás enviarnos el comprobante directamente a nuestro WhatsApp personal para darle seguimiento inmediato a tu pedido. También aceptamos PayPal si prefieres usar tu tarjeta de crédito o débito.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="faq-contacto">
+            <p>¿No encontraste la respuesta que buscabas?</p>
+            <a href="contacto.html">Contáctanos por WhatsApp</a>
+        </div>
+    </main>
+
+    <footer>
+        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
+            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
+        </div>
         
-        <p class="menu-seccion-titulo">COLECCIONES</p>
-        <a href="catalogo.html?cat=temporada">Temporada 25/26</a>
-        <a href="catalogo.html?cat=mundial">Copa del Mundo 2026</a>
-        <a href="catalogo.html?cat=retro-clubes">Retro Clubes</a>
-        <a href="catalogo.html?cat=retro-selecciones">Retro Selecciones</a>
-        <a href="catalogo.html?cat=kids">Kids</a>
-
-        <p class="menu-seccion-titulo">AYUDA</p>
-        <a href="tracking.html">📍 Rastrear Pedido</a>
-        <a href="cuidados.html">🧼 Cuidado del Jersey</a>
-        <a href="tallas.html">📏 Guía de Tallas</a>
-    </div>
-
-    <section class="faq-header">
-        <h1 style="color: #fff; font-size: 36px; margin-bottom: 15px;">CENTRO DE AYUDA ❓</h1>
-        <p style="color: #aaa; font-size: 16px; max-width: 600px; margin: 0 auto;">Todo lo que necesitas saber sobre nuestra calidad, métodos de envío y procesos de compra. Si no encuentras tu respuesta, escríbenos por WhatsApp.</p>
-    </section>
-
-    <section class="faq-container">
-        
-        <h2 class="faq-grupo-titulo">Calidad y Productos</h2>
-        
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Qué calidad son los jerseys?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>Todos nuestros productos son calidad <strong>Premium 1:1</strong> (Top Thai / Calidad Espejo). Esto significa que utilizamos los mismos materiales, tecnologías transpirables, etiquetas y detalles que las versiones de tienda, pero a una fracción de su costo. ¡Garantizamos tu satisfacción total!</p>
-            </div>
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+            <a href="catalogo.html" style="color: #666; font-size: 12px; text-decoration: none;">Catálogo</a>
+            <span style="color: #444;">|</span>
+            <a href="cuidados.html" style="color: #666; font-size: 12px; text-decoration: none;">Cuidados de Lavado</a>
+            <span style="color: #444;">|</span>
+            <a href="faq.html" style="color: var(--dorado); font-size: 12px; text-decoration: none;">Preguntas Frecuentes</a>
+            <span style="color: #444;">|</span>
+            <a href="contacto.html" style="color: #666; font-size: 12px; text-decoration: none;">Contacto</a>
         </div>
 
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Cuál es la diferencia entre Versión Fan y Jugador?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <ul>
-                    <li><strong>Versión Fan (Aficionado):</strong> Corte normal/recto, tela estándar resistente, escudos bordados. Ideal para el uso diario.</li>
-                    <li><strong>Versión Jugador:</strong> Corte ajustado (Slim Fit), tela más ligera y transpirable, escudos y logos termosellados (planchados) para evitar roces. Ideal para jugar o lucir un ajuste atlético. <em>(Recomendamos pedir una talla más grande de tu talla habitual)</em>.</li>
-                </ul>
-            </div>
-        </div>
+        <p style="color: #555; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
+    </footer>
 
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Puedo personalizar mi jersey?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>¡Sí! Puedes agregar el dorsal oficial del equipo con el nombre y número de tu jugador favorito, o personalizarlo con tu propio nombre. Solo debes seleccionar la opción "Personalizado" antes de agregar al carrito e ingresar los datos.</p>
-            </div>
-        </div>
-
-        <h2 class="faq-grupo-titulo">Envíos y Entregas</h2>
-
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Cuánto cuesta el envío?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>El costo de envío a todo México es de <strong>$130.00 MXN</strong> para pedidos de 1 a 3 prendas. Si tu pedido incluye <strong>4 jerseys o más, el envío es totalmente GRATIS</strong>.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Cuánto tiempo tarda en llegar mi pedido?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>Manejamos dos modalidades:</p>
-                <ul>
-                    <li><strong>Stock Inmediato:</strong> Si el producto está en almacén nacional, te llega de 3 a 5 días hábiles tras confirmar tu pago.</li>
-                    <li><strong>Bajo Pedido (Personalizados o especiales):</strong> Tarda aproximadamente de 15 a 20 días hábiles en llegar a tu domicilio desde nuestro almacén internacional.</li>
-                </ul>
-                <p>Al confirmar tu pedido por WhatsApp, te indicaremos exactamente la modalidad de tu paquete.</p>
-            </div>
-        </div>
-
-        <h2 class="faq-grupo-titulo">Pagos y Garantías</h2>
-
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Cuáles son los métodos de pago?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>Para brindarte la mejor atención y seguridad, cerramos todas las ventas por WhatsApp. Aceptamos <strong>Transferencia Bancaria (SPEI)</strong>, depósitos en efectivo en <strong>OXXO</strong> y pago con tarjeta (te generamos un link de pago seguro).</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <div class="faq-pregunta" onclick="toggleFaq(this)">
-                <span>¿Hacen devoluciones o cambios?</span>
-                <span class="faq-icono">+</span>
-            </div>
-            <div class="faq-respuesta">
-                <p>Realizamos cambios o devoluciones únicamente si el jersey presenta un <strong>defecto de fábrica</strong> o si cometimos un error en tu orden (talla o modelo incorrecto). <strong>No hay cambios por errores en la elección de la talla</strong>, por lo que te invitamos a consultar nuestra <a href="tallas.html" style="color: #d4af37;">Guía de Tallas</a> antes de finalizar tu compra. Los productos personalizados no admiten cambios.</p>
-            </div>
-        </div>
-
-    </section>
-
-    <a href="https://wa.me/521XXXXXXXXXX?text=Hola%2C%20tengo%20una%20duda%20que%20no%20está%20en%20el%20FAQ" class="whatsapp-flotante" target="_blank">
-        <span style="font-size: 30px;">💬</span>
-    </a>
-
+    <script src="productos.js"></script>
     <script src="app.js"></script>
-    
     <script>
-        function toggleFaq(elemento) {
-            const itemSeleccionado = elemento.parentElement;
-            const todosLosItems = document.querySelectorAll('.faq-item');
+        // Lógica del Acordeón para las FAQ
+        function toggleFAQ(elemento) {
+            const item = elemento.parentElement;
+            
+            // Si queremos que solo haya uno abierto a la vez (opcional):
+            // const todos = document.querySelectorAll('.faq-item');
+            // todos.forEach(i => {
+            //     if (i !== item) i.classList.remove('activo');
+            // });
 
-            // Si quieres que al abrir uno se cierren los demás, descomenta estas 3 líneas:
-            /* todosLosItems.forEach(item => {
-                if (item !== itemSeleccionado) item.classList.remove('activo');
-            }); */
-
-            // Alternar la clase activo en el elemento clickeado
-            itemSeleccionado.classList.toggle('activo');
+            item.classList.toggle('activo');
         }
     </script>
-
 </body>
 </html>

@@ -1,84 +1,96 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin - La 12 Jersey Store</title>
-  <link rel="stylesheet" href="admin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - La 12</title>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 
-<div id="inicio-admin" class="seccion-admin activo">
-  <h1>⚙️ Panel Admin</h1>
-  <div class="botones-admin">
-    <button onclick="abrirSeccion('productos')">📦 Productos</button>
-    <button onclick="abrirSeccion('resenas')">⭐ Reseñas</button>
-    <button onclick="abrirSeccion('promos')">🎁 Promos</button>
-  </div>
-</div>
+    <div class="admin-container">
+        <h2>⚙️ Generador de Jerseys</h2>
+        
+        <div class="admin-card">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre del Jersey</label>
+                    <input type="text" id="nombre" placeholder="Ej: Real Madrid Local 23/24" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio de Venta ($)</label>
+                    <input type="number" id="precio" placeholder="Ej: 1200" required>
+                </div>
+            </div>
 
-<div id="productos" class="seccion-admin">
-  <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-  <h2>Agregar Producto</h2>
-  <p class="referencia">📁 Copiar en: productos.js</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tipo / Categoría</label>
+                    <select id="tipo">
+                        <option value="Fan">Versión Fan</option>
+                        <option value="Jugador">Versión Jugador</option>
+                        <option value="Retro">Retro</option>
+                        <option value="Kids">Niños / Kids</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Marca</label>
+                    <select id="marca">
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Puma">Puma</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Reebok">Reebok</option>
+                        <option value="Charly">Charly</option>
+                        <option value="Otro">Otro / Genérica</option>
+                    </select>
+                </div>
+            </div>
 
-  <input type="text" id="nombre" placeholder="Nombre del producto">
-  <input type="number" id="precio" placeholder="Precio">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Liga</label>
+                    <input type="text" id="liga" placeholder="Ej: La Liga, Premier League...">
+                </div>
+                <div class="form-group">
+                    <label>Equipo / Selección</label>
+                    <input type="text" id="equipo" placeholder="Ej: Real Madrid">
+                </div>
+            </div>
 
-  <select id="tipoProducto">
-    <option value="mundial">Copa Mundial 2026</option>
-    <option value="temporada">Temporada 25/26</option>
-    <option value="retro-clubes">Retro Clubes</option>
-    <option value="retro-selecciones">Retro Selecciones</option>
-    <option value="kids">Niño</option>
-    <option value="anime">Anime</option>
-  </select>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Ruta Imagen 1 (Principal)</label>
+                    <input type="text" id="img1" placeholder="Ej: img/rm-local-1.jpg" required>
+                </div>
+                <div class="form-group">
+                    <label>Ruta Imagen 2 (Opcional)</label>
+                    <input type="text" id="img2" placeholder="Ej: img/rm-local-2.jpg">
+                </div>
+            </div>
 
-  <input type="text" id="liga" placeholder="Liga (ej: La Liga)">
-  <input type="text" id="equipo" placeholder="Equipo (ej: Real Madrid)">
-  <input type="text" id="imagen" placeholder="Imagen principal (img/productos/ejemplo.jpg)">
-  <input type="text" id="imagen2" placeholder="Imagen secundaria (opcional)">
-  <textarea id="descripcion" placeholder="Descripción del producto"></textarea>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Descripción Corta</label>
+                    <textarea id="desc" placeholder="Jersey calidad premium 1:1, tela transpirable..."></textarea>
+                </div>
+            </div>
 
-  <button onclick="generarProducto()" class="btn-generar">Generar producto</button>
+            <button class="btn-generar" onclick="generarProducto()">GENERAR CÓDIGO</button>
 
-  <pre id="resultado-producto" class="resultado"></pre>
-  <button class="btn-copiar" onclick="copiarTexto('resultado-producto')">📋 Copiar Código</button>
-</div>
+            <div class="resultado-contenedor">
+                <label>Copia esto en tu archivo productos.js:</label>
+                <pre id="resultado-producto">Esperando datos...</pre>
+                
+                <button onclick="copiarCodigo()" style="margin-top: 15px; padding: 12px; background: #333; color: #fff; border: 1px solid var(--accent); cursor: pointer; border-radius: 6px; width: 100%; font-weight: bold; text-transform: uppercase; transition: 0.3s;">
+                    📋 Copiar Código al Portapapeles
+                </button>
+                
+                <p class="copy-hint" style="margin-top: 15px;">* Pega el código antes de la llave final ] en tu archivo productos.js</p>
+            </div>
+        </div>
+    </div>
 
-<div id="resenas" class="seccion-admin">
-  <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-  <h2>Agregar Reseña</h2>
-  <p class="referencia">📁 Copiar en: resenas.html (Muro de valoraciones)</p>
-
-  <input type="text" id="resena-nombre" placeholder="Nombre del cliente">
-  <select id="resena-estrellas">
-    <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
-    <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
-    <option value="⭐⭐⭐">⭐⭐⭐</option>
-  </select>
-  <textarea id="resena-comentario" placeholder="Comentario"></textarea>
-  <input type="text" id="resena-producto" placeholder="Producto comprado (ej: Real Madrid Local)">
-
-  <button onclick="generarResena()" class="btn-generar">Generar reseña</button>
-
-  <pre id="resultado-resena" class="resultado"></pre>
-  <button class="btn-copiar" onclick="copiarTexto('resultado-resena')">📋 Copiar Código</button>
-</div>
-
-<div id="promos" class="seccion-admin">
-  <button class="volver" onclick="volverInicio()">⬅ Volver</button>
-  <h2>Promociones</h2>
-  <p class="referencia">📁 Copiar en: promo.js (Dentro del arreglo cupones)</p>
-
-  <input type="text" id="cupon-codigo" placeholder="Código (ej: LA12-20)">
-  <input type="number" step="0.01" id="cupon-descuento" placeholder="Descuento (0.20 = 20%)">
-
-  <button onclick="generarPromo()" class="btn-generar">Generar promo</button>
-
-  <pre id="resultado-promo" class="resultado"></pre>
-  <button class="btn-copiar" onclick="copiarTexto('resultado-promo')">📋 Copiar Código</button>
-</div>
-
-<script src="admin.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>
