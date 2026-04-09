@@ -1,46 +1,52 @@
-1. El Mapa Exacto del Proyecto (Las 5 Zonas)
-Así debes crear tus archivos y carpetas en tu computadora. Ni un archivo más, ni un archivo menos:
-
-Plaintext
-📁 tu-tienda-la12/             
+la12-store/
 │
 ├── 🛒 ZONA 1: TIENDA PRINCIPAL
-│   ├── index.html              (Home: Cintilla, Carrusel 3D, Video 1:1, WhatsApp Split)
-│   ├── catalogo.html           (PLP: Cuadrícula de productos con hover 2da imagen, buscador y filtros)
-│   ├── producto.html           (PDP: Detalles, acordeones, versión, dorsal, precios tachados/oferta)
-│   └── carrito.html            (Checkout minimalista, barra de envío gratis, form de pago)
+│   ├── index.html          (Home: Carrusel 3D y Video)
+│   ├── catalogo.html       (PLP: Cuadrícula con filtros)
+│   ├── producto.html       (PDP: Página de cada Jersey)
+│   └── carrito.html        (Checkout y pago WhatsApp)
 │
 ├── 🏅 ZONA 2: COLECCIONES
-│   ├── ligas.html              (Exploración por Liga)
-│   └── marcas.html             (Exploración por Marca)
+│   ├── ligas.html          (Explorador de Ligas)
+│   └── marcas.html         (Explorador de Marcas)
 │
 ├── 🛡️ ZONA 3: SOPORTE Y CONFIANZA
-│   ├── tracking.html           (Rastreo de envíos)
-│   ├── faq.html                (Preguntas Frecuentes)
-│   ├── politicas.html          (Políticas de devolución y privacidad)
-│   ├── tallas.html             (Guía de medidas de los jerseys)
-│   ├── cuidados.html           (Reglas de lavado sin secadora)
-│   └── resenas.html            (Formulario de opiniones con incentivo del 20% OFF)
+│   ├── tracking.html       (Rastreo 17Track)
+│   ├── faq.html            (Preguntas)
+│   ├── politicas.html      (Privacidad)
+│   ├── tallas.html         (Tablas de medidas)
+│   ├── cuidados.html       (Guía de lavado)
+│   └── resenas.html        (Testimonios)
 │
-├── ⚙️ ZONA 4: SISTEMA (Tu back-office)
-│   ├── admin.html              (Panel oculto para dar de alta productos)
-│   ├── admin.js                (Código del panel)
-│   └── productos.js            (Tu "Base de Datos" de inventario)
+├── ⚙️ ZONA 4: SISTEMA (Back-Office)
+│   ├── admin.html          (Interfaz del panel)
+│   ├── admin.js            (Generador de códigos)
+│   └── productos.js        (BASE DE DATOS DE JERSEYS)
 │
-├── 🎨 ZONA 5: EL MOTOR
-│   ├── style.css               (Todo el diseño visual, animaciones y adaptación a celular)
-│   └── app.js                  (El "Cerebro": carrito, notificaciones, filtros y WhatsApp)
+├── 🎨 ZONA 5: EL MOTOR (CSS y JS)
+│   ├── css/
+│   │   ├── global.css      (ADN: Header, Footer, Colores)
+│   │   ├── home.css        (Efectos 3D del Index)
+│   │   ├── tienda.css      (Estilos de tarjetas y filtros)
+│   │   ├── pdp.css         (Acordeones y selección de tallas)
+│   │   └── info.css        (Diseño de páginas de texto)
+│   └── js/
+│       ├── main.js         (Inyección de Header/Footer y UI)
+│       ├── carrito.js      (Lógica de compra y totales)
+│       ├── resenas-db.js   (Base de datos de comentarios)
+│       └── promo-db.js     (Lista de cupones)
 │
-└── 📂 img/                     (CARPETAS DE IMÁGENES AUTOMATIZADAS)
-    ├── ui/                     (logo.png, banners, video-calidad.mp4)
-    ├── ligas/                  (fondos de premier, laliga, etc)
-    ├── marcas/                 (fondos de nike, adidas, etc)
-    ├── temporada/          
-    ├── mundial/            
-    ├── retro-clubes/       
-    ├── retro-selecciones/  
-    ├── kids/               
-    └── anime/              
+└── 📂 img/ (Organización de Medios)
+    ├── ui/                 (Logo, banners, videos de interfaz)
+    ├── ligas/              (Fondos de Premier, Liga MX, etc.)
+    ├── marcas/             (Fondos de Nike, Adidas, etc.)
+    ├── temporada/          (Jerseys nuevos)
+    ├── retro-clubes/       (Jerseys antiguos de equipos)
+    ├── retro-selecciones/  (Jerseys antiguos de países)
+    └── kids/               (Jerseys para niños)       
+
+
+     
 2. Las 5 Reglas de Oro de tu Código (Para no cometer errores)
 Para que todo el ecosistema funcione perfecto, asegúrate de que estos "motores" estén bien configurados en tus archivos .js:
 

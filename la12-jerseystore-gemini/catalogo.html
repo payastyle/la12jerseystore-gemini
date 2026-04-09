@@ -3,93 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Completo - La 12 Jersey Store</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Ajuste específico para que el catálogo tenga un título limpio al inicio */
-        .header-catalogo {
-            text-align: center;
-            margin: 170px auto 30px;
-            padding: 0 20px;
-        }
-        .header-catalogo h1 {
-            color: var(--dorado);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 24px;
-        }
-        .header-catalogo p {
-            color: #888;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-    </style>
+    <title>Catálogo | La 12 Jersey Store</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/tienda.css">
 </head>
 <body>
 
-    <div class="promo-cintillo-container">
-        <div class="promo-cintillo-track">
-            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
-            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
-            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
-            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
-            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
-            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
-        </div>
-    </div>
+    <div id="header-placeholder"></div>
 
-    <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
-            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
-                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+    <main class="plp-main">
+        <header class="plp-header">
+            <h1 id="titulo-categoria">Todos los Jerseys</h1>
+            <p id="contador-productos" class="plp-count">Cargando productos...</p>
+        </header>
+
+        <section class="plp-toolbar">
+            <div class="plp-filters-trigger">
+                <button onclick="toggleSidebar()" class="btn-filter-toggle">
+                    Ocultar Filtros <i class="bi bi-sliders"></i>
+                </button>
             </div>
-
-            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px;">
-                <input type="text" id="buscador-principal" placeholder="Buscar por equipo, liga o marca..." 
-                    style="width: 100%; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--color-borde); background: var(--bg-input); color: var(--color-texto);">
+            <div class="plp-sort">
+                <select id="ordenar-select" onchange="ejecutarFiltros()">
+                    <option value="recientes">Lo más nuevo</option>
+                    <option value="baratos">Precio: Menor a Mayor</option>
+                    <option value="caros">Precio: Mayor a Menor</option>
+                </select>
             </div>
+        </section>
 
-            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
-                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
-                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
-                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+        <div class="plp-layout">
+            <aside class="plp-sidebar" id="plp-sidebar">
+                <div class="filter-group">
+                    <h3>Ligas</h3>
+                    <ul id="lista-ligas">
+                        <li onclick="filtrarPor('liga', 'Liga MX')">Liga MX</li>
+                        <li onclick="filtrarPor('liga', 'Premier League')">Premier League</li>
+                        <li onclick="filtrarPor('liga', 'LaLiga')">LaLiga</li>
+                        <li onclick="filtrarPor('liga', 'Serie A')">Serie A</li>
+                        <li onclick="filtrarPor('liga', 'Bundesliga')">Bundesliga</li>
+                    </ul>
                 </div>
-            </div>
+
+                <div class="filter-group">
+                    <h3>Marcas</h3>
+                    <ul id="lista-marcas">
+                        <li onclick="filtrarPor('marca', 'Nike')">Nike</li>
+                        <li onclick="filtrarPor('marca', 'Adidas')">Adidas</li>
+                        <li onclick="filtrarPor('marca', 'Puma')">Puma</li>
+                        <li onclick="filtrarPor('marca', 'Jordan')">Jordan</li>
+                    </ul>
+                </div>
+
+                <button class="btn-reset-filtros" onclick="limpiarFiltros()">Limpiar Todo</button>
+            </aside>
+
+            <section class="plp-grid-container">
+                <div class="grid-nike" id="contenedor-catalogo">
+                    </div>
+            </section>
         </div>
-    </header>
+    </main>
 
-    <nav>
-        <div style="display: flex; justify-content: center; gap: 25px;">
-            <a href="#" onclick="filtrarPorLiga('Liga MX')" class="nav-link">Liga MX</a>
-            <a href="#" onclick="filtrarPorLiga('La Liga')" class="nav-link">La Liga</a>
-            <a href="#" onclick="filtrarPorLiga('Premier League')" class="nav-link">Premier</a>
-            <span style="color: var(--color-borde);">|</span>
-            <a href="#" onclick="filtrarPorMarca('Nike')" class="nav-link">Nike</a>
-            <a href="#" onclick="filtrarPorMarca('Adidas')" class="nav-link">Adidas</a>
-            <a href="#" onclick="filtrarPorMarca('Puma')" class="nav-link">Puma</a>
-            <a href="#" onclick="renderizarProductos(productos)" class="nav-link" style="color: var(--dorado);">Ver Todo</a>
-        </div>
-    </nav>
+    <div id="footer-placeholder"></div>
 
-    <div class="header-catalogo">
-        <h1>Colección Completa</h1>
-        <p>Encuentra las mejores versiones Fan y Jugador calidad 1:1</p>
-    </div>
-
-    <main id="contenedor-productos" class="productos-grid" style="max-width: 1200px; margin: 0 auto 50px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
-        </main>
-
-    <footer>
-        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
-            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
-            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
-        </div>
-        <p style="color: #666; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
-    </footer>
-
-    <script src="productos.js"></script>
-    <script src="app.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/catalogo.js"></script>
 </body>
 </html>

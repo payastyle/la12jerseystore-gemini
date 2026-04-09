@@ -3,264 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La 12 Jersey Store | Premium 1:1</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* ESTILOS EXCLUSIVOS DEL HOME */
-        
-        /* Banner Principal */
-        .hero-banner {
-            max-width: 1200px;
-            margin: 170px auto 30px; /* Margen superior para librar el header y nav fijos */
-            padding: 0 20px;
-        }
-        .hero-banner-content {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('img/banner-home.jpg') center/cover;
-            height: 350px;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            border: 1px solid var(--color-borde);
-        }
-        .hero-banner h1 {
-            font-size: 40px;
-            color: var(--dorado);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-        .hero-banner p {
-            font-size: 16px;
-            margin-bottom: 25px;
-        }
-        .hero-btn {
-            background: var(--dorado);
-            color: #000;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-        .hero-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Carrusel de Marcas */
-        .marcas-visual {
-            max-width: 1200px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            overflow-x: auto;
-        }
-        .marca-circulo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .marca-circulo:hover {
-            transform: translateY(-5px);
-        }
-        .marca-img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: var(--bg-tarjetas);
-            border: 2px solid var(--dorado);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 8px;
-            padding: 10px;
-        }
-        .marca-img img {
-            width: 100%;
-            object-fit: contain;
-        }
-        .marca-circulo span {
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--color-texto);
-        }
-
-        /* Banner de Pedidos Especiales (WhatsApp) */
-        .banner-whatsapp-especial {
-            background: var(--bg-tarjetas);
-            border: 1px solid var(--dorado);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .banner-whatsapp-especial h2 {
-            color: var(--dorado);
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .banner-whatsapp-especial p {
-            color: var(--color-texto);
-            font-size: 15px;
-            margin-bottom: 25px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .btn-wa-especial {
-            background: #25D366;
-            color: #fff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            font-size: 16px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .btn-wa-especial:hover {
-            background: #1ebc5a;
-            transform: translateY(-3px);
-        }
-
-        /* Título de Sección */
-        .seccion-titulo {
-            text-align: center;
-            color: var(--color-texto);
-            font-size: 24px;
-            margin: 40px 0 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 768px) {
-            .hero-banner-content { height: 250px; }
-            .hero-banner h1 { font-size: 28px; }
-            .marcas-visual { justify-content: flex-start; }
-            .marca-img { width: 60px; height: 60px; }
-        }
-    </style>
+    <title>La 12 Jersey Store | Inicio</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
 
-    <div class="promo-cintillo-container">
-        <div class="promo-cintillo-track">
-            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
-            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
-            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
-            <div class="promo-item">🚚 ENVÍO GRATIS EN LA COMPRA DE 4 JERSEYS</div>
-            <div class="promo-item">🔥 CALIDAD PREMIUM 1:1 GARANTIZADA</div>
-            <div class="promo-item">💳 PAGO SEGURO VÍA WHATSAPP O PAYPAL</div>
+    <div id="header-placeholder"></div>
+
+    <div class="oferta-cintillo">
+        <div class="marquee">
+            <span>🔥 PROMO: 3x2 EN TODA LA TIENDA 🔥 EN COMPRAS DE 4 O MÁS EL ENVÍO ES GRATIS 🔥 CALIDAD 1:1 GARANTIZADA 🔥</span>
+            <span>🔥 PROMO: 3x2 EN TODA LA TIENDA 🔥 EN COMPRAS DE 4 O MÁS EL ENVÍO ES GRATIS 🔥 CALIDAD 1:1 GARANTIZADA 🔥</span>
         </div>
     </div>
 
-    <header>
-        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto;">
-            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer; flex: 0 0 auto;">
-                <img src="img/logo.png" alt="La 12" style="height: 40px;">
+    <main>
+        <section class="main-banner">
+            <div class="banner-content">
+                <h1>PORTA TUS COLORES</h1>
+                <p>La máxima calidad en jerseys de fútbol ahora a tu alcance.</p>
+                <button onclick="window.location.href='catalogo.html'" class="btn-principal">VER CATÁLOGO</button>
             </div>
+        </section>
 
-            <div class="search-container" style="flex: 1; margin: 0 30px; max-width: 500px;">
-                <input type="text" id="buscador-principal" placeholder="Buscar por equipo, liga o marca..." 
-                    style="width: 100%; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--color-borde); background: var(--bg-input); color: var(--color-texto);">
+        <section class="section-home">
+            <h2 class="title-home">Explora Colecciones</h2>
+            <div class="carousel-container">
+                <button class="prev" onclick="moveCarousel('cat-track', -1)">❮</button>
+                <div class="carousel-track" id="cat-track">
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=temporada'"><img src="img/ui/cat-temp.jpg"><span>Temporada 25/26</span></div>
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=retro-clubes'"><img src="img/ui/cat-retro.jpg"><span>Retro Clubes</span></div>
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=mundial'"><img src="img/ui/cat-mundial.jpg"><span>Mundial 2026</span></div>
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=kids'"><img src="img/ui/cat-kids.jpg"><span>Kids Kit</span></div>
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=retro-selecciones'"><img src="img/ui/cat-paises.jpg"><span>Retro Países</span></div>
+                    <div class="cat-card" onclick="location.href='catalogo.html?cat=anime'"><img src="img/ui/cat-anime.jpg"><span>Ediciones Anime</span></div>
+                </div>
+                <button class="next" onclick="moveCarousel('cat-track', 1)">❯</button>
             </div>
+        </section>
 
-            <div style="display: flex; gap: 20px; align-items: center; flex: 0 0 auto;">
-                <div onclick="toggleTheme()" style="cursor: pointer; font-size: 20px;" title="Cambiar Tema"><span id="theme-icon">🌙</span></div>
-                <div onclick="window.location.href='carrito.html'" style="position: relative; cursor: pointer; font-size: 22px;" title="Ver Carrito">
-                    🛒 <span id="contador-carrito" style="position: absolute; top:-8px; right:-10px; background:#cc0000; color:#fff; border-radius:50%; padding:2px 6px; font-size:11px; font-weight:bold;">0</span>
+        <section class="section-home">
+            <h2 class="title-home">Lo Más Buscado</h2>
+            <div class="products-grid" id="destacados-home">
+                </div>
+        </section>
+
+        <section class="idolo-section" id="idolo-container">
+            </section>
+
+        <section class="section-home bg-gris">
+            <h2 class="title-home">Busca por Liga</h2>
+            <div class="carousel-container">
+                <button class="prev" onclick="moveCarousel('liga-track', -1)">❮</button>
+                <div class="carousel-track" id="liga-track">
+                    <div class="liga-card"><img src="img/ligas/ligamx.png"></div>
+                    <div class="liga-card"><img src="img/ligas/premier.png"></div>
+                    <div class="liga-card"><img src="img/ligas/laliga.png"></div>
+                    <div class="liga-card"><img src="img/ligas/seriea.png"></div>
+                    <div class="liga-card"><img src="img/ligas/bundes.png"></div>
+                </div>
+                <button class="next" onclick="moveCarousel('liga-track', 1)">❯</button>
+            </div>
+        </section>
+
+        <section class="section-home">
+            <h2 class="title-home">Marcas Oficiales</h2>
+            <div class="carousel-container">
+                <div class="carousel-track marcas-track" id="marcas-track">
+                    <img src="img/marcas/nike.png">
+                    <img src="img/marcas/adidas.png">
+                    <img src="img/marcas/puma.png">
+                    <img src="img/marcas/jordan.png">
                 </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <nav>
-        <div style="display: flex; justify-content: center; gap: 25px; align-items: center;">
-            <a href="#" onclick="filtrarPorLiga('Liga MX')" class="nav-link">Liga MX</a>
-            <a href="#" onclick="filtrarPorLiga('La Liga')" class="nav-link">La Liga</a>
-            <a href="#" onclick="filtrarPorLiga('Premier League')" class="nav-link">Premier</a>
-            <span style="color: var(--color-borde);">|</span>
-            <a href="#" onclick="filtrarPorLiga('Retro')" class="nav-link">Retro</a>
-            <span style="color: var(--color-borde);">|</span>
-            <a href="#" onclick="renderizarProductos(productos)" class="nav-link" style="color: var(--dorado);">Ver Todo</a>
-        </div>
-    </nav>
+        <section class="wa-banner">
+            <div class="wa-content">
+                <h2>¿NO ENCUENTRAS TU JERSEY?</h2>
+                <p>Mándanos una foto del que buscas. Manejamos jerseys de cualquier liga del mundo y ediciones especiales de anime.</p>
+                <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20no%20encuentro%20un%20jersey%20en%20el%20catálogo..." class="btn-wa">COTIZAR POR WHATSAPP 💬</a>
+            </div>
+        </section>
 
-    <section class="hero-banner">
-        <div class="hero-banner-content">
-            <h1>Nueva Temporada 25/26</h1>
-            <p>Viste los colores de tu equipo con la mejor calidad 1:1</p>
-            <a href="#" onclick="renderizarProductos(productos); window.scrollTo({ top: 800, behavior: 'smooth' });" class="hero-btn">Ver Colección</a>
-        </div>
-    </section>
+        <section class="section-home">
+            <h2 class="title-home">Clientes Satisfechos</h2>
+            <div class="resenas-container" id="resenas-home">
+                </div>
+        </section>
+    </main>
 
-    <section class="marcas-visual">
-        <div class="marca-circulo" onclick="filtrarPorMarca('Nike')">
-            <div class="marca-img"><img src="img/nike.png" alt="Nike"></div>
-            <span>Nike</span>
-        </div>
-        <div class="marca-circulo" onclick="filtrarPorMarca('Adidas')">
-            <div class="marca-img"><img src="img/adidas.png" alt="Adidas"></div>
-            <span>Adidas</span>
-        </div>
-        <div class="marca-circulo" onclick="filtrarPorMarca('Puma')">
-            <div class="marca-img"><img src="img/puma.png" alt="Puma"></div>
-            <span>Puma</span>
-        </div>
-        <div class="marca-circulo" onclick="filtrarPorMarca('Jordan')">
-            <div class="marca-img"><img src="img/jordan.png" alt="Jordan"></div>
-            <span>Jordan</span>
-        </div>
-    </section>
+    <div id="footer-placeholder"></div>
 
-    <h2 class="seccion-titulo">Llegadas Recientes</h2>
-
-    <main id="contenedor-productos" class="productos-grid" style="max-width: 1200px; margin: 0 auto 50px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px;">
-        </main>
-
-    <section class="banner-whatsapp-especial" style="margin: 0 20px 50px;">
-        <h2>¿No encuentras tu jersey?</h2>
-        <p>Manejamos catálogo extendido bajo pedido. Mándanos la foto del jersey retro o la versión específica que buscas y te lo conseguimos en calidad Premium 1:1.</p>
-        <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20estoy%20buscando%20un%20jersey%20específico%20que%20no%20vi%20en%20el%20catálogo..." target="_blank" class="btn-wa-especial">
-            COTIZAR POR WHATSAPP 💬
-        </a>
-    </section>
-
-    <footer>
-        <img src="img/logo.png" style="height: 35px; margin-bottom: 20px;" alt="La 12 Logo">
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <a href="#"><img src="img/facebook.png" style="width: 25px;"></a>
-            <a href="#"><img src="img/instagram.png" style="width: 25px;"></a>
-            <a href="#"><img src="img/tiktok.png" style="width: 25px;"></a>
-        </div>
-        
-        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-            <a href="catalogo.html" style="color: #666; font-size: 12px; text-decoration: none;">Catálogo</a>
-            <span style="color: #444;">|</span>
-            <a href="cuidados.html" style="color: #666; font-size: 12px; text-decoration: none;">Cuidados de Lavado</a>
-            <span style="color: #444;">|</span>
-            <a href="faq.html" style="color: #666; font-size: 12px; text-decoration: none;">Preguntas Frecuentes</a>
-            <span style="color: #444;">|</span>
-            <a href="contacto.html" style="color: #666; font-size: 12px; text-decoration: none;">Contacto</a>
-        </div>
-
-        <p style="color: #555; font-size: 11px; margin-top: 20px;">© 2026 LA 12 JERSEY STORE</p>
-    </footer>
-
-    <script src="productos.js"></script>
-    <script src="app.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/productos.js"></script>
+    <script src="js/home-logic.js"></script>
 </body>
 </html>

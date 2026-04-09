@@ -1,0 +1,231 @@
+/* ==========================================
+   PLP REFINADA - ESTILO NIKE / ADIDAS
+   ========================================== */
+
+:root {
+    --nike-gray: #f6f6f6;
+    --nike-dark-gray: #707072;
+    --nike-black: #111111;
+    --dorado-la12: #d4af37;
+}
+
+/* Contenedor Principal con más aire lateral */
+.plp-main { 
+    margin-top: 100px; 
+    padding: 0 48px; 
+    background-color: #fff;
+    min-height: 100vh;
+}
+
+/* Cabecera minimalista */
+.plp-header { 
+    margin-bottom: 40px; 
+    padding-top: 20px; 
+}
+
+.plp-header h1 { 
+    font-size: 24px; 
+    font-weight: 500; 
+    letter-spacing: -0.5px;
+    color: var(--nike-black);
+    text-transform: none; /* Nike no suele usar todo mayúsculas en títulos */
+}
+
+.plp-count { 
+    color: var(--nike-dark-gray); 
+    font-size: 14px; 
+    margin-top: 8px; 
+}
+
+/* Barra de herramientas flotante y limpia */
+.plp-toolbar {
+    display: flex; 
+    justify-content: flex-end; 
+    align-items: center;
+    padding: 12px 0; 
+    position: sticky;
+    top: 60px; 
+    background: #fff; 
+    z-index: 100;
+    border: none;
+}
+
+.btn-filter-toggle {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 24px;
+    font-weight: 400;
+}
+
+#ordenar-select {
+    border: none;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    font-family: inherit;
+}
+
+/* Layout dividido con gran espaciado */
+.plp-layout { 
+    display: grid; 
+    grid-template-columns: 260px 1fr; 
+    gap: 60px; 
+    margin-top: 20px; 
+}
+
+/* Sidebar de filtros elegante */
+.plp-sidebar {
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+}
+
+.filter-group { 
+    margin-bottom: 30px; 
+    border-top: 1px solid #ebebeb; 
+    padding-top: 20px; 
+}
+
+.filter-group:first-child { border-top: none; }
+
+.filter-group h3 { 
+    font-size: 16px; 
+    font-weight: 500; 
+    margin-bottom: 16px; 
+}
+
+.filter-group ul { list-style: none; }
+
+.filter-group li { 
+    padding: 6px 0; 
+    font-size: 14px; 
+    color: var(--nike-black);
+    opacity: 0.8;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter-group li:hover { 
+    opacity: 1; 
+    text-decoration: underline; 
+}
+
+/* Cuadrícula de Productos (Grid) */
+.grid-nike {
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 12px; 
+    row-gap: 48px; 
+}
+
+/* Tarjeta de Producto Individual */
+.card-nike { 
+    border: none; 
+    cursor: pointer;
+    background: transparent;
+}
+
+.img-nike-box {
+    background: var(--nike-gray); 
+    border-radius: 0; /* Esquinas rectas para un look más arquitectónico */
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-nike-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease-in-out;
+    display: block;
+}
+
+/* Segunda imagen para el efecto Hover */
+.img-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 2;
+}
+
+.card-nike:hover .img-hover {
+    opacity: 1;
+}
+
+/* Información del producto (Alineación izquierda) */
+.info-nike { 
+    padding: 12px 0; 
+    text-align: left; 
+}
+
+.tag-nike { 
+    color: var(--nike-dark-gray); 
+    font-size: 14px; 
+    margin-bottom: 4px; 
+    display: block;
+    font-weight: 400;
+}
+
+.info-nike h4 { 
+    font-size: 16px; 
+    font-weight: 500; 
+    color: var(--nike-black); 
+    margin: 0;
+    line-height: 1.4;
+}
+
+.precio-nike { 
+    font-weight: 500; 
+    color: var(--nike-black);
+    margin-top: 12px; 
+    font-size: 16px;
+}
+
+/* Badge de Oferta (Minimalista) */
+.badge-promo {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #fff;
+    color: #ff5f00; /* Naranja Nike */
+    padding: 4px 12px;
+    font-weight: 700;
+    font-size: 12px;
+    z-index: 5;
+    text-transform: uppercase;
+}
+
+/* Botón de limpiar filtros */
+.btn-reset-filtros {
+    background: var(--nike-black);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-reset-filtros:hover {
+    background: #333;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 960px) {
+    .plp-layout { grid-template-columns: 1fr; gap: 20px; }
+    .plp-sidebar { display: none; }
+    .plp-main { padding: 0 20px; }
+    .grid-nike { grid-template-columns: repeat(2, 1fr); } /* 2 columnas en móvil */
+}
