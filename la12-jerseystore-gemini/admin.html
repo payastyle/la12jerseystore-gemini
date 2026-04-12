@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin | LA 12</title>
+    <link rel="stylesheet" href="admin-estilos.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <img src="img/logo-light.png" alt="LA 12 Admin" class="logo-admin">
+            <p>ADMINISTRATION</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-btn activa" onclick="cambiarPestana('sec-productos', this)">📦 Productos</button>
+            <button class="nav-btn" onclick="cambiarPestana('sec-promociones', this)">🏷️ Promociones</button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="index.html" target="_blank" class="link-tienda">👁️ Ver Tienda Pública</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="admin-header">
+            <h1 id="titulo-seccion">Gestión de Productos</h1>
+            <button class="btn-exportar" onclick="exportarCatalogo()">💾 Exportar Catálogo</button>
+        </header>
+
+        <div class="dashboard-body">
+            
+            <section id="sec-productos" class="seccion-admin activa">
+                <div class="tarjeta-blanca">
+                    <h2>Crear Nuevo Producto</h2>
+                    <p class="texto-sutil">Llena los datos para agregar un jersey a tu base de datos secreta.</p>
+                    
+                    <form id="form-producto" class="admin-formulario">
+                        
+                        <div class="form-bloque">
+                            <h3>1. Información Principal</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Equipo / Selección *</label>
+                                    <input type="text" id="f_equipo" placeholder="Ej. Tigres UANL" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre de la Versión *</label>
+                                    <input type="text" id="f_nombre" placeholder="Ej. Jersey Local Temporada 25/26" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Descripción del Producto</label>
+                                <textarea id="f_descripcion" rows="3" placeholder="Detalles de la tela, escudo, etc..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-bloque">
+                            <h3>2. Clasificación y Versiones</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Liga / Torneo</label>
+                                    <input type="text" id="f_liga" placeholder="Ej. Liga MX">
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoría Base</label>
+                                    <input type="text" id="f_categoria" placeholder="Ej. Temporada 25/26">
+                                </div>
+                                <div class="form-group">
+                                    <label>Marca</label>
+                                    <input type="text" id="f_marca" placeholder="Ej. Adidas">
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 15px; background: #fff; padding: 15px; border: 1px solid var(--borde); border-radius: 5px;">
+                                <div class="checkbox-group" style="width: 100%;">
+                                    <input type="checkbox" id="f_tiene_jugador" checked onchange="togglePreciosJugador()">
+                                    <label for="f_tiene_jugador" style="color: var(--color-oro);">Este jersey SÍ cuenta con Versión Jugador (Corte atlético)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-bloque">
+                            <h3>3. Precios y Tallas</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Precio Normal Versión FAN ($) *</label>
+                                    <input type="number" id="f_precio_fan" placeholder="Ej. 1500" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Precio Oferta Versión FAN ($)</label>
+                                    <input type="number" id="f_oferta_fan" placeholder="Ej. 500 (Opcional)">
+                                </div>
+                            </div>
+
+                            <div class="form-row" id="fila_precios_jugador" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ccc;">
+                                <div class="form-group">
+                                    <label style="color: var(--color-oro);">Precio Normal Versión JUGADOR ($)</label>
+                                    <input type="number" id="f_precio_jugador" placeholder="Ej. 2000">
+                                </div>
+                                <div class="form-group">
+                                    <label style="color: var(--color-oro);">Precio Oferta Versión JUGADOR ($)</label>
+                                    <input type="number" id="f_oferta_jugador" placeholder="Ej. 600 (Opcional)">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" style="margin-top: 15px; align-items: center;">
+                                <div class="form-group" style="flex: 0.5;">
+                                    <label>Tipo de Talla</label>
+                                    <select id="f_tipo_talla" onchange="actualizarTallas()">
+                                        <option value="Adulto">Adulto</option>
+                                        <option value="Niño">Niño</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="flex: 2;">
+                                    <label>Tallas Disponibles en Inventario:</label>
+                                    <div id="f_tallas_container" class="tallas-container">
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="form-group">
+                                    <label>Jugador Destacado (Para el Home)</label>
+                                    <input type="text" id="f_jugador" placeholder="Ej. Gignac (Déjalo en blanco si no lleva jugador)">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-bloque">
+                            <h3>4. Multimedia y Estado</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Imagen Principal (Buscador) *</label>
+                                    <input type="text" id="f_img_principal" placeholder="img/tigres-1.jpg" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Imagen Hover (Al pasar el mouse)</label>
+                                    <input type="text" id="f_img_hover" placeholder="img/tigres-2.jpg">
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="form-group" style="width: 100%;">
+                                    <label>Imágenes de la Galería (Restantes)</label>
+                                    <textarea id="f_imagenes_extra" rows="3" placeholder="Pega aquí los links de las demás fotos, separados por una coma. Ej: img/tigres-3.jpg, img/tigres-4.jpg"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="f_activo" checked>
+                                    <label for="f_activo">Producto Activo (Visible en la tienda)</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-guardar-producto">➕ Guardar Jersey en Base de Datos</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="sec-promociones" class="seccion-admin">
+                <div class="tarjeta-blanca">
+                    <h2>Gestor de Cupones y Promociones</h2>
+                    <p class="texto-sutil">Crea códigos de descuento para reseñas (1 uso) o campañas masivas (Hot Sale).</p>
+
+                    <form id="form-promo" class="admin-formulario">
+                        <div class="form-bloque">
+                            <h3>Detalles del Cupón</h3>
+                            
+                            <div class="form-row" style="align-items: flex-end;">
+                                <div class="form-group" style="flex: 2;">
+                                    <label>Código del Cupón *</label>
+                                    <input type="text" id="p_codigo" placeholder="Ej. HOTSALE30 o LA12-X7B9" style="text-transform: uppercase;" required>
+                                </div>
+                                <div class="form-group" style="flex: 1;">
+                                    <button type="button" onclick="generarCodigoRandom()" style="padding: 12px; background: #333; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">🎲 Generar Random</button>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="form-group">
+                                    <label>Tipo de Descuento</label>
+                                    <select id="p_tipo" onchange="actualizarTipoPromo()">
+                                        <option value="porcentaje">Porcentaje (%)</option>
+                                        <option value="monto">Monto Fijo ($ MXN)</option>
+                                        <option value="envio">Envío Gratis</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label id="label_valor_promo">Valor del Descuento (%) *</label>
+                                    <input type="number" id="p_valor" placeholder="Ej. 30" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="form-group">
+                                    <label>Límite de Usos Totales</label>
+                                    <input type="number" id="p_limite" placeholder="Ej. 1 (para reseñas) o dejar vacío para infinito">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fecha de Expiración (Opcional)</label>
+                                    <input type="date" id="p_fecha_exp">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" style="margin-top: 15px;">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="p_activo" checked>
+                                    <label for="p_activo">Cupón Activo (Listo para usarse)</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn-guardar-producto">🎟️ Crear Cupón</button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="modal-exportar" class="modal-oculto">
+        <div class="modal-contenido">
+            <h2>Código Generado Exitosamente</h2>
+            <p>Copia el siguiente texto y pégalo reemplazando todo lo que hay en tu archivo <strong>catalogo.js</strong></p>
+            <textarea id="codigo-exportado" rows="15" readonly></textarea>
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button onclick="copiarCodigo()" class="btn-guardar-producto">Copiar Código</button>
+                <button onclick="cerrarModal()" class="btn-cerrar-modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-app.js"></script>
+</body>
+</html>

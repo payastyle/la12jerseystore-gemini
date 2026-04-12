@@ -1,0 +1,104 @@
+<div class="cintillo-premium">
+    <div class="marquee-rapido">
+        <span>📍 ENTREGAS EN ESCOBEDO Y MONTERREY | 📦 ENVÍOS RÁPIDOS A TODO MÉXICO | 🔥 15% DE DESCUENTO: LA12 | 💳 3 MSI TARJETAS PARTICIPANTES</span>
+        <span>📍 ENTREGAS EN ESCOBEDO Y MONTERREY | 📦 ENVÍOS RÁPIDOS A TODO MÉXICO | 🔥 15% DE DESCUENTO: LA12 | 💳 3 MSI TARJETAS PARTICIPANTES</span>
+    </div>
+</div>
+
+<header class="header-maestro container-fluid">
+    <div class="row align-items-center w-100 g-0">
+        <div class="col-2 col-md-3">
+            <button class="menu-trigger" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+
+        <div class="col-8 col-md-6 text-center">
+            <a href="index.html" class="logo-principal">
+                <img src="img/logo-light.png" alt="LA 12" id="logo-header">
+            </a>
+        </div>
+
+        <div class="col-2 col-md-3 d-flex justify-content-end align-items-center gap-2 gap-md-3">
+            <form class="buscador-capsula d-none d-lg-flex">
+                <input type="search" placeholder="Buscar...">
+                <button type="submit">🔍</button>
+            </form>
+            
+            <button class="btn-search-mobile d-lg-none">🔍</button>
+
+            <button class="carrito-capsula" onclick="abrirCarrito()">
+                <span class="icono">🛒</span>
+                <span id="cart-count" class="badge-oro">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<nav id="menu-lateral" class="sidebar-la12">
+    <div class="sidebar-header" style="text-align: right; padding: 10px 20px 0;">
+        <button class="btn-close-custom" onclick="cerrarMenu()" style="background:none; border:none; font-size:30px; cursor:pointer;">&times;</button>
+    </div>
+
+    <div class="sidebar-logo-container">
+        <img src="img/logo-light.png" alt="LA 12" class="sidebar-logo">
+    </div>
+
+    <div class="sidebar-body">
+        <nav class="nav-principal">
+            <a href="#" class="nav-link-premium">TEMPORADA 25/26</a>
+            <a href="#" class="nav-link-premium">COPA DEL MUNDO 26</a>
+            <a href="#" class="nav-link-premium">RETRO CLUBES</a>
+            <a href="#" class="nav-link-premium">RETRO SELECCIONES</a>
+            <a href="#" class="nav-link-premium">KIDS</a>
+            <a href="#" class="nav-link-premium">EDICIÓN ANIME</a>
+
+            <div class="accordion accordion-flush" id="accLa12">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed link-desplegable" type="button" data-bs-toggle="collapse" data-bs-target="#ligasLa12">
+                LIGAS
+            </button>
+        </h2>
+        <div id="ligasLa12" class="accordion-collapse collapse" data-bs-parent="#accLa12">
+            <div class="accordion-body sub-enlaces">
+                <a href="index.html?liga=ligamx">LIGA MX</a>
+                <a href="index.html?liga=premier">PREMIER LEAGUE</a>
+                <a href="index.html?liga=laliga">LA LIGA</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed link-desplegable" type="button" data-bs-toggle="collapse" data-bs-target="#marcasLa12">
+                MARCAS
+            </button>
+        </h2>
+        <div id="marcasLa12" class="accordion-collapse collapse" data-bs-parent="#accLa12">
+            <div class="accordion-body sub-enlaces">
+                <a href="index.html?marca=adidas">ADIDAS</a>
+                <a href="index.html?marca=nike">NIKE</a>
+                <a href="index.html?marca=puma">PUMA</a>
+            </div>
+        </div>
+    </div>
+</div>
+        </nav>
+
+        <hr class="divisor-dorado-fino">
+
+        <nav class="nav-secundaria">
+            <a href="#">RESEÑAS</a>
+            <a href="#">RASTREAR TU PEDIDO</a>
+            <a href="#">CUIDADOS DEL JERSEY</a>
+            <a href="#">GUÍA DE TALLAS</a>
+            <a href="#">CONTÁCTANOS</a>
+            <a href="#">PREGUNTAS FRECUENTES</a>
+        </nav>
+    </div>
+</nav>
+
+<div id="overlay-menu" class="overlay-blur" onclick="cerrarMenu()"></div>

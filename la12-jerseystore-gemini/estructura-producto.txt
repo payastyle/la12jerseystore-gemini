@@ -1,0 +1,30 @@
+{
+  // 1. IDENTIFICADORES (Lo que el sistema necesita para no confundirse)
+  "id": 101, // (Automático)
+  "fecha_creacion": "2026-04-11", // (Automático - Sirve para la sección "Nuevos Lanzamientos")
+
+  // 2. INFORMACIÓN PRINCIPAL (Lo que el cliente lee primero)
+  "equipo": "Tigres UANL",
+  "nombre": "Jersey Local Temporada 25/26",
+  "descripcion": "Jersey oficial de local. Cuenta con tecnología AEROREADY...",
+  
+  // 3. CLASIFICACIÓN (Para que los filtros del Menú y Buscador funcionen)
+  "liga": "Liga MX",
+  "categoria": "Temporada 25/26",
+  "marca": "Adidas",
+  "version_jugador": true, // (true = Jugador, false = Aficionado)
+
+  // 4. PRECIOS Y TALLAS (El corazón de la venta)
+  "precio_normal": 1800,
+  "precio_oferta": 1500, // (Si está vacío, no hay oferta)
+  "tipo_talla": "Adulto", // ("Adulto" o "Niño")
+  "tallas_disponibles": ["S", "M", "L"], // ¡Aquí respondo tu duda!
+
+  // 5. COLECCIÓN DE JUGADORES (Tu idea estrella para el Home)
+  "jugador_destacado": "Gignac", // (Si está vacío, no aparece en la sección especial)
+
+  // 6. MULTIMEDIA (Las fotos)
+  "imagen_principal": "img/tigres-1.jpg", // (La del buscador / Home)
+  "imagen_hover": "img/tigres-2.jpg",     // (La que sale al pasar el mouse)
+  "imagenes_extra": ["img/tigres-3.jpg", "img/tigres-4.jpg"] // (Galería del PDP)
+}

@@ -1,104 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La 12 Jersey Store | Inicio</title>
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>LA 12 | Jersey Store - Home</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
     <div id="header-placeholder"></div>
 
-    <div class="oferta-cintillo">
-        <div class="marquee">
-            <span>🔥 PROMO: 3x2 EN TODA LA TIENDA 🔥 EN COMPRAS DE 4 O MÁS EL ENVÍO ES GRATIS 🔥 CALIDAD 1:1 GARANTIZADA 🔥</span>
-            <span>🔥 PROMO: 3x2 EN TODA LA TIENDA 🔥 EN COMPRAS DE 4 O MÁS EL ENVÍO ES GRATIS 🔥 CALIDAD 1:1 GARANTIZADA 🔥</span>
+    <main class="contenedor-principal">
+        <section class="seccion-titulo" style="text-align: center; padding: 40px 0;">
+            <h1>Temporada 25/26</h1>
+        </section>
+
+        <div id="contenedor-productos" class="grid-tienda">
+            <p style="text-align:center; padding: 50px; color: #888;">
+                Cargando jerseys de alta gama...
+            </p>
         </div>
-    </div>
-
-    <main>
-        <section class="main-banner">
-            <div class="banner-content">
-                <h1>PORTA TUS COLORES</h1>
-                <p>La máxima calidad en jerseys de fútbol ahora a tu alcance.</p>
-                <button onclick="window.location.href='catalogo.html'" class="btn-principal">VER CATÁLOGO</button>
-            </div>
-        </section>
-
-        <section class="section-home">
-            <h2 class="title-home">Explora Colecciones</h2>
-            <div class="carousel-container">
-                <button class="prev" onclick="moveCarousel('cat-track', -1)">❮</button>
-                <div class="carousel-track" id="cat-track">
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=temporada'"><img src="img/ui/cat-temp.jpg"><span>Temporada 25/26</span></div>
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=retro-clubes'"><img src="img/ui/cat-retro.jpg"><span>Retro Clubes</span></div>
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=mundial'"><img src="img/ui/cat-mundial.jpg"><span>Mundial 2026</span></div>
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=kids'"><img src="img/ui/cat-kids.jpg"><span>Kids Kit</span></div>
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=retro-selecciones'"><img src="img/ui/cat-paises.jpg"><span>Retro Países</span></div>
-                    <div class="cat-card" onclick="location.href='catalogo.html?cat=anime'"><img src="img/ui/cat-anime.jpg"><span>Ediciones Anime</span></div>
-                </div>
-                <button class="next" onclick="moveCarousel('cat-track', 1)">❯</button>
-            </div>
-        </section>
-
-        <section class="section-home">
-            <h2 class="title-home">Lo Más Buscado</h2>
-            <div class="products-grid" id="destacados-home">
-                </div>
-        </section>
-
-        <section class="idolo-section" id="idolo-container">
-            </section>
-
-        <section class="section-home bg-gris">
-            <h2 class="title-home">Busca por Liga</h2>
-            <div class="carousel-container">
-                <button class="prev" onclick="moveCarousel('liga-track', -1)">❮</button>
-                <div class="carousel-track" id="liga-track">
-                    <div class="liga-card"><img src="img/ligas/ligamx.png"></div>
-                    <div class="liga-card"><img src="img/ligas/premier.png"></div>
-                    <div class="liga-card"><img src="img/ligas/laliga.png"></div>
-                    <div class="liga-card"><img src="img/ligas/seriea.png"></div>
-                    <div class="liga-card"><img src="img/ligas/bundes.png"></div>
-                </div>
-                <button class="next" onclick="moveCarousel('liga-track', 1)">❯</button>
-            </div>
-        </section>
-
-        <section class="section-home">
-            <h2 class="title-home">Marcas Oficiales</h2>
-            <div class="carousel-container">
-                <div class="carousel-track marcas-track" id="marcas-track">
-                    <img src="img/marcas/nike.png">
-                    <img src="img/marcas/adidas.png">
-                    <img src="img/marcas/puma.png">
-                    <img src="img/marcas/jordan.png">
-                </div>
-            </div>
-        </section>
-
-        <section class="wa-banner">
-            <div class="wa-content">
-                <h2>¿NO ENCUENTRAS TU JERSEY?</h2>
-                <p>Mándanos una foto del que buscas. Manejamos jerseys de cualquier liga del mundo y ediciones especiales de anime.</p>
-                <a href="https://wa.me/521XXXXXXXXXX?text=Hola,%20no%20encuentro%20un%20jersey%20en%20el%20catálogo..." class="btn-wa">COTIZAR POR WHATSAPP 💬</a>
-            </div>
-        </section>
-
-        <section class="section-home">
-            <h2 class="title-home">Clientes Satisfechos</h2>
-            <div class="resenas-container" id="resenas-home">
-                </div>
-        </section>
     </main>
 
     <div id="footer-placeholder"></div>
 
-    <script src="js/main.js"></script>
-    <script src="js/productos.js"></script>
-    <script src="js/home-logic.js"></script>
+    <script src="catalogo.js"></script>
+
+    <script src="app.js"></script>
+
+    <script src="componentes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

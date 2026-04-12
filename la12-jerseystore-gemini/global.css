@@ -1,0 +1,391 @@
+/* ==============================================
+   LA 12 - ARQUITECTURA VISUAL PREMIUM DEFINITIVA
+   ============================================== */
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap');
+
+:root {
+    --gold: #c5a044;
+    --black: #111111;
+    --white: #ffffff;
+    --borde: #eaeaea;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* --- CINTILLO DINÁMICO --- */
+.cintillo-premium {
+    background-color: var(--gold);
+    color: #000;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 1060;
+}
+
+.marquee-rapido {
+    white-space: nowrap;
+    position: absolute;
+    display: flex;
+    animation: marquee-anim 20s linear infinite;
+}
+
+.marquee-rapido span {
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    padding-right: 80px;
+}
+
+@keyframes marquee-anim {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- HEADER MAESTRO (LOGO 150PX) --- */
+.header-maestro {
+    background: #fff;
+    min-height: 170px; /* Altura ideal para el logo de 150px */
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+}
+
+/* --- AJUSTE DEL LOGO Y HEADER --- */
+#logo-header {
+    height: 150px !important;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
+    transition: 0.3s;
+}
+
+#logo-header:hover { transform: scale(1.05); }
+
+/* --- BOTÓN HAMBURGUESA --- */
+.menu-trigger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Más espacio entre barras */
+    padding: 10px;
+}
+
+.menu-trigger .bar {
+    width: 45px; /* Más largas para imponer con el logo */
+    height: 5px;  /* Más gruesas para que no se pierdan */
+    background-color: var(--black);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+/* --- BUSCADOR Y CARRITO --- */
+.buscador-capsula {
+    background: #f1f1f1;
+    border-radius: 50px;
+    padding: 8px 20px;
+    border: 1px solid transparent;
+}
+
+.buscador-capsula input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 160px;
+}
+
+.carrito-capsula {
+    background: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.badge-oro {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: var(--gold);
+    color: #000;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* --- BUSCADOR RESPONSIVE --- */
+.btn-search-mobile {
+    background: none;
+    border: none;
+    font-size: 24px;
+    padding: 0;
+    color: var(--black);
+}
+
+/* --- SIDEBAR (MENÚ LATERAL REDISEÑADO) --- */
+.sidebar-la12 {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 380px;
+    height: 100vh;
+    background: #fff;
+    z-index: 2000;
+    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    box-shadow: 20px 0 60px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.sidebar-la12.abierto { left: 0; }
+
+.sidebar-logo-container {
+    text-align: center;
+    padding: 20px 0 10px 0;
+}
+
+.sidebar-logo {
+    width: 200px !important;
+    height: auto;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.12));
+    transition: 0.3s;
+}
+
+.sidebar-body {
+    padding: 0 30px;
+    overflow-y: auto;
+}
+
+.nav-link-premium {
+    display: block;
+    padding: 12px 0;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 15px;
+    border-bottom: 1px solid var(--borde);
+    transition: 0.3s;
+}
+
+.nav-link-premium:hover { color: var(--gold); padding-left: 10px; }
+
+/* --- ACORDEONES PREMIUM (LIGAS Y MARCAS) --- */
+.accordion-item {
+    background: transparent !important;
+    border: none !important;
+}
+
+.link-desplegable {
+    display: block !important;
+    width: 100% !important;
+    padding: 15px 0 !important;
+    color: var(--black) !important;
+    text-decoration: none !important;
+    font-weight: 900 !important;
+    font-size: 15px !important;
+    text-transform: uppercase !important;
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid var(--borde) !important;
+    text-align: left !important;
+    box-shadow: none !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.link-desplegable:hover { color: var(--gold) !important; }
+
+.link-desplegable::after {
+    content: '▼';
+    font-size: 10px;
+    transition: 0.3s;
+    color: #ccc;
+}
+
+.link-desplegable:not(.collapsed)::after {
+    transform: rotate(180deg);
+    color: var(--gold);
+}
+
+.sub-enlaces {
+    padding: 10px 0 10px 20px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sub-enlaces a {
+    text-decoration: none !important;
+    color: #666 !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    transition: 0.3s;
+}
+
+.sub-enlaces a:hover { color: var(--gold) !important; padding-left: 5px; }
+
+.nav-secundaria {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 10px 0 40px 0;
+}
+
+.nav-secundaria a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.nav-secundaria a:hover { color: var(--gold); padding-left: 8px; }
+
+.divisor-dorado-fino {
+    border: 0;
+    border-top: 1px solid var(--gold);
+    margin: 20px 0;
+    opacity: 0.3;
+}
+
+.overlay-blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    z-index: 1065;
+}
+
+.overlay-blur.activo { opacity: 1; visibility: visible; }
+
+/* --- RESPONSIVE (CORRECCIONES FINALES) --- */
+@media (max-width: 991px) {
+    .header-maestro {
+        min-height: 100px;
+        padding: 0 10px;
+    }
+    .sidebar-la12 { width: 85%; }
+}
+
+@media (max-width: 768px) {
+    #logo-header {
+        height: 90px !important; /* Logo se reduce para caber en móvil */
+    }
+    .menu-trigger .bar {
+        width: 35px;
+        height: 4px;
+    }
+}
+
+@media (max-width: 375px) {
+    #logo-header {
+        height: 65px !important;
+    }
+    .menu-trigger .bar {
+        width: 28px;
+    }
+}
+
+/* --- FOOTER MAESTRO LA 12 --- */
+.footer-la12 {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 80px 0 40px;
+    border-top: 5px solid var(--gold);
+    margin-top: 60px;
+}
+
+.footer-logo {
+    height: 85px;
+    width: auto;
+    filter: brightness(1.1);
+}
+
+.footer-slogan {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
+}
+
+.footer-title {
+    color: var(--gold);
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a {
+    text-decoration: none;
+    color: #bbb;
+    font-size: 12.5px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+.footer-links a:hover { color: var(--gold); padding-left: 5px; }
+
+.footer-social-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.social-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    text-decoration: none;
+    color: #bbb;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.social-item span { order: 1; }
+.social-item img {
+    order: 2;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: grayscale(1) brightness(1.5);
+    transition: 0.3s;
+}
+
+.social-item:hover { color: var(--gold); }
+.social-item:hover img { filter: none; transform: scale(1.1); }
+
+@media (max-width: 991px) {
+    .footer-social-stack {
+        align-items: center;
+        margin-top: 20px;
+    }
+}

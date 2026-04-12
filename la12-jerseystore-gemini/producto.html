@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA 12 | Jersey Store - Detalle de Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="pdp.css">
+</head>
+<body>
+
+<div id="header-placeholder"></div>
+
+    <main class="pdp-main-content">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-7">
+                    <div class="pdp-gallery-wrapper">
+                        <div class="main-image-container mb-3 shadow-sm rounded overflow-hidden">
+                            <img src="img/jerseys/tigres-1.jpg" id="main-product-img" class="img-fluid w-100">
+                        </div>
+                        <div class="thumb-strip d-flex gap-2">
+                            <img src="img/jerseys/tigres-1.jpg" class="pdp-thumb active" onclick="changeImage(this)">
+                            <img src="img/jerseys/tigres-detalles.jpg" class="pdp-thumb" onclick="changeImage(this)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <h1 class="pdp-title mb-2">Jersey Tigres UANL Local 25/26</h1>
+                    
+                    <div class="pdp-price-wrapper d-flex align-items-center gap-3 mb-4">
+                        <span class="price-old text-muted h5 mb-0 text-decoration-line-through" id="old-price">$1,899.00</span>
+                        <span class="price-new text-gold h2 mb-0 fw-900" id="pdp-price-display">$1,299.00</span>
+                        <span class="badge bg-danger">OFERTA 🔥</span>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="option-section mb-4">
+                        <label class="fw-bold small mb-2 d-block">SELECCIONA VERSIÓN:</label>
+                        <div class="btn-group-pdp" id="version-selector">
+                            <button class="btn-pdp-opt active" data-price="1299" data-old="1899" data-version="Fan">FAN</button>
+                            <button class="btn-pdp-opt" data-price="1699" data-old="2299" data-version="Jugador">JUGADOR</button>
+                        </div>
+                    </div>
+
+                    <div class="option-section mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="fw-bold small">TALLA:</label>
+                            <button class="btn-guia-link" data-bs-toggle="modal" data-bs-target="#modalTallas" type="button">
+                                📏 GUÍA DE TALLAS
+                            </button>
+                        </div>
+                        <div class="btn-group-pdp" id="size-selector">
+                            <button class="btn-pdp-opt">S</button>
+                            <button class="btn-pdp-opt">M</button>
+                            <button class="btn-pdp-opt">L</button>
+                            <button class="btn-pdp-opt">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="personalization-box p-3 border border-gold rounded mb-4 bg-light">
+                        <label class="fw-bold small mb-2 d-flex align-items-center gap-2">
+                            PERSONALIZACIÓN GRATIS 🔥 <span class="badge bg-dark text-gold">REGALO</span>
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <input type="text" class="form-control" placeholder="Nombre (Ej: GIGNAC)">
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control" placeholder="10">
+                            </div>
+                        </div>
+                        <p class="mt-2 mb-0" style="font-size: 15px; color: #bbb; font-style: italic;">
+        * Dejar en blanco si no deseas personalización.
+    </p>
+                    </div>
+
+                    <button class="btn-add-cart-pdp w-100 py-3 mb-4">Añadir al Carrito 🛒</button>
+
+                    <div id="timeline-placeholder"></div>
+<div class="shipping-timeline p-4 border rounded bg-white my-4 shadow-sm">
+    <div class="row text-center position-relative">
+        <div class="col-4">
+            <div class="timeline-icon">🛍️</div>
+            <p class="small mb-0 fw-bold">Ordenado</p>
+            <span class="text-muted x-small" id="fecha-orden"></span>
+        </div>
+        <div class="col-4">
+            <div class="timeline-icon">🚚</div>
+            <p class="small mb-0 fw-bold">Enviado</p>
+            <span class="text-muted x-small" id="fecha-envio"></span>
+        </div>
+        <div class="col-4">
+            <div class="timeline-icon">📦</div>
+            <p class="small mb-0 fw-bold">Entregado</p>
+            <span class="text-muted x-small" id="fecha-entrega"></span>
+        </div>
+    </div>
+    <div class="mt-3 pt-3 border-top x-small text-center text-muted">
+        🚛 <b>Envío Express:</b> Tiempo de llegada estimado: <span id="rango-entrega"></span>. Envío gratuito a México a excepción de zonas extendidas.
+    </div>
+</div>
+
+<div class="accordion accordion-flush pdp-accordion border-top border-bottom mb-5" id="pdpDetails">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#infoMat">
+                Material y tejido
+            </button>
+        </h2>
+        <div id="infoMat" class="accordion-collapse collapse" data-bs-parent="#pdpDetails">
+            <div class="accordion-body small text-muted">
+                <b>Composición:</b> 100% poliéster de alta calidad.<br>
+                Tejido ligero, transpirable y de secado rápido para mayor comodidad.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#infoPack">
+                Contenido del paquete
+            </button>
+        </h2>
+        <div id="infoPack" class="accordion-collapse collapse" data-bs-parent="#pdpDetails">
+            <div class="accordion-body small text-muted">
+                <b>Incluye:</b> 1 jersey, embalado.<br>
+                <b>Estado:</b> nuevo, con etiquetas.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#infoCare">
+                Cuidado y lavado
+            </button>
+        </h2>
+        <div id="infoCare" class="accordion-collapse collapse" data-bs-parent="#pdpDetails">
+            <div class="accordion-body small text-muted">
+                <ul>
+                    <li>Recomendado: lavar a mano con agua fría.</li>
+                    <li>Si usas lavadora: programa delicado y coloca la prenda del revés.</li>
+                    <li>Utiliza jabón neutro o detergente líquido suave.</li>
+                    <li>No usar cloro ni blanqueadores.</li>
+                    <li>Evitar el uso de suavizantes.</li>
+                    <li>No exprimir el jersey para evitar deformaciones.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#infoDiff">
+                Diferencia Fan vs Player
+            </button>
+        </h2>
+        <div id="infoDiff" class="accordion-collapse collapse" data-bs-parent="#pdpDetails">
+            <div class="accordion-body small text-muted">
+                <p><b>Fan:</b> corte cómodo, tejido más resistente — ideal para uso diario.</p>
+                <p><b>Player:</b> corte más ajustado y atlético; tela más ligera con microperforaciones, idéntica a la versión usada en cancha.</p>
+                <img src="img/diferencias.jpg" class="img-fluid rounded mt-2 shadow-sm">
+            </div>
+        </div>
+    </div>
+</div>
+
+</main>
+
+<section class="seccion-diferencia-split py-5 bg-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                <h2 class="pdp-title mb-3" style="font-size: 42px;">La diferencia se nota</h2>
+                <p class="text-muted fs-5" style="max-width: 450px; margin: 0 auto; margin-left: 0;">
+                    No solo vendemos jerseys, ofrecemos calidad, comodidad y estilo que supera a los demás.
+                </p>
+            </div>
+
+            <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end">
+                <div class="tabla-omni-style">
+                    <div class="omni-row header">
+                        <div class="omni-cell info"></div>
+                        <div class="omni-cell brand">LA 12 JERSEY</div>
+                        <div class="omni-cell others">OTROS</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Calidad premium en cada playera</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Diseños fieles a los originales</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Telas cómodas y transpirables</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Ideal para jugar o vestir diario</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Excelente relación calidad-precio</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                    <div class="omni-row">
+                        <div class="omni-cell info">Envíos rápidos en México</div>
+                        <div class="omni-cell brand">✔</div>
+                        <div class="omni-cell others">✘</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pdp-recomendados py-5 bg-light">
+    <div class="container">
+        <h4 class="fw-bold mb-4 text-center">MÁS PRODUCTOS PARA TI</h4>
+        <div id="productos-recomendados" class="row g-4 justify-content-center">
+            </div>
+    </div>
+</section>
+
+    <div class="modal fade" id="modalTallas" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                    <img src="img/guia-adultos.jpg" id="img-guia-tallas" class="img-fluid w-100 rounded">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="catalogo.js"></script>
+    <script src="componentes.js"></script> 
+    <script src="app.js"></script> 
+    <script src="pdp.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

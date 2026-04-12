@@ -1,0 +1,26 @@
+/* ==============================================
+   LA 12 - ESTILOS HOME / CATÁLOGO (estilos.css)
+   ============================================== */
+.grid-tienda {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px; padding: 60px 5%; max-width: 1400px; margin: 0 auto;
+}
+
+.producto-card {
+    background-color: var(--bg-tarjeta); border: 1px solid var(--borde);
+    border-radius: 8px; padding: 25px; text-align: center; position: relative;
+    transition: transform 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.producto-card:hover { transform: translateY(-8px); border-color: var(--gold); }
+
+.img-producto { width: 100%; height: 280px; object-fit: contain; transition: opacity 0.3s; }
+.badge { position: absolute; top: 15px; left: 15px; background: var(--gold); color: #000; padding: 6px 14px; font-weight: 900; border-radius: 4px; }
+
+.precio-oferta, .precio-normal { color: var(--gold); font-weight: 900; font-size: 22px; }
+.precio-tachado { text-decoration: line-through; color: var(--texto-secundario); font-size: 15px; }
+
+.producto-card button {
+    width: 100%; padding: 16px; margin-top: 15px; background: transparent;
+    border: 2px solid var(--gold); color: var(--gold); font-weight: 700; border-radius: 4px;
+}
+.producto-card button:hover { background: var(--gold); color: #000; }

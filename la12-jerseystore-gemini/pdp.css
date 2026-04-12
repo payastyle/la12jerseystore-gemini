@@ -1,0 +1,178 @@
+/* ESTILOS ESPECÍFICOS DE PRODUCTO - LA 12 */
+.pdp-main-content { margin-top: 50px; }
+
+.pdp-title { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; font-size: 28px; }
+
+.pdp-price { color: var(--gold); font-weight: 900; }
+
+/* Botones de Opciones */
+.btn-group-pdp { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn-pdp-opt {
+    border: 2px solid #ddd;
+    background: #fff;
+    padding: 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.3s;
+    border-radius: 4px;
+}
+
+.btn-pdp-opt.active, .btn-pdp-opt:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+/* Guía de Tallas */
+.btn-guia-link {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+/* Botón Añadir Carrito */
+.btn-add-cart-pdp {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-add-cart-pdp:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-5px);
+}
+
+/* Galería */
+.pdp-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.pdp-thumb.active { border-color: var(--gold); }
+
+/* --- LÍNEA DE TIEMPO --- */
+.timeline-icon {
+    width: 50px; height: 50px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    border: 1px solid #eee;
+}
+.x-small { font-size: 11px; }
+
+/* --- ACORDEONES --- */
+.pdp-accordion .accordion-button:not(.collapsed) {
+    background: transparent; color: var(--gold); box-shadow: none;
+}
+.pdp-accordion .accordion-button { font-size: 14px; padding: 15px 0; }
+.pdp-accordion .accordion-body ul { padding-left: 20px; margin-bottom: 0; }
+.pdp-accordion .accordion-body li { margin-bottom: 8px; }
+
+/* Precios y Personalización */
+.price-new { color: var(--gold); letter-spacing: -1px; }
+.price-old { opacity: 0.6; }
+.border-gold { border: 2px solid var(--gold) !important; }
+.fw-900 { font-weight: 900; }
+
+/* ==========================================================
+   ESTILO TIPO OMNI JERSEYS (CENTRADO Y COMPACTO)
+   ========================================================== */
+.tabla-omni-style {
+display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background: #fff;
+    width: 100%;
+    max-width: 500px; /* Un poco más estrecha para el diseño split */
+    box-shadow: 0 15px 45px rgba(0,0,0,0.07);
+    position: relative;
+    margin: 0; /* Quitamos el margin auto para que mande el flex de Bootstrap */
+}
+
+.omni-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+.omni-row:last-child { border-bottom: none; }
+
+.omni-cell {
+    padding: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra los iconos de check y x */
+}
+
+/* La descripción a la izquierda ocupa más espacio y se alinea al texto */
+.omni-cell.info {
+flex: 1.5; /* Ajustamos el peso del texto para que quepa bien */
+    justify-content: flex-start;
+    text-align: left;
+    min-width: 180px;
+    color: #333;
+    padding-left: 15px;
+    font-size: 12px;
+}
+
+/* Las columnas de comparación son compactas para evitar el hueco blanco */
+.omni-cell.brand, 
+.omni-cell.others {
+flex: 0 0 100px; /* Columnas de check/x más compactas */
+    width: 100px;
+}
+
+/* LA COLUMNA DESTACADA QUE SE IMPONE */
+.omni-cell.brand {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    font-size: 18px;
+    transform: scaleY(1.08); /* Efecto de sobresalir */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 5;
+}
+
+.omni-row.header .omni-cell.brand {
+    border-radius: 10px 10px 0 0;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 900;
+}
+
+.omni-row:last-child .omni-cell.brand {
+    border-radius: 0 0 10px 10px;
+}
+
+.omni-cell.others {
+    color: #ccc;
+    font-size: 16px;
+}
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 768px) {
+    .omni-cell { padding: 12px 8px; font-size: 11px; }
+    .omni-cell.brand { transform: none; font-size: 14px; }
+    .omni-cell.info { min-width: 150px; }
+}
+.pdp-recomendados .card-img-top {
+    height: 120px !important; /* Ajusta la altura de las imágenes de recomendados */
+    object-fit: contain;
+}

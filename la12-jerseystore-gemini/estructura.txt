@@ -1,93 +1,70 @@
-la12-store/
+la12-jersey-store/
 │
-├── 🛒 ZONA 1: TIENDA PRINCIPAL
-│   ├── index.html          (Home: Carrusel 3D y Video)
-│   ├── catalogo.html       (PLP: Cuadrícula con filtros)
-│   ├── producto.html       (PDP: Página de cada Jersey)
-│   └── carrito.html        (Checkout y pago WhatsApp)
+├── index.html                 # Home principal
+├── categorias.html            # Catálogo con filtros
+├── carrito.html               # Carrito página completa
+├── carrito-lateral.html       # Carrito lateral (componente)
+├── producto.html              # /categoria/[id]
+├── admin.html                 # Panel admin (solo tú)
 │
-├── 🏅 ZONA 2: COLECCIONES
-│   ├── ligas.html          (Explorador de Ligas)
-│   └── marcas.html         (Explorador de Marcas)
+├── components/
+│   ├── header.html            # Header compartido TODAS páginas
+│   ├── footer.html            # Footer compartido TODAS páginas
+│   ├── cintillo.html          # Cintillo dinámico
+│   └── carrito-lateral.html   # Lateral flotante
 │
-├── 🛡️ ZONA 3: SOPORTE Y CONFIANZA
-│   ├── tracking.html       (Rastreo 17Track)
-│   ├── faq.html            (Preguntas)
-│   ├── politicas.html      (Privacidad)
-│   ├── tallas.html         (Tablas de medidas)
-│   ├── cuidados.html       (Guía de lavado)
-│   └── resenas.html        (Testimonios)
+├── pages/                     # Páginas de menú
+│   ├── temporada2526.html
+│   ├── copa_mundo26.html
+│   ├── retro_clubes.html
+│   ├── retro_selecciones.html
+│   ├── kids.html
+│   ├── edicion_anime.html
+│   ├── resenas.html
+│   ├── rastrear.html
+│   ├── cuidados.html
+│   ├── tallas.html
+│   ├── contacto.html
+│   └── faq.html
 │
-├── ⚙️ ZONA 4: SISTEMA (Back-Office)
-│   ├── admin.html          (Interfaz del panel)
-│   ├── admin.js            (Generador de códigos)
-│   └── productos.js        (BASE DE DATOS DE JERSEYS)
+├── assets/
+│   ├── img/
+│   │   ├── jerseys/           # Imágenes productos
+│   │   ├── equipos/
+│   │   ├── ligas/
+│   │   └── marcas/
+│   ├── icons/                 # SVG icons
+│   └── logos/                 # Logo versiones
 │
-├── 🎨 ZONA 5: EL MOTOR (CSS y JS)
-│   ├── css/
-│   │   ├── global.css      (ADN: Header, Footer, Colores)
-│   │   ├── home.css        (Efectos 3D del Index)
-│   │   ├── tienda.css      (Estilos de tarjetas y filtros)
-│   │   ├── pdp.css         (Acordeones y selección de tallas)
-│   │   └── info.css        (Diseño de páginas de texto)
-│   └── js/
-│       ├── main.js         (Inyección de Header/Footer y UI)
-│       ├── carrito.js      (Lógica de compra y totales)
-│       ├── resenas-db.js   (Base de datos de comentarios)
-│       └── promo-db.js     (Lista de cupones)
+├── css/
+│   ├── variables.css          # Colores, tema, espaciados
+│   ├── main.css               # Global
+│   ├── header.css
+│   ├── footer.css
+│   ├── home.css
+│   ├── catalogo.css
+│   ├── carrito.css
+│   └── admin.css
 │
-└── 📂 img/ (Organización de Medios)
-    ├── ui/                 (Logo, banners, videos de interfaz)
-    ├── ligas/              (Fondos de Premier, Liga MX, etc.)
-    ├── marcas/             (Fondos de Nike, Adidas, etc.)
-    ├── temporada/          (Jerseys nuevos)
-    ├── retro-clubes/       (Jerseys antiguos de equipos)
-    ├── retro-selecciones/  (Jerseys antiguos de países)
-    └── kids/               (Jerseys para niños)       
-
-
-     
-2. Las 5 Reglas de Oro de tu Código (Para no cometer errores)
-Para que todo el ecosistema funcione perfecto, asegúrate de que estos "motores" estén bien configurados en tus archivos .js:
-
-1. El Navbar Universal (En todos tus .html):
-Asegúrate de pegar el mismo bloque de código (Cintilla de Promos + Header + Menú Lateral) debajo de la etiqueta <body> en absolutamente todos tus archivos HTML para que el cliente nunca se pierda.
-
-2. La Lógica de Precios en la PDP (app.js):
-Recuerda que el precio "Tachado" es solo visual. Todo el cálculo de carrito se hace sobre el Precio de Oferta.
-
-Versión Jugador / Manga Larga = +$120
-
-Con Dorsal = +$80
-
-Tallas Extra (XXL, 3XL, 4XL) = +$35
-
-3. La Regla del Envío en el Carrito (app.js):
-El sistema ya está programado para sumar la cantidad de prendas, no de modelos:
-
-De 1 a 3 jerseys = $130.00 de envío.
-
-4 o más jerseys = Envío GRATIS (con la barra de progreso verde llenándose dinámicamente).
-
-4. Las Rutas Automáticas del Panel (admin.js):
-Tú ya no escribes "img/temporada/foto.jpg". Tú solo seleccionas la categoría "Temporada" y escribes "foto.jpg". El código de admin.js une esos datos y crea la ruta exacta para que tu productos.js quede limpio.
-
-5. El Botón de WhatsApp Final (app.js):
-Cuando el cliente le da a "Confirmar Pedido" en el checkout, el sistema lee todos sus inputs (Nombre, Dirección, Email, País) y te manda un desglose perfecto a tu celular, incluyendo el subtotal, el costo de envío exacto y el total final a cobrar.
-
-3. Tu Guía de Tamaños de Imagen (Para el diseñador)
-Mantener estas proporciones es lo que evitará que tu página se vea descuadrada:
-
-Jerseys (Productos): 1000 x 1000 px (Formato Cuadrado 1:1).
-
-Foto 1: Jersey frente. Foto 2: Jersey espalda o jugador.
-
-Hero Banner (Promo): 1920 x 1080 px (Horizontal). Sujeto al centro.
-
-Banner WhatsApp Split: 1000 x 1200 px (Vertical). Foto de jugador.
-
-Carrusel de Colecciones: 600 x 760 px (Vertical).
-
-Video Comparativa: Formato vertical estilo TikTok/Reels (1080x1920 px).
-
-Regla general: Siempre usa formato .JPG o .WebP para que tu tienda cargue rápido (menos de 200kb por foto).
+├── js/
+│   ├── app.js                 # Inicialización
+│   ├── includes.js            # Carga header/footer/cintillo
+│   ├── theme.js               # Claro/oscuro
+│   ├── carruseles.js          # Todos los carruseles JSON
+│   ├── catalogo.js            # Filtros, búsqueda, grid
+│   ├── carrito.js             # Carrito + cupones anti-abuso
+│   ├── routing.js             # /categoria/[id]
+│   ├── admin.js               # CRUD + validaciones
+│   └── fingerprint.js         # Anti-abuso cupones
+│
+└── data/                      # 🔥 TODO se edita aquí (20s)
+    ├── productos.json         # Productos + version.tiene_jugador
+    ├── equipos.json           # Equipos
+    ├── categorias.json        # Categorías menú
+    ├── ligas.json             # Ligas carrusel + filtro
+    ├── marcas.json            # Marcas carrusel + filtro
+    ├── jugadores.json          # Jugadores home
+    ├── promociones.json        # Cupones con vigencia/abuso
+    ├── carrusel-*.json         # Carruseles home
+    ├── url-examples.json       # Demo slugs
+    └── README.md               # Instrucciones uso

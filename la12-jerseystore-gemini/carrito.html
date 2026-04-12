@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito | LA 12 - Jersey Store</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header class="header-principal">
+        <div class="header-center" style="flex: 100%; justify-content: center;">
+            <a href="index.html" class="logo-link">
+                <img src="img/logo.png" alt="LA 12 Jersey Store" class="logo-img">
+            </a>
+        </div>
+    </header>
+
+    <main class="pagina-carrito">
+        <h1 style="text-align: center; color: var(--color-oro); margin-top: 40px;">RESUMEN DE TU PEDIDO</h1>
+        
+        <div class="contenedor-carrito-pagina">
+            <div id="lista-pagina-carrito" class="lista-articulos">
+                </div>
+            
+            <div class="resumen-pago">
+                <h3>Total a Pagar</h3>
+                <h2 style="color: var(--color-oro);">$<span id="total-pagina-carrito">0</span> MXN</h2>
+                <p style="font-size: 14px; color: var(--text-muted);">*El costo de envío se calculará después.</p>
+                <button class="btn-checkout" style="width: 100%; margin-top: 20px;">Finalizar Compra</button>
+                <a href="index.html" style="display: block; text-align: center; margin-top: 15px; color: var(--text-main);">← Volver a la tienda</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-principal" style="margin-top: auto;">
+        <div class="footer-creditos">
+            <p>&copy; 2026 LA 12 - Jersey Store. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function cargarCarritoPagina() {
+            let carrito = JSON.parse(localStorage.getItem('carritoLa12')) || [];
+            const lista = document.getElementById('lista-pagina-carrito');
+            const totalElement = document.getElementById('total-pagina-carrito');
+            let total = 0;
+
+            if(carrito.length === 0) {
+                lista.innerHTML = "<p>Tu carrito está vacío.</p>";
+                return;
+            }
+
+            lista.innerHTML = "";
+            carrito.forEach((item, index) => {
+                total += item.precio;
+                lista.innerHTML += `
+                    <div class="cart-item" style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px;">
+                        <img src="${item.imagen}" style="width: 80px;">
+                        <div class="cart-item-info">
+                            <h3>${item.equipo}</h3>
+                            <p>${item.version} | Talla: Seleccionar en el siguiente paso</p>
+                            <h4 style="color: var(--color-oro); margin-top: 10px;">$${item.precio}</h4>
+                        </div>
+                    </div>
+                `;
+            });
+            totalElement.innerText = total;
+        }
+        cargarCarritoPagina();
+    </script>
+</body>
+</html>
