@@ -16,6 +16,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const pDisplay = document.getElementById('pdp-price-display');
     const oDisplay = document.getElementById('old-price');
 
+    // --- INYECTAR LA DESCRIPCIÓN / HISTORIA ---
+    const descElement = document.getElementById('pdp-descripcion');
+    if (descElement) {
+        if (producto.descripcion) {
+            descElement.innerText = producto.descripcion;
+            descElement.style.display = 'block';
+        } else {
+            descElement.style.display = 'none';
+        }
+    }
+
+    // --- LÓGICA DEL BREADCRUMB (Categoría / Nombre) ---
+    const linkCat = document.getElementById('breadcrumb-link-cat');
+    const txtProd = document.getElementById('breadcrumb-prod-name');
+
+    if (linkCat && txtProd) {
+        linkCat.innerText = producto.categoria || "Colección";
+        linkCat.href = `plp.html?cat=${encodeURIComponent(producto.categoria)}`;
+        txtProd.innerText = producto.equipo;
+    }
+
+    // --- ✨ AQUÍ AGREGAMOS LA LÓGICA DE IMÁGENES Y GALERÍA ---
+    const mainImg = document.getElementById('main-product-img');
+    const thumbContainer = document.getElementById('galeria-thumbs');
+
+    if (producto.imagenes) {
+        // Ponemos la imagen principal inicial
+        if (mainImg) mainImg.src = producto.imagenes.principal;
+
+        // Creamos las miniaturas (Principal + Galería)
+        if (thumbContainer) {
+            const todasLasFotos = [producto.imagenes.principal, ...producto.imagenes.galeria];
+            thumbContainer.innerHTML = todasLasFotos.map((url, index) => `
+                <img src="${url}" 
+                     class="pdp-thumb ${index === 0 ? 'active' : ''}" 
+                     onclick="changeImage(this)">
+            `).join('');
+        }
+    }
+    // -------------------------------------------------------
+
     if (pDisplay && producto.precios.fan) {
         pDisplay.innerText = `$${producto.precios.fan.oferta}.00`;
         oDisplay.innerText = `$${producto.precios.fan.normal}.00`;
@@ -25,16 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const vSelector = document.getElementById('version-selector');
     if (vSelector) {
         const btnJug = vSelector.querySelector('[data-version="Jugador"]');
-        if (!producto.versiones.tiene_jugador && btnJug) {
+        if (producto.versiones && !producto.versiones.tiene_jugador && btnJug) {
             btnJug.style.display = 'none'; 
         }
     }
 
     // 4. GUÍA DE TALLAS DINÁMICA
     const imgGuia = document.getElementById('img-guia-tallas');
-    const categoriaLimpia = producto.categoria.trim().toLowerCase();
-
-    if (imgGuia) {
+    if (imgGuia && producto.categoria) {
+        const categoriaLimpia = producto.categoria.trim().toLowerCase();
         imgGuia.src = (categoriaLimpia === 'kids') ? 'img/guia-kids.jpg' : 'img/guia-adultos.jpg';
     }
 
@@ -82,17 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const contenedor = document.getElementById('productos-recomendados');
         if (!contenedor) return;
 
-        // Filtramos para no repetir el actual y mezclamos el azar
         const sugerencias = catalogo
             .filter(p => p.id !== producto.id)
             .sort(() => 0.5 - Math.random())
             .slice(0, 8); 
 
         contenedor.innerHTML = sugerencias.map(p => `
-            <div class="col-6 col-md-3">
-                <div class="card h-100 border-0 shadow-sm p-2 text-center">
+            <div class="col-6 col-md-3 mb-4">
+                <div class="card h-100 border-0 shadow-sm p-2 text-center card-recomendado">
                     <a href="producto.html?id=${p.id}" class="text-decoration-none">
-                        <img src="${p.imagenes.principal}" class="card-img-top rounded mb-2" alt="${p.nombre}" style="height: 150px; object-fit: contain;">
+                        <div class="pdp-img-container mb-2">
+                            <img src="${p.imagenes.principal}" class="img-recomendado img-front">
+                            <img src="${p.imagenes.hover || p.imagenes.principal}" class="img-recomendado img-back">
+                        </div>
                         <h6 class="text-dark fw-bold mb-1 small">${p.equipo}</h6>
                         <p class="text-muted x-small mb-1">${p.nombre}</p>
                         <span class="text-gold fw-900">$${p.precios.fan.oferta}.00</span>
@@ -105,45 +147,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. FUNCIONALIDAD DEL BOTÓN AGREGAR AL CARRITO
     const btnCarrito = document.querySelector('.btn-add-cart-pdp');
+
     if (btnCarrito) {
         btnCarrito.addEventListener('click', () => {
-            const tallaSeleccionada = document.querySelector('#size-selector .btn-pdp-opt.active');
-            const versionSeleccionada = document.querySelector('#version-selector .btn-pdp-opt.active');
+            const tallaActiva = document.querySelector('#size-selector .btn-pdp-opt.active');
+            const versionActiva = document.querySelector('#version-selector .btn-pdp-opt.active');
             
-            if (!tallaSeleccionada) {
-                alert("⚠️ Por favor, selecciona una talla antes de agregar.");
+            const inputNombre = document.querySelector('input[placeholder="Nombre (Ej: GIGNAC)"]');
+            const inputNumero = document.querySelector('input[placeholder="10"]');
+
+            if (!tallaActiva) {
+                alert("⚠️ Selecciona una talla");
                 return;
             }
 
+            let precioTexto = document.getElementById('pdp-price-display').innerText;
+
             const itemCarrito = {
                 id: producto.id,
-                nombre: producto.nombre,
                 equipo: producto.equipo,
+                nombre: producto.nombre,
                 imagen: producto.imagenes.principal,
-                talla: tallaSeleccionada.innerText,
-                version: versionSeleccionada ? versionSeleccionada.getAttribute('data-version') : 'Fan',
-                precio: pDisplay.innerText,
-                cantidad: 1
+                talla: tallaActiva.innerText,
+                version: versionActiva ? versionActiva.getAttribute('data-version') : 'Fan',
+                precio: precioTexto, 
+                cantidad: 1,
+                personalizacion: {
+                    nombre: inputNombre ? inputNombre.value.trim().toUpperCase() : "",
+                    numero: inputNumero ? inputNumero.value.trim() : ""
+                }
             };
 
-            // Guardar en localStorage
             let carritoActual = JSON.parse(localStorage.getItem('carrito_la12')) || [];
             carritoActual.push(itemCarrito);
             localStorage.setItem('carrito_la12', JSON.stringify(carritoActual));
 
-            // Feedback visual al usuario
-            const colorOriginal = btnCarrito.style.backgroundColor;
+            actualizarBadgeCarrito();
+
+            if (typeof abrirMiniCarrito === 'function') {
+                abrirMiniCarrito();
+            }
+
             btnCarrito.innerText = "¡AÑADIDO! ✅";
-            btnCarrito.style.backgroundColor = "#28a745";
-            
-            setTimeout(() => {
-                btnCarrito.innerText = "Añadir al Carrito 🛒";
-                btnCarrito.style.backgroundColor = colorOriginal;
-            }, 2000);
+            setTimeout(() => { btnCarrito.innerText = "Añadir al Carrito 🛒"; }, 2000);
         });
     }
 
-    // Función interna para los clics en tallas
     function rebindButtons() {
         const sButtons = document.querySelectorAll('#size-selector .btn-pdp-opt');
         sButtons.forEach(btn => {
@@ -155,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Función global para la galería de fotos
+// Función global para la galería de fotos (Fuera para que onclick la vea)
 function changeImage(el) {
     const mainImg = document.getElementById('main-product-img');
     if(mainImg) mainImg.src = el.src;

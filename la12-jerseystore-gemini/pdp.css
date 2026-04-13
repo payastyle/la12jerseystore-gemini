@@ -176,3 +176,35 @@ flex: 0 0 100px; /* Columnas de check/x más compactas */
     height: 120px !important; /* Ajusta la altura de las imágenes de recomendados */
     object-fit: contain;
 }
+
+/* Contenedor de imágenes en recomendados */
+.pdp-img-container {
+    position: relative;
+    height: 160px; /* Ajusta según el tamaño de tus fotos */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.img-recomendado {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.4s ease; /* Hace que el cambio sea suave, no de golpe */
+}
+
+/* La segunda imagen está oculta por defecto */
+.img-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* Al pasar el mouse por la tarjeta */
+.card-recomendado:hover .img-front {
+    opacity: 0; /* Se va la jersey sola */
+}
+
+.card-recomendado:hover .img-back {
+    opacity: 1; /* Aparece Gignac */
+}

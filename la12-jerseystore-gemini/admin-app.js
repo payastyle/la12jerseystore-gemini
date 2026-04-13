@@ -182,22 +182,34 @@ if(formPromo) {
     });
 }
 
-// --- 6. MOTOR DE EXPORTACIÓN ---
+// ==========================================
+// 6. MOTOR DE EXPORTACIÓN Y MODAL
+// ==========================================
+
 function exportarCatalogo() {
-    if (baseDeDatosAdmin.length === 0 && baseDeDatosPromos.length === 0) {
-        alert("No hay productos ni cupones guardados para exportar.");
-        return;
+    // Detectamos en qué sección está el usuario (Productos o Promos)
+    const esSeccionPromos = document.getElementById('sec-promociones').classList.contains('activa');
+    const modal = document.getElementById('modal-exportar');
+    const txtArea = document.getElementById('codigo-exportado');
+    const parrafoInstrucciones = document.querySelector('.modal-contenido p');
+
+    if (esSeccionPromos) {
+        if (baseDeDatosPromos.length === 0) return alert("No hay cupones para exportar.");
+        
+        // Exportamos el último cupón creado
+        const ultimoCupon = baseDeDatosPromos[baseDeDatosPromos.length - 1];
+        txtArea.value = JSON.stringify(ultimoCupon, null, 4);
+        parrafoInstrucciones.innerHTML = "Copia el código y pégalo al final de tu archivo <strong>promociones.js</strong>";
+    } else {
+        if (baseDeDatosAdmin.length === 0) return alert("No hay productos para exportar.");
+        
+        // Exportamos el último producto creado
+        const ultimoProd = baseDeDatosAdmin[baseDeDatosAdmin.length - 1];
+        txtArea.value = JSON.stringify(ultimoProd, null, 4);
+        parrafoInstrucciones.innerHTML = "Copia el código y pégalo al final de tu archivo <strong>catalogo.js</strong>";
     }
 
-    let codigoJSONProductos = JSON.stringify(baseDeDatosAdmin, null, 4);
-    let codigoJSONPromos = JSON.stringify(baseDeDatosPromos, null, 4);
-    
-    let codigoFinal = `// Archivo generado por Panel Admin LA 12\n\n`;
-    codigoFinal += `const catalogo = ${codigoJSONProductos};\n\n`;
-    codigoFinal += `const cuponesActivos = ${codigoJSONPromos};\n`;
-
-    document.getElementById('codigo-exportado').value = codigoFinal;
-    document.getElementById('modal-exportar').classList.add('visible');
+    modal.classList.add('visible');
 }
 
 function cerrarModal() {
@@ -206,7 +218,19 @@ function cerrarModal() {
 
 function copiarCodigo() {
     const textoArea = document.getElementById('codigo-exportado');
+    const btnCopiar = document.querySelector('.modal-contenido .btn-guardar-producto'); // El botón de copiar
+    
+    // Seleccionamos y copiamos al portapapeles
     textoArea.select();
     document.execCommand('copy');
-    alert("¡Código copiado! Ahora pégalo en tu archivo catalogo.js");
+
+    // FEEDBACK VISUAL DE 2 SEGUNDOS
+    const textoOriginal = btnCopiar.innerText;
+    btnCopiar.innerText = "¡COPIADO CON ÉXITO! ✅";
+    btnCopiar.style.backgroundColor = "#28a745"; // Verde éxito
+
+    setTimeout(() => {
+        btnCopiar.innerText = textoOriginal;
+        btnCopiar.style.backgroundColor = ""; // Regresa al color oro
+    }, 2000);
 }

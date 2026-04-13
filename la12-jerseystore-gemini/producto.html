@@ -16,19 +16,26 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-7">
+<nav aria-label="breadcrumb" class="mb-3">
+    <ol class="breadcrumb small" style="background: none; padding: 0;">
+        <li class="breadcrumb-item">
+            <a href="#" id="breadcrumb-link-cat" class="text-gold fw-bold text-decoration-none text-uppercase"></a>
+        </li>
+        <li class="breadcrumb-item active text-muted text-uppercase" id="breadcrumb-prod-name" aria-current="page"></li>
+    </ol>
+</nav>
                     <div class="pdp-gallery-wrapper">
-                        <div class="main-image-container mb-3 shadow-sm rounded overflow-hidden">
-                            <img src="img/jerseys/tigres-1.jpg" id="main-product-img" class="img-fluid w-100">
-                        </div>
-                        <div class="thumb-strip d-flex gap-2">
-                            <img src="img/jerseys/tigres-1.jpg" class="pdp-thumb active" onclick="changeImage(this)">
-                            <img src="img/jerseys/tigres-detalles.jpg" class="pdp-thumb" onclick="changeImage(this)">
-                        </div>
-                    </div>
+    <div class="main-image-container mb-3 shadow-sm rounded overflow-hidden">
+        <img src="" id="main-product-img" class="img-fluid w-100">
+    </div>
+    <div class="thumb-strip d-flex gap-2" id="galeria-thumbs">
+        </div>
+</div>
                 </div>
 
                 <div class="col-lg-5">
                     <h1 class="pdp-title mb-2">Jersey Tigres UANL Local 25/26</h1>
+                    <p id="pdp-descripcion" class="text-muted fst-italic mb-3" style="font-size: 15px; display: none;"></p>
                     
                     <div class="pdp-price-wrapper d-flex align-items-center gap-3 mb-4">
                         <span class="price-old text-muted h5 mb-0 text-decoration-line-through" id="old-price">$1,899.00</span>

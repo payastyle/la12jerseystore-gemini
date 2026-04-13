@@ -3,70 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Carrito | LA 12 - Jersey Store</title>
-    <link rel="stylesheet" href="estilos.css">
+    <title>Mi Carrito | LA 12</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="carrito.css"> 
 </head>
 <body>
-    <header class="header-principal">
-        <div class="header-center" style="flex: 100%; justify-content: center;">
-            <a href="index.html" class="logo-link">
-                <img src="img/logo.png" alt="LA 12 Jersey Store" class="logo-img">
-            </a>
-        </div>
-    </header>
 
-    <main class="pagina-carrito">
-        <h1 style="text-align: center; color: var(--color-oro); margin-top: 40px;">RESUMEN DE TU PEDIDO</h1>
-        
-        <div class="contenedor-carrito-pagina">
-            <div id="lista-pagina-carrito" class="lista-articulos">
-                </div>
+    <div id="header-placeholder"></div>
+
+    <main class="carrito-container py-5">
+        <div class="container">
+            <h2 class="section-title mb-4">MI CARRITO DE COMPRAS</h2>
             
-            <div class="resumen-pago">
-                <h3>Total a Pagar</h3>
-                <h2 style="color: var(--color-oro);">$<span id="total-pagina-carrito">0</span> MXN</h2>
-                <p style="font-size: 14px; color: var(--text-muted);">*El costo de envío se calculará después.</p>
-                <button class="btn-checkout" style="width: 100%; margin-top: 20px;">Finalizar Compra</button>
-                <a href="index.html" style="display: block; text-align: center; margin-top: 15px; color: var(--text-main);">← Volver a la tienda</a>
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div id="carrito-vacio" class="text-center py-5 d-none">
+                        <h4>Tu carrito está vacío 😢</h4>
+                        <a href="index.html" class="btn btn-dark mt-3">Ver Jerseys</a>
+                    </div>
+                    
+                    <div id="lista-productos-carrito">
+                        </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 resumen-compra">
+                        <h4 class="fw-bold mb-4">Resumen</h4>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span id="subtotal-carrito">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Envío</span>
+                            <span id="envio-texto" class="fw-bold text-success">$120.00</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2 d-none" id="fila-descuento">
+                            <span>Descuento (<span id="nombre-cupon-aplicado"></span>)</span>
+                            <span class="text-danger fw-bold" id="descuento-texto">-$0.00</span>
+                        </div>
+
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fw-bold">TOTAL</span>
+                            <span class="fw-bold fs-4 text-gold" id="total-carrito">$0.00</span>
+                        </div>
+
+                        <div id="contenedor-cupon-aplicado" class="mb-3 d-none p-3 border rounded-3 bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-muted small d-block">Cupón Aplicado:</span>
+                                    <strong id="nombre-cupon-label" class="text-gold"></strong>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminarCupon()">Eliminar 🗑️</button>
+                            </div>
+                        </div>
+
+                        <div id="grupo-input-cupon" class="input-group mb-3">
+                            <input type="text" id="input-cupon" class="form-control" placeholder="CÓDIGO DE DESCUENTO" style="text-transform: uppercase;">
+                            <button class="btn btn-dark" type="button" onclick="aplicarCupon()">Aplicar</button>
+                        </div>
+                        
+                        <p id="mensaje-cupon" class="small mt-1 mb-3 text-center" style="display:none;"></p>
+
+                        <div id="envio-status-container" class="mb-4 p-3 rounded-3 bg-light border">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span id="texto-envio-dinamico" class="fw-bold small text-uppercase"></span>
+                                <span id="icono-envio">🚚</span>
+                            </div>
+                            <div class="progress" style="height: 8px; background-color: #e9ecef;">
+                                <div id="barra-progreso-envio" 
+                                     class="progress-bar progress-bar-striped progress-bar-animated" 
+                                     role="progressbar" 
+                                     style="width: 0%; background-color: #c5a044; transition: width 0.5s ease;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-finalizar-pedido" class="btn-whatsapp-pago">
+                            Pedir por WhatsApp 📱
+                        </button>
+                        
+                        <p class="text-muted x-small mt-3 text-center">
+                            * Al dar clic serás redirigido a WhatsApp para confirmar tallas y pago.
+                        </p>
+                    </div>
+                </div>
+            </div> <section class="mt-5 pt-5 border-top" id="seccion-recomendaciones-carrito">
+                <h4 class="fw-bold mb-4 text-center">TAMBIÉN TE PODRÍA GUSTAR 🔥</h4>
+                <div id="lista-recomendados-carrito" class="row g-3 justify-content-center">
+                    </div>
+            </section>
+
+        </div> </main> <div class="modal fade" id="modalEnvio" tabindex="-1" aria-labelledby="modalEnvioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-header bg-dark text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold" id="modalEnvioLabel">📍 Datos de Envío</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <p class="small text-muted mb-4">Completa tu información para generar tu orden en WhatsApp.</p>
+                    
+                    <form id="form-datos-envio">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small">Nombre Completo *</label>
+                            <input type="text" class="form-control" id="env_nombre" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold small">Calle y Número *</label>
+                            <input type="text" class="form-control" id="env_direccion" placeholder="Ej. Av. Universidad 123, Int 4" required>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-12 col-md-4">
+                                <label class="form-label fw-bold small">C.P. *</label>
+                                <input type="text" class="form-control" id="env_cp" required maxlength="5" placeholder="Ej. 66050">
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <label class="form-label fw-bold small">Colonia *</label>
+                                <select class="form-select" id="env_colonia" required>
+                                    <option value="">Escribe tu C.P. primero...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-12 col-md-5">
+                                <label class="form-label fw-bold small">Ciudad *</label>
+                                <input type="text" class="form-control" id="env_ciudad" readonly style="background-color: #e9ecef;" required>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label class="form-label fw-bold small">Estado *</label>
+                                <input type="text" class="form-control" id="env_estado" readonly style="background-color: #e9ecef;" required>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label class="form-label fw-bold small">País *</label>
+                                <input type="text" class="form-control" id="env_pais" value="México" readonly style="background-color: #e9ecef;" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small">Teléfono / WhatsApp *</label>
+                            <input type="tel" class="form-control" id="env_telefono" required>
+                        </div>
+
+                        <div class="payment-methods-section border-top pt-3 mt-3">
+    <label class="form-label fw-bold small mb-3">SELECCIONA TU FORMA DE PAGO *</label>
+    
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="metodoPago" id="pay_mp" value="Mercado Pago" required>
+        <label class="form-check-label small" for="pay_mp">
+            Mercado Pago (Tarjeta de Crédito/Débito)
+        </label>
+    </div>
+
+    <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="metodoPago" id="pay_transfer" value="Transferencia">
+        <label class="form-check-label small" for="pay_transfer">
+            Transferencia Interbancaria (SPEI)
+        </label>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="radio" name="metodoPago" id="pay_oxxo" value="Pago en Oxxo">
+        <label class="form-check-label small" for="pay_oxxo">
+            Efectivo en Oxxo
+        </label>
+    </div>
+
+    <div id="info-pago-container" class="mt-3 p-3 rounded-3 bg-white border small" style="display: none;">
+        <div id="info-mp" class="metodo-info" style="display: none;">
+            <p class="mb-0 text-muted">✨ Al confirmar, se te enviará un link oficial de Mercado Pago para realizar tu pago de forma segura sin exponer tus datos.</p>
+        </div>
+
+        <div id="info-transferencia" class="metodo-info" style="display: none;">
+            <p class="mb-1"><strong>Banco:</strong> BBVA</p>
+            <p class="mb-1"><strong>CLABE:</strong> 012 180 01234567890 1</p>
+            <p class="mb-0"><strong>Titular:</strong> Julio Luna</p>
+        </div>
+
+        <div id="info-oxxo" class="metodo-info" style="display: none;">
+            <p class="mb-1"><strong>Número de tarjeta/cuenta:</strong> 4152 3130 1234 5678</p>
+            <p class="mb-0">✨ Solo dicta este número en caja de Oxxo y confirma el monto total.</p>
+        </div>
+    </div>
+</div>
+
+                        <button type="submit" class="btn-whatsapp-pago w-100" style="padding: 15px; font-size: 16px;">
+                            Confirmar y Enviar 📱
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 
-    <footer class="footer-principal" style="margin-top: auto;">
-        <div class="footer-creditos">
-            <p>&copy; 2026 LA 12 - Jersey Store. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        function cargarCarritoPagina() {
-            let carrito = JSON.parse(localStorage.getItem('carritoLa12')) || [];
-            const lista = document.getElementById('lista-pagina-carrito');
-            const totalElement = document.getElementById('total-pagina-carrito');
-            let total = 0;
-
-            if(carrito.length === 0) {
-                lista.innerHTML = "<p>Tu carrito está vacío.</p>";
-                return;
-            }
-
-            lista.innerHTML = "";
-            carrito.forEach((item, index) => {
-                total += item.precio;
-                lista.innerHTML += `
-                    <div class="cart-item" style="border: 1px solid var(--border-color); padding: 15px; border-radius: 8px;">
-                        <img src="${item.imagen}" style="width: 80px;">
-                        <div class="cart-item-info">
-                            <h3>${item.equipo}</h3>
-                            <p>${item.version} | Talla: Seleccionar en el siguiente paso</p>
-                            <h4 style="color: var(--color-oro); margin-top: 10px;">$${item.precio}</h4>
+    <div class="modal fade" id="modalQuickAdd" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-header bg-dark text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold">Configurar Producto</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <div class="d-flex align-items-center mb-4 bg-white p-2 rounded shadow-sm">
+                        <img id="qa-img" src="" style="width: 70px; height: 90px; object-fit: contain; background: #f8f9fa; border-radius: 4px;" class="me-3">
+                        <div>
+                            <h6 id="qa-equipo" class="fw-bold mb-0 text-dark"></h6>
+                            <p id="qa-nombre" class="text-muted small mb-1"></p>
+                            <span id="qa-precio" class="text-gold fw-bold fs-5"></span>
                         </div>
                     </div>
-                `;
-            });
-            totalElement.innerText = total;
-        }
-        cargarCarritoPagina();
-    </script>
+
+                    <div class="row g-2 mb-3">
+                        <div class="col-6">
+                            <label class="form-label fw-bold small">Versión:</label>
+                            <select class="form-select" id="qa-version">
+                                <option value="Fan">Fan</option>
+                                <option value="Jugador">Jugador</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label fw-bold small">Talla:</label>
+                            <select class="form-select" id="qa-talla">
+                                <option value="S">S</option>
+                                <option value="M" selected>M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 p-3 border border-gold rounded bg-white">
+                        <label class="form-label fw-bold small mb-2 d-block">Personalización Gratis (Opcional):</label>
+                        <div class="row g-2">
+                            <div class="col-8">
+                                <input type="text" class="form-control form-control-sm" id="qa-pers-nombre" placeholder="Nombre (Ej: GIGNAC)">
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control form-control-sm" id="qa-pers-numero" placeholder="10">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 mb-3">
+    <a href="#collapseGuiaQuick" class="text-gold small fw-bold text-decoration-none" data-bs-toggle="collapse">
+        📏 Ver Guía de Tallas
+    </a>
+    
+    <div class="collapse mt-2" id="collapseGuiaQuick">
+        <div class="card card-body p-1 border-0 bg-light">
+            <img src="" id="img-guia-tallas-quick" class="img-fluid rounded shadow-sm" alt="Guía de tallas">
+        </div>
+    </div>
+</div>
+
+                    <button type="button" class="btn btn-dark w-100 fw-bold py-3" onclick="confirmarQuickAdd()">
+                        AGREGAR AL CARRITO 🛒
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="catalogo.js"></script>
+    <script src="promociones.js"></script> 
+    <script src="componentes.js"></script> 
+    <script src="carrito.js"></script> 
 </body>
 </html>

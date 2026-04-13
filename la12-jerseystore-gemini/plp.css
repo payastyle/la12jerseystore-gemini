@@ -1,0 +1,40 @@
+.producto-card {
+    background: white;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.producto-card:hover {
+    transform: translateY(-8px);
+}
+
+.img-wrapper {
+    background: #f8f9fa;
+    position: relative;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-wrapper img {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.badge-oferta-plp {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #dc3545;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.text-gold { color: #c5a044; }
+.x-small { font-size: 12px; }

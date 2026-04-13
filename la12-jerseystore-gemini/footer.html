@@ -77,3 +77,25 @@
         </div>
     </div>
 </footer>
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="miniCarritoLateral" aria-labelledby="miniCarritoLabel" style="z-index: 9999;">
+    <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="miniCarritoLabel">🛒 Tu Carrito</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+        
+        <div id="mini-carrito-lista" class="flex-grow-1 overflow-auto">
+        </div>
+        
+        <div class="border-top pt-3 mt-auto">
+            <div class="d-flex justify-content-between fw-bold mb-3">
+                <span>Subtotal:</span>
+                <span id="mini-carrito-subtotal" class="text-gold">$0.00</span>
+            </div>
+            <a href="carrito.html" class="btn btn-dark w-100 mb-2 py-2 fw-bold">Ir a Pagar</a>
+            <button type="button" class="btn btn-outline-secondary w-100 py-2" data-bs-dismiss="offcanvas">Seguir Comprando</button>
+        </div>
+    </div>
+</div>
